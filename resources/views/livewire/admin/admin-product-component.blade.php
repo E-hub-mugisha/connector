@@ -27,7 +27,7 @@
                             <th>product name</th>
                             <th>Price</th>
                             <th>Status</th>
-                            <th>SKU</th>
+                            <th>Brand</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
                                 {{$product->stock_status}}
                             </td>
                             <td>
-                                {{$product->SKU}}
+                                {{$product->brand}}
                             </td>
                             <td class="action-col">
                                 <div class="dropdown">

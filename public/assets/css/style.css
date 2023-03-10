@@ -5324,7 +5324,7 @@ p {
 .header-14 .cart-dropdown.show .dropdown-toggle,
 .header-14 .compare-dropdown:hover .dropdown-toggle,
 .header-14 .compare-dropdown.show .dropdown-toggle {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .header-14 .mobile-menu-toggler {
@@ -5381,7 +5381,7 @@ p {
     width: unset;
     bottom: 0;
     height: .1rem;
-    background-color: #fcb941;
+    background-color: #0a91ed;
     transform-origin: right center;
     transform: scale(0, 1);
     transition: transform .3s ease
@@ -5506,7 +5506,7 @@ p {
 .header-14 .header-bottom .header-right i {
     font-size: 1.6rem;
     margin-right: 1.5rem;
-    color: #fcb941
+    color: #0a91ed
 }
 
 .header-14 .header-dropdown-link {
@@ -5528,7 +5528,7 @@ p {
 
 .header-14 .wishlist-link:hover .wishlist-txt,
 .header-14 .wishlist-link:focus .wishlist-txt {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .header-14 .compare-dropdown {
@@ -5541,7 +5541,7 @@ p {
 
 .header-14 .compare-dropdown:hover .compare-txt,
 .header-14 .compare-dropdown:focus .compare-txt {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .header-14 .cart-dropdown {
@@ -5557,7 +5557,7 @@ p {
 
 .header-14 .cart-dropdown:hover .cart-txt,
 .header-14 .cart-dropdown:focus .cart-txt {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .header-14 .compare-dropdown [class*='count'],
@@ -7766,7 +7766,7 @@ p {
     font-size: 1.6rem;
     line-height: 1.25;
     letter-spacing: -.01em;
-    color: #333333;
+    color: #000;
     margin-bottom: .2rem
 }
 
@@ -7941,7 +7941,7 @@ p {
     left: 0;
     white-space: nowrap;
     overflow: hidden;
-    color: #fcb941
+    color: #0A91ED
 }
 
 .ratings-primary .ratings-val {
@@ -8853,7 +8853,7 @@ p {
 }
 
 .product.product-10 .btn-expandable span {
-    background-color: #fcb941
+    background-color: #0a91ed
 }
 
 .product.product-10 .product-media {
@@ -8891,7 +8891,7 @@ p {
 .product.product-10 .btn-product:hover span,
 .product.product-10 .btn-product:focus span {
     color: #c96;
-    box-shadow: 0 1px 0 0 #fcb941
+    box-shadow: 0 1px 0 0 #0a91ed
 }
 
 .product.product-10 .product-action {
@@ -8905,9 +8905,9 @@ p {
 
 .product.product-10 .btn-cart {
     padding: .5rem 3.5rem;
-    border: .2rem solid #fcb941;
+    border: .2rem solid #0a91ed;
     border-radius: .5rem;
-    color: #fcb941
+    color: #0a91ed
 }
 
 .product.product-10 .btn-cart span {
@@ -8921,17 +8921,17 @@ p {
 .product.product-10 .btn-cart:hover,
 .product.product-10 .btn-cart:focus {
     color: #222;
-    background-color: #fcb941
+    background-color: #0a91ed
 }
 
 .product.product-10 .btn-quickview {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .product.product-10 .btn-quickview:hover,
 .product.product-10 .btn-quickview:focus {
     color: #fff;
-    background-color: #fcb941
+    background-color: #0a91ed
 }
 
 .product.product-10 .product-title a {
@@ -8944,7 +8944,7 @@ p {
 
 .product.product-10 .product-title a:hover,
 .product.product-10 .product-title a:focus {
-    color: #fcb941
+    color: #0a91ed
 }
 
 .product.product-10 .product-price {
@@ -10362,7 +10362,13 @@ small.form-text {
     border-color: #dadada;
     border-radius: 50%
 }
-
+.form-check-input {
+    padding: 5px;
+    margin: 5px;
+}
+.form-check-label {
+    margin-left: 27px;
+}
 .custom-control.custom-radio .custom-control-input:checked~.custom-control-label::before {
     border-color: #c96;
     background-color: #fff
@@ -11336,7 +11342,8 @@ button:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px
+    min-height: 48px;
+    border: 2px solid;
 }
 
 .brand img {
@@ -12992,7 +12999,8 @@ button:focus {
 }
 
 .product-details-tab {
-    margin-bottom: 5rem
+    margin: 5rem
+
 }
 
 .product-details-tab .nav.nav-pills .nav-link {
@@ -13163,17 +13171,17 @@ button:focus {
 }
 
 .product-details-centered {
-    text-align: center
+    /* text-align: center */
 }
 
 .product-details-centered .ratings-container,
 .product-details-centered .product-price,
 .product-details-centered .details-filter-row {
-    justify-content: center
+    /* justify-content: center */
 }
 
 .product-details-centered .product-content {
-    max-width: 470px;
+    /* max-width: 470px; */
     margin-left: auto;
     margin-right: auto
 }
@@ -13191,10 +13199,10 @@ button:focus {
     min-width: 104px
 }
 
-.product-details-centered .product-details-action {
+/* .product-details-centered .product-details-action {
     flex-direction: column;
     align-items: center
-}
+} */
 
 .product-details-centered .product-details-action .btn-cart {
     min-width: 218px

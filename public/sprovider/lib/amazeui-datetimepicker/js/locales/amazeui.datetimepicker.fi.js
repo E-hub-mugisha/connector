@@ -7,7 +7,7 @@
 		days: ["sunnuntai", "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai", "sunnuntai"],
 		daysShort: ["sun", "maa", "tii", "kes", "tor", "per", "lau", "sun"],
 		daysMin: ["su", "ma", "ti", "ke", "to", "pe", "la", "su"],
-		months: ["tammikuu", "helmikuu", "maaliskuu", "huhtikuu", "toukokuu", "kesäkuu", "heinäkuu", "elokuu", "syyskuu", "lokakuu", "marraskuu", "joulukuu"],
+		months: ["tammikuu", "helmikuu", "maalibrandu", "huhtikuu", "toukokuu", "kesäkuu", "heinäkuu", "elokuu", "syybrandu", "lokakuu", "marrabrandu", "joulukuu"],
 		monthsShort: ["tam", "hel", "maa", "huh", "tou", "kes", "hei", "elo", "syy", "lok", "mar", "jou"],
 		today: "tänään",
 		suffix: [],

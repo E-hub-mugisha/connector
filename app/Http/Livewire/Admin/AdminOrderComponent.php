@@ -13,21 +13,21 @@ class AdminOrderComponent extends Component
 
     public function deleteOrder($order_id)
     {
-        $order = Booking::find($order_id);
+        $order = ServiceBooking::find($order_id);
         
         $order->delete();
         session()->flash('message','Order Cancelled');
     }
     public function validateOrder($order_id)
     {
-        $order = Booking::find($order_id);
+        $order = ServiceBooking::find($order_id);
         $order->status = "completed";
         $order->save();
         session()->flash('message','Order completed');
     }
     public function cancelOrder($order_id)
     {
-        $order = Booking::find($order_id);
+        $order = ServiceBooking::find($order_id);
         $order->status = "decline";
         $order->save();
         session()->flash('message','Order cancelled');

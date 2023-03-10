@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Contact;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactComponent extends Component
 {
@@ -42,7 +43,9 @@ class ContactComponent extends Component
         $contact->message = $this->message;
         $contact->save();
 
+        alert()->success('Thank You', 'Your message have been sent successfully.');
         session()->flash('message', 'Your message has been send successfully!');
+        return redirect()->route('home');
     }
     public function render()
     {

@@ -19,25 +19,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Twitter -->
-    <!-- <meta name="twitter:site" content="@bootstrapdash">
-    <meta name="twitter:creator" content="@bootstrapdash">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Azia">
-    <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="twitter:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png"> -->
-
-    <!-- Facebook -->
-    <!-- <meta property="og:url" content="https://www.bootstrapdash.com/azia">
-    <meta property="og:title" content="Azia">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
-
-    <meta property="og:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
-    <meta property="og:image:secure_url" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600"> -->
-
     <!-- Meta -->
     <meta name="description" content="Service provider Dashboard">
     <meta name="author" content="BootstrapDash">
@@ -52,23 +33,27 @@
 
     <!-- azia CSS -->
     <link rel="stylesheet" href="{{asset('sprovider/css/azia.css')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
     @livewireStyles
 
 </head>
 
 <body>
 
-        @include('livewire.sprovider.navbar')
-        <main>
-            {{ $slot }}
-        </main>
-        <div class="az-footer ht-40">
-            <div class="container ht-100p pd-t-0-f">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © HileTask 2022</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Designed by <a href="https://homiez.rw" target="_blank">HOMIEZ</a></span>
-            </div><!-- container -->
-        </div><!-- az-footer -->
-    
+    @include('livewire.sprovider.navbar')
+    <main>
+        {{ $slot }}
+    </main>
+    @include('sweetalert::alert')
+    <div class="az-footer ht-40">
+        <div class="container ht-100p pd-t-0-f">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © HileTask <?php echo date("Y"); ?></span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Designed by <a href="https://homiez.rw" target="_blank">HOMIEZ</a></span>
+        </div><!-- container -->
+    </div><!-- az-footer -->
+
 
     <script src="{{asset('sprovider/lib/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('sprovider/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

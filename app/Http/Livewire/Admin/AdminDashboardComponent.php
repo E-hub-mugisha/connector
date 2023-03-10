@@ -6,9 +6,15 @@ use App\Models\Booking;
 use App\Models\Order;
 use App\Models\ServiceProvider;
 use Livewire\Component;
+use App\Exports\ServiceExport;
+use Excel;
 
 class AdminDashboardComponent extends Component
 {
+    public function exportExcel()
+    {
+        return Excel::download(new ServiceExport,'services.xls');
+    }
     public function render()
     {
         $porders = Order::orderBy('created_at', 'DESC')->get()->take(5);

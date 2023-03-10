@@ -29,26 +29,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($services as $service)
+                                @foreach($sproviderServices as $serv)
                                 <tr>
-                                    <td>{{$service->id}}</td>
+                                    <td>{{$serv->id}}</td>
                                     <td>
                                         <a href="#">
-                                            <img src="{{asset('assets/images/products/thumbnails')}}/{{$service->thumbnail}}" alt="Product image" height="50" width="60">
+                                            <img src="{{asset('assets/images/products/thumbnails')}}/{{$serv->thumbnail}}" alt="Product image" height="50" width="60">
                                         </a>
                                     </td>
-                                    <td>{{$service->name}}</td>
-                                    <td>{{$service->category->name}}</td>
-                                    <td>{{$service->price}}</td>
+                                    <td>{{$serv->name}}</td>
+                                    <td>{{$serv->category->name}}</td>
+                                    <td>{{$serv->price}}</td>
                                     <td>
-                                        @if($service->status)
+                                        @if($serv->status)
                                         Active
                                         @else
                                         Inactive
                                         @endif
                                     </td>
                                     <td>
-                                        @if($service->featured)
+                                        @if($serv->featured)
                                         Yes
                                         @else
                                         No
@@ -62,7 +62,7 @@
 
                                             <div class="dropdown-menu tx-13" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#" onclick="confirm('are you sure, you want to delete this!') || event.stopImmediatePropagation()" wire:click.prevent="deleteService({{$service->id}})">Delete</a>
+                                                <a class="dropdown-item" href="#" onclick="confirm('are you sure, you want to delete this!') || event.stopImmediatePropagation()" wire:click.prevent="deleteService({{$serv->id}})">Delete</a>
                                                 <a class="dropdown-item" href="#">The best option</a>
                                             </div>
                                         </div>

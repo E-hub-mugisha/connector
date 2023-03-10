@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AddServiceComponent extends Component
 {
@@ -28,6 +30,7 @@ class AddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
     public $duration;
+    public $location;
 
     public function generateSlug()
     {
@@ -41,7 +44,6 @@ class AddServiceComponent extends Component
             'slug' => 'required',
             'tagline' => 'required',
             'service_category_id' => 'required',
-            'service_provider_id' => 'required',
             'price' => 'required',
             'image' => 'required|mimes:jpeg,png',
             'thumbnail' => 'required|mimes:jpeg,png',
@@ -49,6 +51,7 @@ class AddServiceComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'duration' => 'required',
+            'location' => 'required',
         ]);
     }
 
@@ -59,7 +62,6 @@ class AddServiceComponent extends Component
             'slug' => 'required',
             'tagline' => 'required',
             'service_category_id' => 'required',
-            'service_provider_id' => 'required',
             'price' => 'required',
             'image' => 'required|mimes:jpeg,png',
             'thumbnail' => 'required|mimes:jpeg,png',
@@ -67,19 +69,22 @@ class AddServiceComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'duration' => 'required',
+            'location' => 'required',
         ]);
-
+        
         $service = new Service();
+        $sprovider = ServiceProvider::where('user_id',Auth::user()->id)->first();
         $service->name = $this->name;
         $service->slug = $this->slug;
         $service->tagline = $this->tagline;
         $service->service_category_id = $this->service_category_id;
-        $service->service_provider_id = $this->service_provider_id;
+        $service->service_provider_id = $sprovider->id;
         $service->price = $this->price;
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
         $service->duration = $this->duration;
         $service->description = $this->description;
+        $service->location = $this->location;
         $service->inclusion = str_replace("\n",'|',trim($this->inclusion));
         $service->exclusion = str_replace("\n",'|',trim($this->exclusion));
         
@@ -93,6 +98,9 @@ class AddServiceComponent extends Component
         $service->image = $imageName2;
 
         $service->save();
+        
+        alert()->success('SuccessAlert','Thank you for reaching out to Homiez; we will get back to you soon');
+
         session()->flash('message','Service created successfully!');
 
     }

@@ -27,28 +27,48 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="email" value="{{ __('Email') }}">Username or email address *</label>
-                                    <input type="text" class="form-control" id="email" name="email" required :value="old('email')" required autofocus>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required :value="old('email')" required autofocus>
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div><!-- End .form-group -->
 
                                 <div class="form-group">
                                     <label for="password-2" value="{{ __('Password') }}">Password *</label>
-                                    <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" required autofocus>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div><!-- End .form-group -->
 
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="terms" value="1" required />
+                                    <label class="form-check-label">
+                                        Agree with the <a href="{{ route('terms') }}">
+                                            {{ __('Terms and conditions') }}
+                                        </a>
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="remember_me" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="signin-remember-2">Remember Me</label>
+                                </div><!-- End .custom-checkbox -->
                                 <div class="form-footer">
                                     <button type="submit" class="btn btn-outline-primary-2">
                                         <span>LOG IN</span>
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
 
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="remember_me">
-                                        <label class="custom-control-label" for="signin-remember-2">Remember Me</label>
-                                    </div><!-- End .custom-checkbox -->
+
 
                                     @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="forgot-link">
-                                    {{ __('Forgot your password?') }}
+                                        {{ __('Forgot your password?') }}
                                     </a>
                                     @endif
 

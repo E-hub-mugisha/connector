@@ -11,16 +11,16 @@ class bookMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public $mailData;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($mailData)
     {
-        $this->user = $user;
+        $this->mailData = $mailData;
     }
 
     /**
@@ -31,6 +31,6 @@ class bookMail extends Mailable
     public function build()
     {
         return $this->subject('you have new booking')
-                    ->view('emails.bookMail');
+                    ->markdown('emails.bookMail');
     }
 }

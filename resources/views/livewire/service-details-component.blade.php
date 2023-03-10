@@ -1,3 +1,5 @@
+@section('title', 'Service Details')
+
 <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
     <div class="container d-flex align-items-center">
         <ol class="breadcrumb">
@@ -6,17 +8,6 @@
             <li class="breadcrumb-item active" aria-current="page">Services</li>
         </ol>
 
-        <nav class="product-pager ml-auto" aria-label="Product">
-            <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
-                <i class="icon-angle-left"></i>
-                <span>Prev</span>
-            </a>
-
-            <a class="product-pager-link product-pager-next" href="#" aria-label="Next" tabindex="-1">
-                <span>Next</span>
-                <i class="icon-angle-right"></i>
-            </a>
-        </nav><!-- End .pager-nav -->
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
 
@@ -30,35 +21,21 @@
                             <figure class="product-main-image">
                                 <img id="product-zoom" src="{{asset('assets/images/products')}}/{{$service->image}}" data-zoom-image="{{asset('assets/images/products')}}/{{$service->image}}" alt="{{$service->name}}">
 
-                                <a href="#" id="btn-product-gallery" class="btn-product-gallery">
-                                    <i class="icon-arrows"></i>
-                                </a>
-                            </figure><!-- End .product-main-image -->
 
-                            <div id="product-zoom-gallery" class="product-image-gallery">
-                                <a class="product-gallery-item active" href="#" data-image="{{asset('assets/images/products/thumbnails')}}/{{$service->thumbnail}}" data-zoom-image="assets/images/products/single/1-big.jpg">
-                                    <img src="{{asset('assets/images/products/thumbnails')}}/{{$service->thumbnail}}" alt="product side">
-                                </a>
-                            </div><!-- End .product-image-gallery -->
+                            </figure><!-- End .product-main-image -->
                         </div><!-- End .row -->
                     </div><!-- End .product-gallery -->
                 </div><!-- End .col-md-6 -->
 
                 <div class="col-md-6">
                     <div class="product-details">
-                        <h1 class="product-title">{{$service->name}}</h1><!-- End .product-title -->
-
-                        <div class="ratings-container">
-                            <div class="ratings">
-                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                            </div><!-- End .ratings -->
-                            <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
-                        </div><!-- End .rating-container -->
-
-
-
+                        <h1 class="product-title" style="font-size: 3rem; font-weight:600;">{{$service->name}}</h1><!-- End .product-title -->
+                        <div class="product-title">
+                            <span>Category:</span>
+                            <a href="#">{{$service->category->name}}</a><br />
+                        </div><!-- End .product-cat -->
                         <div class="product-content">
-                            <p>{{$service->tagline}}</p>
+                            <p>{{$service->description}}</p>
                         </div><!-- End .product-content -->
 
                         <div class="details-filter-row details-row-size">
@@ -68,102 +45,102 @@
                                 @endphp
                                 @if($service->discount)
                                 @if($service->discount_type == 'fixed')
-                                <p>Discount:<span>{{$service->discount}}</span><span>@php $total = $total-$service->discount; @endphp</span></p>
+                                <div class="discount-fix">
+                                    Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
+                                </div>
+                                <div class="discount-fix-total">
+                                    <span>@php $total = $total-$service->discount; @endphp</span>
+                                </div>
                                 @elseif($service->discount_type == 'percent')
-                                <p>Discount:<span>{{$service->discount}}%</span><span>@php $total = $total-($total*$service->discount/100); @endphp</span></p>
+                                <div class="discount-per">
+                                    Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
+                                </div>
+                                <div class="discount-per-total" style="margin:6px;">
+                                    <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
+                                </div>
                                 @endif
                                 @endif
-                                <label for="price">Total:<span>{{$total}}</span></label>
-                            </div><!-- End .product-price -->
-
-
-                        </div><!-- End .details-filter-row -->
-
-                        <div class="product-details-action">
-                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart"><span>Book Now</span></a>
-
-                            <div class="details-action-wrapper">
-                                <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>
-                                       Provided by: 
-                                    </span>
-                                    {{$service->service_provider}}
-                                </a>                                
-                            </div><!-- End .details-action-wrapper -->
-                        </div><!-- End .product-details-action -->
-
-                        <div class="product-details-footer">
-                            <div class="product-cat">
-                                <span>Category:</span>
-                                <a href="#">{{$service->category->name}}</a><br/>
-                                <span>Provided by:</span>
-                                <a href="#">{{$service->service_provider}}</a>
-                            </div><!-- End .product-cat -->
-
-
-                            <div class="social-icons social-icons-sm">
-                                <span class="social-label">Share:</span>
-                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                <div class="total">
+                                    Total:<span style="margin: 6px;">{{$total}}</span>
+                                </div>
                             </div>
-                        </div><!-- End .product-details-footer -->
-                    </div><!-- End .product-details -->
-                </div><!-- End .col-md-6 -->
-            </div><!-- End .row -->
-        </div><!-- End .product-details-top -->
+                        </div><!-- End .product-price -->
+                    </div><!-- End .details-filter-row -->
 
-        <div class="product-details-tab">
-            <ul class="nav nav-pills justify-content-center" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Inclusion information</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Exclusion Information</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                    <div class="product-desc-content">
-                        <h3>{{$service->name}} Information</h3>
-                        <p>{{$service->description}}</p>
-                    </div><!-- End .product-desc-content -->
-                </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                    <div class="product-desc-content">
-                        <h3>{{$service->name}} Inclusion</h3>
-                        <ul>
-                            @foreach(explode("|",$service->inclusion) as $inclusion)
-                            <li>{{$inclusion}}</li>
-                            @endforeach
-                        </ul>
-                    </div><!-- End .product-desc-content -->
-                </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                    <div class="product-desc-content">
-                        <h3>{{$service->name}} Exclusion</h3>
-                        <ul>
-                            @foreach(explode("|",$service->exclusion) as $exclusion)
-                            <li>{{$exclusion}}</li>
-                            @endforeach
-                        </ul>
-                    </div><!-- End .product-desc-content -->
-                </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                    <div class="product-details-action">
+                        <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart"><span>Book Now</span></a>
+
+                        <div class="details-action-wrapper">
+                            <a href="#" class="btn-product btn-wishlist" title="Wishlist">
+                                <span>
+                                    Provider's Profile
+                                </span>
+                            </a>
+                        </div>
+                    </div><!-- End .product-details-action -->
+
+                    <div class="product-details-footer">
+
+                        <div class="social-icons social-icons-sm">
+                            <div class="ss-box"></div>
+                        </div>
+                    </div><!-- End .product-details-footer -->
+                </div><!-- End .product-details -->
+            </div><!-- End .col-md-6 -->
+        </div><!-- End .row -->
+    </div><!-- End .product-details-top -->
+
+    <div class="product-details-tab">
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Inclusion information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Exclusion Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                <div class="product-desc-content">
+                    <h3>{{$service->name}} Information</h3>
+                    <p>{{$service->description}}</p>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                <div class="product-desc-content">
+                    <h3>{{$service->name}} Inclusion</h3>
+                    <ul>
+                        @foreach(explode("|",$service->inclusion) as $inclusion)
+                        <li>{{$inclusion}}</li>
+                        @endforeach
+                    </ul>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+                <div class="product-desc-content">
+                    <h3>{{$service->name}} Exclusion</h3>
+                    <ul>
+                        @foreach(explode("|",$service->exclusion) as $exclusion)
+                        <li>{{$exclusion}}</li>
+                        @endforeach
+                    </ul>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                 @livewire('service-ratings', ['service' => $service], key($service->id))
-                </div><!-- .End .tab-pane -->
-            </div><!-- End .tab-content -->
-        </div><!-- End .product-details-tab -->
+            </div><!-- .End .tab-pane -->
+        </div><!-- End .tab-content -->
+    </div><!-- End .product-details-tab -->
 
-        @if($r_service)
-        <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
-
+    @if($r_service)
+    <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+    <div class="container">
         <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
                             "nav": false, 
                             "dots": true,
@@ -189,37 +166,43 @@
                                 }
                             }
                         }'>
-            <div class="product product-7 text-center">
+            <div class="product product-2">
                 <figure class="product-media">
-                    <span class="product-label label-new">New</span>
                     <a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}">
-                        <img src="{{asset('assets/images/products/thumbnails')}}/{{$r_service->thumbnail}}" alt="{{$r_service->name}}" class="product-image">
+                        <img src="{{ asset('assets/images/category') }}/{{$r_service->category->image}}" alt="{{$r_service->name}}" class="product-image" style="width:230px; height:150px;">
                     </a>
 
-
-
                     <div class="product-action">
-                        <a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}" class="btn-product btn-cart"><span>View detail</span></a>
+                        <a href="{{route('home.booking',['service_slug'=>$r_service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
                     </div><!-- End .product-action -->
                 </figure><!-- End .product-media -->
 
                 <div class="product-body">
-                    <div class="product-cat">
-                        <a href="#">{{$r_service->category->name}}</a>
-                    </div><!-- End .product-cat -->
+
                     <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}">{{$r_service->name}}</a></h3><!-- End .product-title -->
+                    <div class="product-cat">
+                        <a href="#">{{$r_service->category->name}}</a>&nbsp;<span>|</span>&nbsp;<a href="#">{{$r_service->tagline}}</a>
+                    </div><!-- End .product-cat -->
                     <div class="product-price">
-                        ${{$r_service->price}}
+                        {{$r_service->price}}<span>RWF</span>
                     </div><!-- End .product-price -->
+                    <!-- <div class="product-desc">
+                                            {{ Str::limit($r_service->description,50)}}
+                                        </div> -->
                     <div class="ratings-container">
+
                         <div class="ratings">
-                            <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                            <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
                         </div><!-- End .ratings -->
-                        <span class="ratings-text">( 2 Reviews )</span>
+                        <span class="ratings-text">( 4 Reviews )</span>
                     </div><!-- End .rating-container -->
+                    <div class="product-detail" style="padding:10px;">
+                        <a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}" class="btn btn-primary btn-round"><span>Read more </span><i class="icon-long-arrow-right"></i></a>
+                    </div><!-- End .product-action -->
                 </div><!-- End .product-body -->
             </div><!-- End .product -->
         </div><!-- End .owl-carousel -->
         @endif
     </div><!-- End .container -->
 </div><!-- End .page-content -->
+</div>

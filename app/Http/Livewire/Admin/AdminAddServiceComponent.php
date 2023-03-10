@@ -28,6 +28,7 @@ class AdminAddServiceComponent extends Component
     public $inclusion;
     public $exclusion;
     public $duration;
+    public $location;
 
     public function generateSlug()
     {
@@ -49,6 +50,7 @@ class AdminAddServiceComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'duration' => 'required',
+            'location' => 'required',
         ]);
     }
 
@@ -67,6 +69,7 @@ class AdminAddServiceComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'duration' => 'required',
+            'location' => 'required',
         ]);
 
         $service = new Service();
@@ -80,6 +83,7 @@ class AdminAddServiceComponent extends Component
         $service->discount_type = $this->discount_type;
         $service->duration = $this->duration;
         $service->description = $this->description;
+        $service->location = $this->location;
         $service->inclusion = str_replace("\n",'|',trim($this->inclusion));
         $service->exclusion = str_replace("\n",'|',trim($this->exclusion));
         

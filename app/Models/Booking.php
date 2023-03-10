@@ -16,7 +16,9 @@ class Booking extends Model
         parent::boot();
         static::created(function ($item){
             $adminEmail = "kabosierik@gmail.com";
-            Mail::to($adminEmail)->send(new BookingMail($item));
+            $providerEmail = $item['proEmail'];
+            Mail::to($adminEmail)
+                  ->cc($providerEmail)->send(new BookingMail($item));
         });
     }
 }

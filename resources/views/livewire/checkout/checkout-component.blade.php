@@ -77,7 +77,7 @@
                                         
                                         <tr class="summary-subtotal">
                                             <td>Subtotal:</td>
-                                            <td>${{Cart::subtotal()}}</td>
+                                            <td>{{Cart::subtotal()}}<span class="text-color-success">RWF</span></td>
                                         </tr><!-- End .summary-subtotal -->
                                         <tr>
                                             <td>Shipping:</td>
@@ -86,7 +86,7 @@
                                         <tr class="summary-total">
                                             <td>Total:</td>
                                             
-                                            <td>${{ Cart::total()}}</td>
+                                            <td>{{ Cart::total()}}<span class="text-color-success">RWF</span></td>
                                             
                                         </tr><!-- End .summary-total -->
                                     </tbody>

@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class ServicesComponent extends Component
 { 

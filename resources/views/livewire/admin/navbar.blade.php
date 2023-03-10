@@ -53,7 +53,7 @@
                 <h6 class="dropdown-header">
                     Alerts Center
                 </h6>
-                @foreach(\App\Models\Booking::latest()->take(5)->get() as $bookings)
+                @foreach(\App\Models\ServiceBooking::latest()->take(5)->get() as $bookings)
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                         <div class="icon-circle bg-primary">
@@ -62,7 +62,7 @@
                     </div>
                     <div>
                         <div class="small text-gray-500">{{$bookings->created_at}}</div>
-                        <span class="font-weight-bold">{{$bookings->service_name}} || {{$bookings->location}}</span>
+                        <span class="font-weight-bold">{{$bookings->names}} || {{$bookings->location}}</span>
                     </div>
                 </a>
                 @endforeach

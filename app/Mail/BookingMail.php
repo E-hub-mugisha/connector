@@ -30,6 +30,6 @@ class BookingMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Booking - '. $this->data->service_name)->markdown('emails.bookMail');
+        return $this->subject('New Booking - '. $this->data->service_name)->markdown('emails.bookingMail');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Shop;
 use App\Models\Product;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Str;
 
 class ProductDetailComponent extends Component
 {

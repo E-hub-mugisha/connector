@@ -1,4 +1,6 @@
 <div>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
@@ -36,7 +38,7 @@
                         </div><!-- End .form-group -->
                         <div class="form-group">
                             <label for="content" value="{{ __('content') }}">content</label>
-                            <textarea class="form-control" id="content" name="content" wire:model="content" required></textarea>
+                            <textarea class="form-control" id="summernote" name="content" wire:model="content" required></textarea>
                             @error('content') <p class="text-danger">{{$message}}</p>@enderror
                         </div><!-- End .form-group -->
 
@@ -71,3 +73,19 @@
         </div>
     </div>
 </div>
+<script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+    </script>

@@ -8,8 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>HileTasker Admin - Dashboard</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -17,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     @livewireStyles
 
 </head>
@@ -35,20 +41,21 @@
                 <main>
                     {{ $slot }}
                 </main>
+                @include('sweetalert::alert')
             </div>
             <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; HileTasker 2022</span>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; HileTasker <?php echo date("Y"); ?></span>
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+            </footer>
+            <!-- End of Footer -->
         </div>
-        
+
     </div>
-    
+
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -72,7 +79,9 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     @livewireScripts
 
 </body>

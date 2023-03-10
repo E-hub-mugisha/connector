@@ -51,7 +51,7 @@
                         </div><!-- End .form-group -->
                         <div class="form-group">
                             <label>Duration *</label>
-                            <input type="time" class="form-control" id="duration" name="duration" wire:model="duration" required>
+                            <input type="text" class="form-control" id="duration" name="duration" wire:model="duration" required>
                             @error('duration') <p class="text-danger">{{$message}}</p>@enderror
 
                         </div>
@@ -81,6 +81,11 @@
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                             </select>
+                        </div><!-- End .form-group -->
+                        <div class="form-group">
+                            <label for="location" value="{{ __('location') }}">location</label>
+                            <input type="text" class="form-control" id="location" name="location" wire:model="location">
+                            @error('location') <p class="text-danger">{{$message}}</p>@enderror
                         </div><!-- End .form-group -->
 
                         <div class="form-group">

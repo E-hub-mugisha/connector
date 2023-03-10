@@ -1,14 +1,14 @@
 <div>
     <div class="row justify-content-center">
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
+        <div class="col-md-10">
+            <div class="card shadow mb-1" style="padding:24px;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Add Service Category</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
+                <div class="container">
+                    <div id="signin-2">
                         @if(Session::has('message'))
                         <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
                         @endif
@@ -25,7 +25,15 @@
                                 <input type="text" class="form-control" id="slug" name="slug" wire:model="slug" required>
                                 @error('slug') <p class="text-danger">{{$message}}</p>@enderror
                             </div><!-- End .form-group -->
-
+                            <div class="form-group">
+                                <label for="subcategory" value="{{ __('SubCategory') }}">subcategory</label>
+                                <select class="form-control" wire:model="service_category_id">
+                                    <option value="">None</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div><!-- End .form-group -->
                             <div class="form-group">
                                 <label for="image" value="{{ __('Category image') }}">Category image</label>
                                 <input type="file" class="form-control" id="image" name="image" wire:model="image" required>

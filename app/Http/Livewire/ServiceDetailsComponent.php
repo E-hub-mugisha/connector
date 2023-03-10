@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Service;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class ServiceDetailsComponent extends Component
 {

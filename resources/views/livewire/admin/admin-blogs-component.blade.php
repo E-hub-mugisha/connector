@@ -23,18 +23,14 @@
                     </div><!-- End .entry-meta -->
 
                     <h4 class="entry-title">
-                        <a href="#">{{ Str::limit($blog->title, 50) }}</a>
+                        <a href="{{route('admin.blog_detail',['blog_slug'=>$blog->slug])}}">{{ Str::limit($blog->title, 50) }}</a>
                     </h4><!-- End .entry-title -->
 
                     <div class="entry-cats">
                         in <a href="#">{{$blog->blog_category}}</a>
                     </div><!-- End .entry-cats -->
-
-                    <div class="entry-content">
-                        <p>{{ Str::limit($blog->slug, 80)}}</p>
-                    </div><!-- End .entry-content -->
                     <div class="form-footer">
-                        <a href="#" class="btn btn-primary btn-icon-split">
+                        <a href="{{route('admin.blog_detail',['blog_slug'=>$blog->slug])}}" class="btn btn-primary btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-flag"></i>
                             </span>

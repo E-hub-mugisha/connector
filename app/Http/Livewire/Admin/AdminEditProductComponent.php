@@ -14,7 +14,7 @@ class AdminEditProductComponent extends Component
     use WithFileUploads;
     public $name;
     public $slug;
-    public $SKU;
+    public $brand;
     public $newimage;
     public $category_id;
     public $regular_price;
@@ -23,6 +23,7 @@ class AdminEditProductComponent extends Component
     public $quantity;
     public $description;
     public $short_description;
+    public $subcategory;
 
     public $product_id;
 
@@ -32,8 +33,9 @@ class AdminEditProductComponent extends Component
         $this->product_id = $product->id;
         $this->name = $product->name;
         $this->slug = $product->slug;
-        $this->SKU = $product->SKU;
+        $this->brand = $product->brand;
         $this->category_id = $product->category_id;
+        $this->subcategory = $product->subcategory;
         $this->regular_price = $product->regular_price;
         $this->short_description = $product->short_description;
         $this->stock_status = $product->stock_status;
@@ -50,8 +52,9 @@ class AdminEditProductComponent extends Component
         $this->validateOnly($fields,[
             'name' => 'required',
             'slug' => 'required',
-            'SKU' => 'required',
+            'brand' => 'required',
             'category_id' => 'required',
+            'subcategory' => 'required',
             'regular_price' => 'required',
             'description' => 'required',
             'short_description' => 'required',
@@ -71,8 +74,9 @@ class AdminEditProductComponent extends Component
         $this->validate([
             'name' => 'required',
             'slug' => 'required',
-            'SKU' => 'required',
+            'brand$brand' => 'required',
             'category_id' => 'required',
+            'subcategory' => 'required',
             'regular_price' => 'required',
             'description' => 'required',
             'short_description' => 'required',
@@ -89,8 +93,9 @@ class AdminEditProductComponent extends Component
         $product = Product::find($this->product_id);
         $product->name = $this->name;
         $product->slug = $this->slug;
-        $product->SKU = $this->SKU;
+        $product->brand = $this->brand;
         $product->category_id = $this->category_id;
+        $product->subcategory = $this->subcategory;
         $product->regular_price = $this->regular_price;
         $product->short_description = $this->short_description;
         $product->stock_status = $this->stock_status;

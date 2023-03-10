@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    
-    <title>HileTask</title>
+
+    <title>@yield('title') - {{ config('app.name', 'HileTask') }}</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="HileTasker">
     <meta name="author" content="p-themes">
@@ -11,13 +11,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/icons/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="manifest" href="{{ asset('assets/images/icons/site.html') }}">
-    <link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
     <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
     <meta name="apple-mobile-web-app-title" content="HileTasker">
     <meta name="application-name" content="HileTasker">
-    <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="{{ asset('assets/images/icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
@@ -29,6 +25,10 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-4.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/demos/demo-4.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/assisfery/SocialShareJS@1.4/social-share.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/assisfery/SocialShareJS@1.4/social-share.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     @livewireStyles
 </head>
 
@@ -38,7 +38,7 @@
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
-                        <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                        <a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
@@ -47,29 +47,6 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
-                                    <!-- <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">USD</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="#">Eur</a></li>
-                                                    <li><a href="#">Usd</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">English</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="#">English</a></li>
-                                                    <li><a href="#">French</a></li>
-                                                    <li><a href="#">Spanish</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li> -->
                                     @if(Route::has('login'))
                                     @auth
                                     @if(Auth::user()->utype==="ADM")
@@ -217,29 +194,12 @@
         <main class="main">
             {{ $slot }}
         </main><!-- End .main -->
+        @include('sweetalert::alert')
 
         <footer class="footer">
-            <!-- <div class="cta bg-image bg-dark pt-4 pb-5 mb-0" style="background-image: url(assets/images/demos/demo-4/bg-5.jpg);">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-10 col-md-8 col-lg-6">
-                            <div class="cta-heading text-center">
-                                <h3 class="cta-title text-white">Get The Latest Deals</h3>
-                                <p class="cta-desc text-white">and receive <span class="font-weight-normal">$20 coupon</span> for first shopping</p>
-                            </div>
-
-                            <form action="#">
-                                <div class="input-group input-group-round">
-                                    <input type="su_email" class="form-control form-control-white" placeholder="Enter your Email Address" aria-label="Email Adress" required>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit"><span>Subscribe</span><i class="icon-long-arrow-right"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <div>
+                @include('livewire.admin.newsletter-component')
+            </div>
             <div class="footer-middle">
                 <div class="container">
                     <div class="row">
@@ -256,7 +216,7 @@
                                 <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="/about">About HileTasker</a></li>
+                                    <li><a href="/about">About HileTask</a></li>
                                     <li><a href="#">Our Services</a></li>
                                     <li><a href="/faq">FAQ</a></li>
                                     <li><a href="{{route('home.contact')}}">Contact us</a></li>
@@ -270,8 +230,8 @@
 
                                 <ul class="widget-list">
                                     <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="assets/documents/Hiletask terms of service.pdf">Terms and conditions</a></li>
-                                    <li><a href="assets/documents/HileTask Privacy Policy.pdf">Privacy Policy</a></li>
+                                    <li><a href="{{ route('terms') }}">Terms and conditions</a></li>
+                                    <li><a href="{{route('policy')}}">Privacy Policy</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
@@ -281,8 +241,8 @@
                                 <h4 class="widget-title">Contact info</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                                    <li><a href="mail-to:#"><i class="icon-envelope"></i>support@hiletasker.com</a></li>
+                                    <li><a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a></li>
+                                    <li><a href="mail-to:#"><i class="icon-envelope"></i>support@hiletask.com</a></li>
                                 </ul><!-- End .widget-list -->
                                 <div class="social-icons">
                                     <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
@@ -306,7 +266,10 @@
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
+    <!-- <div class="elfsight-app-c5e59fd8-4714-43ac-b56e-29761cd65ba0"></div> -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+    <!-- <script src="https://apps.elfsight.com/p/platform.js" defer></script> -->
+
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
@@ -420,6 +383,7 @@
     <script src="{{ asset('assets/js/jquery.plugin.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('assets/js/share.js') }}"></script>
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/demos/demo-4.js') }}"></script>
@@ -436,7 +400,76 @@
             }
         });
     </script>
-    
+    <script src="https://getchat.app/assets/js/min/getchatapp.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var gcaMain = new GetChatApp({
+                'mobileNumber': '+250782390919',
+                'titleMessage': '👋 Chat with me on WhatsApp!',
+                'welcomeMessage': 'Hey there!🙌<br /> <br /> Get in touch with me by typing a message here. It will go straight to my phone! 🔥<br /> <br /> ~Your Name',
+                'position': 'right',
+                'platforms': {
+                    'whatsapp': true,
+                    'facebook': false,
+                    'email': false,
+                    'instagram': false,
+                    'telegram': false,
+                },
+                'facebookPageId': '',
+                'gcaEmailAddress': '',
+                'gcaEmailSubject': '',
+                'gcaInstagramUsername': '',
+                'gcaTelegramUsername': '',
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        window.onload = setShareLinks;
+
+        function setShareLinks() {
+            var pageUrl = encodeURIComponent(document.URL);
+            var pageTitle = encodeURIComponent(document.title);
+
+            document.addEventListener('click', function(event) {
+                let url = null;
+
+                if (event.target.classList.contains('share__link--facebook')) {
+                    url = "https://www.facebook.com/sharer.php?u=" + pageUrl;
+                    socialWindow(url, 570, 570);
+                }
+
+                if (event.target.classList.contains('share__link--twitter')) {
+                    url = "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + pageTitle;
+                    socialWindow(url, 570, 300);
+                }
+
+                if (event.target.classList.contains('share__link--linkedin')) {
+                    url = "https://www.linkedin.com/shareArticle?mini=true&url=" + pageUrl;
+                    socialWindow(url, 570, 570);
+                }
+
+                if (event.target.classList.contains('share__link--whatsapp')) {
+                    url = "whatsapp://send?text=" + pageTitle + "%20" + pageUrl;
+                    socialWindow(url, 570, 450);
+                }
+
+                if (event.target.classList.contains('share__link--mail')) {
+                    url = "mailto:?subject=%22" + pageTitle + "%22&body=Read%20the%20article%20%22" + pageTitle + "%22%20on%20" + pageUrl;
+                    socialWindow(url, 570, 450);
+                }
+
+            }, false);
+        }
+
+        function socialWindow(url, width, height) {
+            var left = (screen.width - width) / 2;
+            var top = (screen.height - height) / 2;
+            var params = "menubar=no,toolbar=no,status=no,width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+            window.open(url, "", params);
+        }
+    </script>
+
 
     @livewireScripts
 </body>

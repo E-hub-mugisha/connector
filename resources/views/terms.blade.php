@@ -15,16 +15,20 @@
                 <div class="form-tab">
                     <ul class="nav nav-pills nav-fill">
                         <li class="nav-item">
-                            <a class="nav-link active">HileTask</a>
+                            <a class="nav-link active">HileTask <h3>Terms and conditions</h3></a>
                         </li>
                     </ul>
                     <div>
                         <div id="signin-2">
-                            <h3>Terms and conditions</h3>
+                            
+                            <iframe src="assets/documents/Hiletask terms of service.pdf#toolbar=0" width="100%" height="500px">
+                                </iframe>
                             <div class="form-footer">
-                                <a href="assets/documents/Hiletask terms of service.pdf" class="btn text-center btn-outline-primary-2">
-                                    <span>Read Now</span>
-                                    <i class="icon-long-arrow-right"></i>
+                                
+                                <a href="{{ url()->previous() }}" class="btn text-center btn-outline-primary-2">
+                                    <i class="icon-long-arrow-left"></i>
+                                    <span>Back</span>
+                                    
                                 </a>
                             </div>
                         </div>

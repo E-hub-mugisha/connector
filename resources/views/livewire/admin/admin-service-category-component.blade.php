@@ -26,6 +26,7 @@
                             <th>image</th>
                             <th>category name</th>
                             <th>Featured</th>
+                            <th>Subcategory</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -47,6 +48,13 @@
                                 @else
                                 No
                                 @endif
+                            </td>
+                            <td>
+                                <ul class="sclist">
+                                    @foreach($scategory->subcategories as $scat)
+                                    <li>{{$scat->name}}</li>
+                                    @endforeach
+                                </ul>
                             </td>
                             <td class="action-col">
                                 <div class="dropdown">

@@ -7,6 +7,7 @@ use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Str;
 
 class ShopComponent extends Component
 {
@@ -43,7 +44,8 @@ class ShopComponent extends Component
         }
         
         $categories = Category::all();
+        $sproducts = Product::inRandomOrder()->take(4)->get();
         
-        return view('livewire.shop.shop-component',['products'=>$products,'categories'=>$categories])->layout('components.shop');
+        return view('livewire.shop.shop-component',['products'=>$products,'sproducts'=>$sproducts,'categories'=>$categories])->layout('components.shop');
     }
 }

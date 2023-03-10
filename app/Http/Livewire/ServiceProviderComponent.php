@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ServiceProvider;
+use Illuminate\Support\Str;
 
 class ServiceProviderComponent extends Component
 {

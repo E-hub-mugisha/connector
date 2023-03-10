@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Notifications\WelcomeEmailNotification;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -42,9 +44,12 @@ class CreateNewUser implements CreatesNewUsers
         if($registeras === 'SVP')
         {
             ServiceProvider::create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'proEmail' => $user->email,
             ]);
         }
+        alert()->success('SuccessAlert', 'Lorem ipsum dolor sit amet.');
+        $user->notify(new WelcomeEmailNotification($user));
         return $user;
     }
 }

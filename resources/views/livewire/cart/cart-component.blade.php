@@ -43,7 +43,7 @@
                                         <div class="product">
                                             <figure class="product-media">
                                                 <a href="{{route('product-detail',['product_slug'=>$item->model->slug])}}">
-                                                    <img src="{{asset('assets/images/products/table/product-1.jpg')}}" alt="Product image">
+                                                    <img src="{{asset('assets/images/products')}}/{{$item->model->image}}" alt="Product image">
                                                 </a>
                                             </figure>
 
@@ -52,7 +52,7 @@
                                             </h3><!-- End .product-title -->
                                         </div><!-- End .product -->
                                     </td>
-                                    <td class="price-col">${{ $item->model->regular_price }}</td>
+                                    <td class="price-col">{{ $item->model->regular_price }}<span class="text-color-success">RWF</span></td>
                                     <td class="quantity-col">
                                         <div class="cart-product-quantity">
                                             <input type="number" class="form-control" value="{{$item->qty}}" min="1" max="10" step="1" data-decimals="0" required>
@@ -60,7 +60,7 @@
                                             <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')">-</a>
                                         </div><!-- End .cart-product-quantity -->
                                     </td>
-                                    <td class="total-col">${{$item->Subtotal()}}</td>
+                                    <td class="total-col">{{$item->Subtotal()}}<span class="text-color-success">RWF</span></td>
                                     <td class="remove-col"><button class="btn-remove" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="icon-close"></i></button></td>
                                 </tr>
                                 @endforeach
@@ -92,14 +92,14 @@
                                 <tbody>
                                     <tr class="summary-subtotal">
                                         <td>Subtotal:</td>
-                                        <td>${{Cart::subtotal()}}</td>
+                                        <td>{{Cart::subtotal()}}<span class="text-color-success">RWF</span></td>
                                     </tr><!-- End .summary-subtotal -->
                                     
 
 
                                     <tr class="summary-total">
                                         <td>Total:</td>
-                                        <td>${{ Cart::total()}}</td>
+                                        <td>{{ Cart::total()}}<span class="text-color-success">RWF</span></td>
                                     </tr><!-- End .summary-total -->
                                 </tbody>
                             </table><!-- End .table table-summary -->

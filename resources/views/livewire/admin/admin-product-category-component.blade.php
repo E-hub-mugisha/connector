@@ -26,22 +26,30 @@
                             <th>image</th>
                             <th>Category name</th>
                             <th>Slug</th>
+                            <th>Sub Categories</th>
                             <th>Created at</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $category)
+                        @foreach($categories as $category)
                         <tr>
                             <td>{{$category->id}}</td>
                             <td>
-                            <a href="#">
+                                <a href="#">
                                     <img src="{{asset('assets/images/category/products')}}/{{$category->image}}" alt="{{$category->name}}" height="50" width="60">
                                 </a>
                             </td>
                             <td>{{$category->name}}</td>
                             <td>{{$category->slug}}</td>
                             <td>
-                            {{$category->created_at}}
+                                <ul class="sclist">
+                                    @foreach($category->subcategories as $scategory)
+                                    <li>{{$scategory->name}}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td>
+                                {{$category->created_at}}
                             </td>
                             <td class="action-col">
                                 <div class="dropdown">

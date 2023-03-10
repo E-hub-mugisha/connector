@@ -17,14 +17,14 @@ class AdminProductOrdersDetailComponent extends Component
     public function deliveredOrder($porder_id)
     {
         $porder = Order::find($porder_id);
-        $porder->status = "Delivered";
+        $porder->status = "completed";
         $porder->save();
         session()->flash('message','Order Delivered');
     }
     public function cancelOrder($porder_id)
     {
         $porder = Order::find($porder_id);
-        $porder->status = "cancelled";
+        $porder->status = "decline";
         $porder->save();
         session()->flash('message','Order cancelled');
     }

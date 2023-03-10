@@ -1,3 +1,5 @@
+@section('title', 'Contact')
+
 <div>
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         <div class="container">
@@ -28,8 +30,8 @@
                     <div class="contact-box text-center">
                         <h3>Start a Conversation</h3>
 
-                        <div><a href="mailto:#">info@hiletasker.com</a></div>
-                        <div><a href="tel:#">+1 987-876-6543</a>, <a href="tel:#">+1 987-976-1234</a></div>
+                        <div><a href="mailto:#">info@hiletask.com</a></div>
+                        <div><a href="tel:+250 791 957 955">+250 791 957 955</a></div>
                     </div><!-- End .contact-box -->
                 </div><!-- End .col-md-4 -->
 

@@ -8,16 +8,22 @@
             display: block;
         }
     </style>
-    <div class="az-content-body pd-lg-l-40 d-flex flex-column">
-        <div class="container">
-            <h1 class="page-title">All Orders</h1>
+    <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        </div>
 
-            <div class="page-content">
-                <div class="container">
-                    @if(Session::has('message'))
-                    <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-                    @endif
-
+        <!-- Content Row -->
+        <div class="row justify-content-center">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Recent Bookings</h6>
+                </div>
+                @if(Session::has('message'))
+                <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+                @endif
+                <div class="card-body">
                     <table class="table table-responsive table-wishlist table-mobile">
                         <thead>
                             <tr>
@@ -67,8 +73,6 @@
                             @endforeach
                         </tbody>
                     </table><!-- End .table table-wishlist -->
-
-
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </div>

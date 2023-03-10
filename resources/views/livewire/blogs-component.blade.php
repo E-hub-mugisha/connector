@@ -1,3 +1,5 @@
+@section('title', 'Blog')
+
 <div>
     <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
         <div class="container">
@@ -21,7 +23,7 @@
                 <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
                     <article class="entry entry-grid text-center">
                         <figure class="entry-media">
-                            <a href="single.html">
+                            <a href="{{route('home.blog_detail',['blog_slug'=>$blog->slug])}}">
                                 <img src="{{asset('assets/images/blogs/thumbnails')}}/{{$blog->thumbnail}}" alt="{{$blog->title}}">
                             </a>
                         </figure><!-- End .entry-media -->
@@ -46,7 +48,7 @@
                             </div><!-- End .entry-cats -->
 
                             <div class="entry-content">
-                                <p>{{$blog->slug}}</p>
+                                <p>{{Str::limit($blog->slug,50)}}</p>
                                 <a href="{{route('home.blog_detail',['blog_slug'=>$blog->slug])}}" class="read-more">Continue Reading</a>
                             </div><!-- End .entry-content -->
                         </div><!-- End .entry-body -->

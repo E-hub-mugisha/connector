@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Products</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Centered</li>
+                <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
             </ol>
 
             <nav class="product-pager ml-auto" aria-label="Product">
@@ -48,7 +48,7 @@
                             </div><!-- End .rating-container -->
 
                             <div class="product-price">
-                                ${{$product->regular_price}}
+                                {{$product->regular_price}}<span class="text-color-success">RWF</span>
                             </div><!-- End .product-price -->
 
                             <div class="product-content">
@@ -113,7 +113,7 @@
                             <p>{{$product->description}}</p>
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
-                    <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                    <!-- <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
                         <div class="product-desc-content">
                             <h3>Information</h3>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
@@ -130,8 +130,8 @@
 
                             <h3>Size</h3>
                             <p>one size</p>
-                        </div><!-- End .product-desc-content -->
-                    </div><!-- .End .tab-pane -->
+                        </div>
+                    </div> -->
                     <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
                         <div class="product-desc-content">
                             <h3>Delivery & returns</h3>
@@ -236,11 +236,11 @@
 
                     <div class="product-body">
                         <div class="product-cat">
-                            <a href="#">Women</a>
+                            <a href="{{route('product.brand',['brand'=>$r_product->brand])}}">{{$r_product->brand}}</a>
                         </div><!-- End .product-cat -->
                         <h3 class="product-title"><a href="{{route('product-detail',['product_slug'=>$r_product->slug])}}">{{$r_product->name}}</a></h3><!-- End .product-title -->
                         <div class="product-price">
-                            ${{$r_product->regular_price}}
+                            {{$r_product->regular_price}}<span class="text-color-success">RWF</span>
                         </div><!-- End .product-price -->
                         <div class="ratings-container">
                             <div class="ratings">

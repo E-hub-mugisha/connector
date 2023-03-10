@@ -32,6 +32,7 @@ class EditProviderServicesComponent extends Component
     public $newimage;
     public $featured;
     public $duration;
+    public $location;
 
     public function mount($service_slug)
     {
@@ -50,6 +51,7 @@ class EditProviderServicesComponent extends Component
         $this->thumbnail = $service->thumbnail;
         $this->description = $service->description;
         $this->duration = $service->duration;
+        $this->location = $service->location;
         $this->inclusion = str_replace("|", "\n", $service->inclusion);
         $this->exclusion = str_replace("|", "\n", $service->exclusion);
     }
@@ -71,7 +73,8 @@ class EditProviderServicesComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'service_provider_id' => 'required',
-            'duration' => 'required'
+            'duration' => 'required',
+            'location' => 'required',
         ]);
         if ($this->newimage) {
             $this->validateOnly($fields, [
@@ -98,7 +101,8 @@ class EditProviderServicesComponent extends Component
             'inclusion' => 'required',
             'exclusion' => 'required',
             'service_provider_id' => 'required',
-            'duration' => 'required'
+            'duration' => 'required',
+            'location' => 'required',
         ]);
 
         if ($this->newimage) {
@@ -114,17 +118,19 @@ class EditProviderServicesComponent extends Component
         }
 
         $service = Service::find($this->service_id);
+        $sprovider = ServiceProvider::where('user_id',Auth::user()->id)->first();
         $service->name = $this->name;
         $service->slug = $this->slug;
         $service->tagline = $this->tagline;
         $service->service_category_id = $this->service_category_id;
-        $service->service_category_id = $this->service_category_id;
+        $service->service_provider_id = $sprovider->id;
         $service->price = $this->price;
         $service->discount = $this->discount;
         $service->discount_type = $this->discount_type;
         $service->featured = $this->featured;
         $service->description = $this->description;
         $service->duration = $this->duration;
+        $service->location = $this->location;
         $service->inclusion = str_replace("\n", '|', trim($this->inclusion));
         $service->exclusion = str_replace("\n", '|', trim($this->exclusion));
 

@@ -13,16 +13,15 @@ class AdminProductCategoryComponent extends Component
     public function deleteProductCategory($id)
     {
         $category = Category::find($id);
-        if($category->image)
-        {
-            unlink('assets/images/category/products'.'/'.$category->image);
+        if ($category->image) {
+            unlink('assets/images/category/products' . '/' . $category->image);
         }
         $category->delete();
-        session()->flash('message','Product category deleted');
+        session()->flash('message', 'Product category deleted');
     }
     public function render()
     {
         $categories = Category::paginate(12);
-        return view('livewire.admin.admin-product-category-component',['categories'=>$categories])->layout('layouts.app');
+        return view('livewire.admin.admin-product-category-component', ['categories' => $categories])->layout('layouts.app');
     }
 }

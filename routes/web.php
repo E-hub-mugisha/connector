@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProductSearchController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Admin\AdminAddBlogComponent;
 use App\Http\Livewire\Admin\AdminAddProductCategoryComponent;
@@ -9,6 +10,7 @@ use App\Http\Livewire\Admin\AdminAddProductComponent;
 use App\Http\Livewire\Admin\AdminAddServiceCategoryComponent;
 use App\Http\Livewire\Admin\AdminAddServiceComponent;
 use App\Http\Livewire\Admin\AdminAddSliderComponent;
+use App\Http\Livewire\Admin\AdminBlogDetailComponent;
 use App\Http\Livewire\Admin\AdminBlogsComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminEditBlogComponent;
@@ -28,6 +30,7 @@ use App\Http\Livewire\Admin\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\AdminServicesByCategoryComponent;
 use App\Http\Livewire\Admin\AdminServicesComponent;
 use App\Http\Livewire\Admin\AdminSliderComponent;
+use App\Http\Livewire\Admin\AdminUserMailComponent;
 use App\Http\Livewire\Admin\AdminUsersComponent;
 use App\Http\Livewire\BlogDetailComponent;
 use App\Http\Livewire\BlogsComponent;
@@ -42,12 +45,16 @@ use App\Http\Livewire\Customer\CustomerPorderDetailComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\Order\OrderComponent;
 use App\Http\Livewire\ServiceByCategoryComponent;
+use App\Http\Livewire\ServiceByLocationComponent;
 use App\Http\Livewire\ServiceCategoriesComponent;
 use App\Http\Livewire\ServiceDetailsComponent;
 use App\Http\Livewire\ServiceProviderByCategoryComponent;
+use App\Http\Livewire\ServiceProviderByLocationComponent;
 use App\Http\Livewire\ServiceProviderComponent;
 use App\Http\Livewire\ServiceProviderProfileComponent;
 use App\Http\Livewire\ServicesComponent;
+use App\Http\Livewire\Shop\ProductBrand;
+use App\Http\Livewire\Shop\ProductBrandComponent;
 use App\Http\Livewire\Shop\ProductCategoryComponent;
 use App\Http\Livewire\Shop\ProductDetailComponent;
 use App\Http\Livewire\Shop\ShopComponent;
@@ -57,6 +64,7 @@ use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Http\Livewire\Sprovider\ProfileSproviderComponent;
 use App\Http\Livewire\Sprovider\ProviderServicesComponent;
 use App\Http\Livewire\Sprovider\ServiceProviderServices;
+use App\Http\Livewire\Sprovider\ServicesProviderServiceOfferingComponent;
 use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Http\Livewire\Sprovider\SproviderEditOrderComponent;
 use App\Http\Livewire\Sprovider\SproviderOrderComponent;
@@ -82,9 +90,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeComponent::class)->name('home');
 Route::get('/services', ServicesComponent::class)->name('home.services');
 Route::get('/service-categories', ServiceCategoriesComponent::class)->name('home.service_categories');
-Route::get('/{category_slug}/services', ServiceByCategoryComponent::class)->name('home.service_by_category');
+Route::get('/services/{category_slug}/{scategory_slug?}', ServiceByCategoryComponent::class)->name('home.service_by_category');
 Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('home.service_details');
-
+Route::get('/services/{service_location}', ServiceByLocationComponent::class)->name('home.service_location');
+Route::get('/service_provider/{slocation}', ServiceProviderByLocationComponent::class)->name('home.service_provider_location');
 Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
 Route::get('/contact', ContactComponent::class)->name('home.contact');
@@ -92,19 +101,21 @@ Route::get('/blogs', BlogsComponent::class)->name('home.blogs');
 Route::get('/blog/{blog_slug}', BlogDetailComponent::class)->name('home.blog_detail');
 
 Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
-Route::get('/{sprovider_name}/profile', ServiceProviderProfileComponent::class)->name('home.service-provider_profile');
+Route::get('/profile/{sprovider_id}', ServiceProviderProfileComponent::class)->name('home.service-provider_profile');
 Route::get('/service_provider', ServiceProviderComponent::class)->name('home.service_provider');
-Route::get('/{service_category_name}/services_provider', ServiceProviderByCategoryComponent::class)->name('home.service_provider_by_category');
+Route::get('/services_provider/{service_category_name}', ServiceProviderByCategoryComponent::class)->name('home.service_provider_by_category');
 
 Route::get('/{service_slug}/booking', BookingComponent::class)->name('home.booking')->middleware('auth');
 Route::get('/shop/product', ShopComponent::class)->name('shop.shop');
 Route::get('/{product_slug}/product', ProductDetailComponent::class)->name('product-detail');
-Route::get('/{category_slug}/product-category', ProductCategoryComponent::class)->name('product.category');
-
+Route::get('/product-category/{category_slug}/{scategory_slug?}', ProductCategoryComponent::class)->name('product.category');
+Route::get('{brand}/product-brand', ProductBrandComponent::class)->name('product.brand');
 Route::get('/productautocomplete', [ProductSearchController::class, 'productAutocomplete'])->name('productAutocomplete');
 Route::post('/productsearch', [ProductSearchController::class, 'searchProduct'])->name('searchProduct');
 
 Route::post('/bookNow', [App\Http\Controllers\BookingController::class, 'bookNow']);
+Route::post('/sendComment', [App\Http\Controllers\CommentController::class, 'sendComment']);
+Route::post('/sendNewsletter', [App\Http\Controllers\NewsletterController::class, 'sendNewsletter'])->name('newsletter');
 Route::get('/order', OrderComponent::class)->name('home.order');
 
 Route::get('/cart', CartComponent::class)->name('product.cart');
@@ -118,6 +129,10 @@ Route::get('/about', function () {
 Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
+
+Route::get('/policy', function () {
+    return view('policy');
+})->name('policy');
 
 Route::get('/faq', function () {
     return view('faq');
@@ -141,8 +156,7 @@ Route::middleware([
     Route::get('/profile/sprovider', ProfileSproviderComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
     Route::get('/sprovider/service/add', AddServiceComponent::class)->name('sprovider.add_service');
-    Route::get('/sprovider/services', SproviderServiceComponent::class)->name('sprovider.services');
-    Route::get('/provider/services', ProviderServicesComponent::class)->name('provider');
+    Route::get('/offering', ServicesProviderServiceOfferingComponent::class)->name('offerings.service');
     Route::get('/sprovider/order', SproviderOrderComponent::class)->name('sprovider.order');
     Route::get('/sprovider/order/edit/{order_id}', SproviderEditOrderComponent::class)->name('sprovider.edit_order');
     Route::get('/sprovider/service/edit/{service_slug}', EditProviderServicesComponent::class)->name('sprovider.edit_service');
@@ -168,7 +182,8 @@ Route::middleware([
 
     Route::get('/admin/blogs', AdminBlogsComponent::class)->name('admin.blogs');
     Route::get('/admin/blog/add', AdminAddBlogComponent::class)->name('admin.add_blog');
-    Route::get('/admin/blog/edit/{blog_id}', AdminEditBlogComponent::class)->name('admin.edit_blog');
+    Route::get('/admin/blog/edit/{slug}', AdminEditBlogComponent::class)->name('admin.edit_blog');
+    Route::get('/admin/blog/{blog_slug}', AdminBlogDetailComponent::class)->name('admin.blog_detail');
     Route::get('/admin/order', AdminOrderComponent::class)->name('admin.order');
     Route::get('/admin/order/edit/{order_id}', AdminEditOrderComponent::class)->name('admin.edit_order');
     Route::get('/admin.service_providers', AdminServiceProvidersComponent::class)->name('admin.service_providers');
@@ -181,4 +196,7 @@ Route::middleware([
     Route::get('/admin/add_product_category', AdminAddProductCategoryComponent::class)->name('admin.add_product_category');
     Route::get('/admin/product_order', AdminProductOrdersComponent::class)->name('admin.product_order');
     Route::get('/admin/product_order_detail/{order_id}', AdminProductOrdersDetailComponent::class)->name('admin.product_order_detail');
+    Route::get('/export-excel', [App\Http\Controllers\ReportController::class, 'exportExcel'])->name('exportExcel');
+    Route::get('/admin/users-email', AdminUserMailComponent::class)->name('admin.users_email');
+    Route::post('users-send-email', [App\Http\Controllers\UserController::class, 'sendEmail'])->name('ajax.send.email');
 });

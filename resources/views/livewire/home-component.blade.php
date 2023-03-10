@@ -1,90 +1,13 @@
+@section('title', 'Home')
+
 <div>
-    <div class="intro-slider-container mb-5">
-        <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{
-                        "dots": true,
-                        "nav": false,
-                        "loop": true, 
-                        "responsive": {
-                            "1200": {
-                                "nav": true,
-                                "dots": false
-                            }
-                        }
-                    }'>
-            @foreach($sliders as $slider)
-            <div class="intro-slide" style="background-image: url(assets/images/slider/{{$slider->image}});">
-                <div class="container intro-content">
-                    <div class="row justify-content-end">
-                        <div class="col-auto col-sm-7 col-md-6 col-lg-5">
-                            <h3 class="intro-subtitle text-third">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
-                            <h2 class="intro-title">{{$slider->title}}</h2><!-- End .intro-title -->
+    @include('pages.hero')
 
-
-
-                            <a href="{{route('shop.shop')}}" class="btn btn-primary btn-round">
-                                <span>Shop Products</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </a>
-                        </div><!-- End .col-lg-11 offset-lg-1 -->
-                    </div><!-- End .row -->
-                </div><!-- End .intro-content -->
-            </div><!-- End .intro-slide -->
-            @endforeach
-        </div><!-- End .intro-slider owl-carousel owl-simple -->
-
-        <span class="slider-loader"></span><!-- End .slider-loader -->
-    </div><!-- End .intro-slider-container -->
-
-    <div class="container">
-        <h2 class="title text-center mb-4">Explore Popular Categories</h2><!-- End .title text-center -->
-
-        <div class="cat-blocks-container">
-            <div class="row">
-                @foreach($scategories as $scategory)
-                <div class="col-6 col-sm-4 col-lg-2">
-                    <a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}" class="cat-block">
-                        <figure>
-                            <span>
-                                <img src="{{ asset('assets/images/category') }}/{{$scategory->image}}" alt="{{$scategory->name}}">
-                            </span>
-                        </figure>
-
-                        <h3 class="cat-block-title">{{$scategory->name}}</h3><!-- End .cat-block-title -->
-                    </a>
-                </div><!-- End .col-sm-4 col-lg-2 -->
-                @endforeach
-            </div><!-- End .row -->
-            <div class="more-container text-center mt-1 mb-5">
-                <a href="{{route('home.service_categories')}}" class="btn btn-outline-dark-2 btn-round btn-more"><span>View all</span><i class="icon-long-arrow-right"></i></a>
-            </div><!-- End .more-container -->
-        </div><!-- End .cat-blocks-container -->
-    </div><!-- End .container -->
+    @include('pages.category')
 
     <div class="mb-4"></div><!-- End .mb-4 -->
 
-    <div class="container">
-        <div class="heading text-center mb-3">
-            <h2 class="title">Today’s</h2><!-- End .title -->
-            <p class="title-desc">Featured deal and more</p><!-- End .title-desc -->
-        </div><!-- End .heading -->
-        <div class="row justify-content-center">
-            @foreach($fscategories as $scategory)
-            <div class="col-md-6 col-lg-3">
-                <div class="banner banner-overlay banner-overlay-light">
-                    <a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}">
-                        <img src="{{ asset('assets/images/category') }}/{{$scategory->image}}" alt="{{$scategory->name}}" style="height: 198px;">
-                    </a>
 
-                    <div class="banner-content">
-                        <h4 class="banner-subtitle"><a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}">Featured</a></h4><!-- End .banner-subtitle -->
-                        <h3 class="banner-title"><a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}"><strong>{{$scategory->name}}</strong></a></h3><!-- End .banner-title -->
-                        <a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}" class="banner-link">View Now<i class="icon-long-arrow-right"></i></a>
-                    </div><!-- End .banner-content -->
-                </div><!-- End .banner -->
-            </div><!-- End .col-md-4 -->
-            @endforeach
-        </div><!-- End .row -->
-    </div><!-- End .container -->
 
     <div class="mb-3"></div><!-- End .mb-5 -->
 
@@ -123,30 +46,37 @@
                     @foreach($fservices as $service)
                     <div class="product product-2">
                         <figure class="product-media">
-                            <span class="product-label label-circle label-top">Top</span>
                             <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
-                                <img src="{{ asset('assets/images/products/thumbnails') }}/{{$service->thumbnail}}" alt="{{$service->name}}" class="product-image">
+                                <img src="{{ asset('assets/images/category') }}/{{$service->category->image}}" alt="{{$service->name}}" class="product-image" style="width:230px; height:150px;">
                             </a>
 
                             <div class="product-action">
-                                <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Book Now">Book Now</a>
+                                <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
                             </div><!-- End .product-action -->
                         </figure><!-- End .product-media -->
 
                         <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">{{$service->category->name}}</a>
-                            </div><!-- End .product-cat -->
+
                             <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">{{$service->name}}</a></h3><!-- End .product-title -->
+                            <div class="product-cat">
+                                <a href="#">{{$service->category->name}}</a>&nbsp;<span>|</span>&nbsp;<a href="#">{{$service->tagline}}</a>
+                            </div><!-- End .product-cat -->
                             <div class="product-price">
-                                ${{$service->price}}
+                                {{$service->price}}<span>RWF</span>
                             </div><!-- End .product-price -->
+                            <!-- <div class="product-desc">
+                                            {{ Str::limit($service->description,50)}}
+                                        </div> -->
                             <div class="ratings-container">
+
                                 <div class="ratings">
                                     <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
                                 </div><!-- End .ratings -->
                                 <span class="ratings-text">( 4 Reviews )</span>
                             </div><!-- End .rating-container -->
+                            <div class="product-detail" style="padding:10px;">
+                                <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="btn btn-primary btn-round"><span>Read more </span><i class="icon-long-arrow-right"></i></a>
+                            </div><!-- End .product-action -->
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
                     @endforeach
@@ -173,35 +103,6 @@
         </div><!-- End .cta -->
     </div><!-- End .container -->
 
-    <div class="container">
-        <div class="heading text-center mb-3">
-            <h2 class="title">Deals & Outlet</h2><!-- End .title -->
-            <p class="title-desc">Today’s deal and more</p><!-- End .title-desc -->
-        </div><!-- End .heading -->
-
-        <div class="row">
-            @foreach($blogs as $blog)
-            <div class="col-lg-6 deal-col">
-                <div class="deal" style="background-image: url('assets/images/blogs/thumbnails/{{$blog->thumbnail}}');">
-                    <div class="deal-content">
-                        <h3 class="product-title"><a href="{{route('home.blog_detail',['blog_slug'=>$blog->slug])}}">{{ Str::limit($blog->title, 50)}}</a></h3><!-- End .product-title -->
-
-                        <div class="product-price">
-                            <span class="new-price">In {{$blog->blog_category}} </span>
-                            <span class="old-price">On: {{$blog->created_at}}</span>
-                        </div><!-- End .product-price -->
-
-                        <a href="{{route('home.blog_detail',['blog_slug'=>$blog->slug])}}" class="btn btn-link"><span>Read more</span><i class="icon-long-arrow-right"></i></a>
-                    </div><!-- End .deal-content -->
-                </div><!-- End .deal -->
-            </div><!-- End .col-lg-6 -->
-            @endforeach
-        </div><!-- End .row -->
-
-        <div class="more-container text-center mt-1 mb-5">
-            <a href="{{route('home.blogs')}}" class="btn btn-outline-dark-2 btn-round btn-more"><span>More Blogs</span><i class="icon-long-arrow-right"></i></a>
-        </div><!-- End .more-container -->
-    </div><!-- End .container -->
 
     <!-- <div class="container">
         <hr class="mb-0">
@@ -260,195 +161,82 @@
                 <div class="heading-left">
                     <h2 class="title">Trending Products</h2><!-- End .title -->
                 </div><!-- End .heading-left -->
-
-                <div class="heading-right">
-                    <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
-                        <li class="nav-item active">
-                            <a class="nav-link" id="trending-all-link" data-toggle="tab" href="#trending-all-tab" role="tab" aria-controls="trending-all-tab" aria-selected="false">All</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" id="trending-top-link" data-toggle="tab" href="#trending-top-tab" role="tab" aria-controls="trending-top-tab" aria-selected="true">Appliances</a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" id="trending-best-link" data-toggle="tab" href="#trending-best-tab" role="tab" aria-controls="trending-best-tab" aria-selected="false">Cleaning</a>
-                        </li>
-
-                    </ul>
-                </div><!-- End .heading-right -->
             </div><!-- End .heading -->
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab-content tab-content-carousel just-action-icons-sm">
-                        <div class="tab-pane p-0 fade show active" id="trending-all-tab" role="tabpanel" aria-labelledby="trending-all-link">
-                            <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                            "nav": false, 
-                                            "dots": false,
-                                            "margin": 20,
-                                            "loop": true,
-                                            "responsive": {
-                                                "0": {
-                                                    "items":2
-                                                },
-                                                "480": {
-                                                    "items":2
-                                                },
-                                                "768": {
-                                                    "items":3
-                                                },
-                                                "992": {
-                                                    "items":4
-                                                }
-                                            }
-                                        }'>
-                                @foreach($services as $service)
-                                <div class="product product-2">
-                                    <figure class="product-media">
-                                        <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
-                                            <img src="{{ asset('assets/images/products/thumbnails') }}/{{$service->thumbnail}}" alt="{{$service->name}}" class="product-image">
-                                        </a>
+            <div class="tab-content tab-content-carousel just-action-icons-sm">
+                <div class="tab-pane p-0 fade show active" id="new-all-tab" role="tabpanel" aria-labelledby="new-all-link">
+                    <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
+                                "nav": false, 
+                                "dots": true,
+                                "margin": 20,
+                                "loop": true,
+                                "responsive": {
+                                    "0": {
+                                        "items":2
+                                    },
+                                    "480": {
+                                        "items":2
+                                    },
+                                    "768": {
+                                        "items":3
+                                    },
+                                    "992": {
+                                        "items":4
+                                    },
+                                    "1200": {
+                                        "items":5
+                                    }
+                                }
+                            }'>
+                        @foreach($services as $service)
+                        <div class="product product-2">
+                            <figure class="product-media">
+                                <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
+                                    <img src="{{ asset('assets/images/category') }}/{{$service->category->image}}" alt="{{$service->name}}" class="product-image" style="width:230px; height:150px;">
+                                </a>
 
-                                        <div class="product-action">
-                                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
-                                        </div><!-- End .product-action -->
-                                    </figure><!-- End .product-media -->
+                                <div class="product-action">
+                                    <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
 
-                                    <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="#">{{$service->category->name}}</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">{{$service->name}}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            ${{$service->price}}
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <span class="ratings-text">( 4 Reviews )</span>
-                                        </div><!-- End .rating-container -->
+                            <div class="product-body">
 
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                                @endforeach
-                            </div><!-- End .owl-carousel -->
-                        </div><!-- .End .tab-pane -->
-                        <div class="tab-pane p-0 fade " id="trending-top-tab" role="tabpanel" aria-labelledby="trending-top-link">
-                            <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                            "nav": false, 
-                                            "dots": false,
-                                            "margin": 20,
-                                            "loop": true,
-                                            "responsive": {
-                                                "0": {
-                                                    "items":2
-                                                },
-                                                "480": {
-                                                    "items":2
-                                                },
-                                                "768": {
-                                                    "items":3
-                                                },
-                                                "992": {
-                                                    "items":4
-                                                }
-                                            }
-                                        }'>
-                                @foreach($aservices as $aservice)
-                                <div class="product product-2">
-                                    <figure class="product-media">
-                                        <span class="product-label label-circle label-top">Top</span>
-                                        <a href="{{route('home.service_details',['service_slug'=>$aservice->slug])}}">
-                                            <img src="{{ asset('assets/images/products/thumbnails') }}/{{$aservice->thumbnail}}" alt="{{$aservice->name}}" class="product-image">
-                                        </a>
+                                <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">{{$service->name}}</a></h3><!-- End .product-title -->
+                                <div class="product-cat">
+                                    <a href="#">{{$service->category->name}}</a>&nbsp;<span>|</span>&nbsp;<a href="#">{{$service->tagline}}</a>
+                                </div><!-- End .product-cat -->
+                                <div class="product-price">
+                                    {{$service->price}}<span>RWF</span>
+                                </div><!-- End .product-price -->
+                                <!-- <div class="product-desc">
+                                            {{ Str::limit($service->description,50)}}
+                                        </div> -->
+                                <div class="ratings-container">
 
-                                        <div class="product-action">
-                                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
-                                        </div><!-- End .product-action -->
-                                    </figure><!-- End .product-media -->
-
-                                    <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="#">{{$aservice->category->name}}</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$aservice->slug])}}">{{$aservice->name}}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            ${{$aservice->price}}
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <span class="ratings-text">( 4 Reviews )</span>
-                                        </div><!-- End .rating-container -->
-
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                                @endforeach
-                            </div><!-- End .owl-carousel -->
-                        </div><!-- .End .tab-pane -->
-                        <div class="tab-pane p-0 fade" id="trending-best-tab" role="tabpanel" aria-labelledby="trending-best-link">
-                            <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl" data-owl-options='{
-                                            "nav": false, 
-                                            "dots": false,
-                                            "margin": 20,
-                                            "loop": true,
-                                            "responsive": {
-                                                "0": {
-                                                    "items":2
-                                                },
-                                                "480": {
-                                                    "items":2
-                                                },
-                                                "768": {
-                                                    "items":3
-                                                },
-                                                "992": {
-                                                    "items":4
-                                                }
-                                            }
-                                        }'>
-                                @foreach($cleanservices as $cleanservice)
-                                <div class="product product-2">
-                                    <figure class="product-media">
-                                        <a href="{{route('home.service_details',['service_slug'=>$cleanservice->slug])}}">
-                                            <img src="{{ asset('assets/images/products/thumbnails') }}/{{$cleanservice->thumbnail}}" alt="{{$cleanservice->name}}" class="product-image">
-                                        </a>
-
-                                        <div class="product-action">
-                                            <a href="{{route('home.booking',['service_slug'=>$cleanservice->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
-                                        </div><!-- End .product-action -->
-                                    </figure><!-- End .product-media -->
-
-                                    <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="#">{{$cleanservice->category->name}}</a>
-                                        </div><!-- End .product-cat -->
-                                        <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$cleanservice->slug])}}">{{$cleanservice->name}}</a></h3><!-- End .product-title -->
-                                        <div class="product-price">
-                                            ${{$cleanservice->price}}
-                                        </div><!-- End .product-price -->
-                                        <div class="ratings-container">
-                                            <div class="ratings">
-                                                <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                            </div><!-- End .ratings -->
-                                            <span class="ratings-text">( 4 Reviews )</span>
-                                        </div><!-- End .rating-container -->
-
-                                    </div><!-- End .product-body -->
-                                </div><!-- End .product -->
-                                @endforeach
-                            </div><!-- End .owl-carousel -->
-                        </div><!-- .End .tab-pane -->
-
-                    </div><!-- End .tab-content -->
-                </div><!-- End .col-xl-4-5col -->
-            </div><!-- End .row -->
+                                    <div class="ratings">
+                                        <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+                                    </div><!-- End .ratings -->
+                                    <span class="ratings-text">( 4 Reviews )</span>
+                                </div><!-- End .rating-container -->
+                                <div class="product-detail" style="padding:10px;">
+                                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="btn btn-primary btn-round"><span>Read more </span><i class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .product-action -->
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                        @endforeach
+                    </div><!-- End .owl-carousel -->
+                </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
         </div><!-- End .container -->
     </div><!-- End .bg-light pt-5 pb-6 -->
 
     <div class="mb-5"></div><!-- End .mb-5 -->
+    @include('pages.services')
 
+    <div class="container">
+        <hr class="mb-5">
+    </div><!-- End .container -->
 
     <div class="container new-arrivals">
         <div class="heading heading-flex mb-3">
@@ -486,7 +274,7 @@
                     @if(!empty($sprovider->sprovider_name))
                     <div class="product product-2">
                         <figure class="product-media">
-                            <a href="{{route('home.service-provider_profile',['sprovider_name'=>$sprovider->sprovider_name])}}">
+                            <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}">
                                 @if($sprovider->image)
                                 <img src="{{asset('assets/images/sproviders')}}/{{$sprovider->image}}" alt="{{$sprovider->sprovider_name}}" height="100">
                                 @else
@@ -496,18 +284,42 @@
                         </figure><!-- End .product-media -->
 
                         <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">@if($sprovider->service_category_id)
-                                    {{$sprovider->category->name}}
-                                    @endif</a>
-                            </div><!-- End .product-cat -->
+
                             <h3 class="product-title">
-                                <a href="{{route('home.service-provider_profile',['sprovider_name'=>$sprovider->sprovider_name])}}">{{$sprovider->sprovider_name}}</a>
+                                <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}">{{$sprovider->sprovider_name}}</a>
                             </h3><!-- End .product-title -->
-                            <div class="product-price">
-                                {{$sprovider->city}}
-                            </div><!-- End .product-price -->
+                            <div class="product-cat">
+                                <span>Provides:</span><a href="#">@if($sprovider->service_category_id)
+                                    {{$sprovider->category->name}}
+                                    @endif</a>Services <br />
+                                <div class="mb-1"></div>
+                                <div class="product-price">
+                                    <span class="icon-map-marker"></span>&nbsp; {{$sprovider->city}}
+                                </div>
+                            </div><!-- End .product-cat -->
+                            <div class="product-desc">
+                                {{ Str::limit($sprovider->about,50)}}
+                            </div>
+                            <div class="ratings-container">
+
+                                <div class="ratings">
+                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+                                </div><!-- End .ratings -->
+                                <span class="ratings-text">( 4 Reviews )</span>
+                            </div><!-- End .rating-container -->
+                            <!-- <div class="product-desc">
+                                @php
+                                $totalSales = \App\Models\ServiceBooking::where('service_provider_id',$sprovider->id)->where('status','completed')->distinct('user_id')->count();
+                                @endphp
+                                <a href="#">Royal Customers: &nbsp;{{$totalSales}}</a><br />
+                                <a href="#">2 Comments</a><br />
+                                @php
+                                $totalSales = \App\Models\ServiceBooking::where('service_provider_id',$sprovider->id)->where('status','completed')->count();
+                                @endphp
+                                <a href="#">Total Served customers: &nbsp;{{$totalSales}}</a>
+                            </div> -->
                         </div><!-- End .product-body -->
+
                     </div><!-- End .product -->
                     @endif
                     @endforeach
@@ -519,6 +331,8 @@
     <div class="container">
         <hr class="mb-0">
     </div><!-- End .container -->
+
+    @include('pages.blogContent')
 
     <!-- <div class="icon-boxes-container bg-transparent">
         <div class="container">
@@ -576,4 +390,19 @@
             </div>
         </div>
     </div> -->
+    <div class="container">
+        <div class="cta cta-border mb-5" style="background-image: url(assets/images/demos/demo-4/bg-1.jpg);">
+            <img src="{{ asset('assets/images/demos/demo-4/camera.png') }}" alt="camera" class="cta-img">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="cta-content">
+                        <div class="cta-text text-right text-white">
+                            <p>Shop Today’s Deals <br><strong>Awesome Made Easy. HERO7 Black</strong></p>
+                        </div><!-- End .cta-text -->
+                        <a href="{{route('shop.shop')}}" class="btn btn-primary btn-round"><span>Shop Now </span><i class="icon-long-arrow-right"></i></a>
+                    </div><!-- End .cta-content -->
+                </div><!-- End .col-md-12 -->
+            </div><!-- End .row -->
+        </div><!-- End .cta -->
+    </div><!-- End .container -->
 </div>

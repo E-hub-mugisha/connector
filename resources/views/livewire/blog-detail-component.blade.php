@@ -1,3 +1,5 @@
+@section('title', 'Blog Detail')
+
 <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
     <div class="container">
         <h1 class="page-title">{{$blog->title}}</h1>
@@ -34,7 +36,7 @@
                         </div><!-- End .entry-meta -->
 
                         <h2 class="entry-title">
-                        {{$blog->title}}
+                            {{$blog->title}}
                         </h2><!-- End .entry-title -->
 
                         <div class="entry-cats">
@@ -50,62 +52,92 @@
 
                             <p>{{$blog->slug}}</p>
 
-                            </div><!-- End .entry-content -->
+                        </div><!-- End .entry-content -->
 
                         <div class="entry-footer row no-gutters flex-column flex-md-row">
                             <div class="col-md">
                                 <div class="entry-tags">
-                                    <span>Tags:</span> <a href="#">photography</a> <a href="#">style</a>
+                                    <span>Post visitors:</span> <a href="#">{{$blog->views}}</a>
                                 </div><!-- End .entry-tags -->
                             </div><!-- End .col -->
 
                             <div class="col-md-auto mt-2 mt-md-0">
                                 <div class="social-icons social-icons-color">
-                                    <span class="social-label">Share this post:</span>
-                                    <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                    <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                    <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                                    <a href="#" class="social-icon social-linkedin" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>
-                                </div><!-- End .soial-icons -->
+                                    <div class="ss-box"></div>
+                                    <!-- <span class="social-label">Share this post:</span> -->
+                                    <!-- <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a> -->
+                                    <!-- <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a> -->
+                                    <!-- <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a> -->
+                                    <!-- <a href="#" class="social-icon social-linkedin" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a> -->
+                                </div>
                             </div><!-- End .col-auto -->
                         </div><!-- End .entry-footer row no-gutters -->
                     </div><!-- End .entry-body -->
 
-                    <div class="entry-author-details">
-                        <figure class="author-media">
-                            <a href="#">
-                                <img src="assets/images/blog/single/author.jpg" alt="User name">
-                            </a>
-                        </figure><!-- End .author-media -->
-
-                        <div class="author-body">
-                            <div class="author-header row no-gutters flex-column flex-md-row">
-                                <div class="col">
-                                    <h4><a href="#">John Doe</a></h4>
-                                </div><!-- End .col -->
-                                <div class="col-auto mt-1 mt-md-0">
-                                    <a href="#" class="author-link">View all posts by John Doe <i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .col -->
-                            </div><!-- End .row -->
-
-                            <div class="author-content">
-                                <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu erat. Aliquam erat volutpat. </p>
-                            </div><!-- End .author-content -->
-                        </div><!-- End .author-body -->
-                    </div><!-- End .entry-author-details-->
                 </article><!-- End .entry -->
 
-                <nav class="pager-nav" aria-label="Page navigation">
-                    <a class="pager-link pager-link-prev" href="#" aria-label="Previous" tabindex="-1">
-                        Previous Post
-                        <span class="pager-link-title">Cras iaculis ultricies nulla</span>
-                    </a>
+                <div>
+                    <div class="comments">
+                        <h3 class="title">Comments</h3><!-- End .title -->
 
-                    <a class="pager-link pager-link-next" href="#" aria-label="Next" tabindex="-1">
-                        Next Post
-                        <span class="pager-link-title">Praesent placerat risus</span>
-                    </a>
-                </nav><!-- End .pager-nav -->
+                        <ul>
+                            @forelse($blog->comments as $comment)
+                            <li>
+                                <div class="comment">
+                                    <figure class="comment-media">
+                                        <a href="#">
+                                            <img src="{{asset('assets/images/avatar.jpg') }}" alt="User name">
+                                        </a>
+                                    </figure>
+
+                                    <div class="comment-body">
+                                        <div class="comment-user">
+                                            <h4>
+                                                <a href="#">
+                                                    @if($comment->user)
+                                                    {{$comment->user->name}}
+                                                    @endif
+                                                </a>
+                                            </h4>
+                                            <span class="comment-date">{{$comment->created_at}}</span>
+                                        </div><!-- End .comment-user -->
+
+                                        <div class="comment-content">
+                                            <p>{{$comment->comment_body}}</p>
+                                        </div><!-- End .comment-content -->
+                                    </div><!-- End .comment-body -->
+                                </div><!-- End .comment -->
+                            </li>
+                            @empty
+                            <h6>No Comment so far</h6>
+                            @endforelse
+                        </ul>
+                    </div><!-- End .comments -->
+                    <div class="reply">
+                        <div class="heading">
+                            <h3 class="title">Leave A Reply</h3><!-- End .title -->
+                            <p class="title-desc">Your email address will not be published. Required fields are marked *</p>
+                        </div><!-- End .heading -->
+
+                        <form action="/sendComment" method="POST">
+                            @csrf
+                            <label for="reply-message" class="sr-only">Comment</label>
+                            <textarea name="comment_body" id="comment_body" cols="30" rows="4" class="form-control" required placeholder="Comment *"></textarea>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <input type="hidden" class="form-control" id="blog_id" name="blog_id" value="{{$blog->id}}" required>
+                                </div><!-- End .col-md-6 -->
+                            </div><!-- End .row -->
+
+                            <button type="submit" class="btn btn-outline-primary-2">
+                                <span>POST COMMENT</span>
+                                <i class="icon-long-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div><!-- End .reply -->
+                </div>
 
                 @if($r_blog)
                 <div class="related-posts">
@@ -159,34 +191,12 @@
 
             <aside class="col-lg-3">
                 <div class="sidebar">
-                    <div class="widget widget-search">
-                        <h3 class="widget-title">Search</h3><!-- End .widget-title -->
-
-                        <form action="#">
-                            <label for="ws" class="sr-only">Search in blog</label>
-                            <input type="search" class="form-control" name="ws" id="ws" placeholder="Search in blog" required>
-                            <button type="submit" class="btn"><i class="icon-search"></i><span class="sr-only">Search</span></button>
-                        </form>
-                    </div><!-- End .widget -->
-
-                    <div class="widget widget-cats">
-                        <h3 class="widget-title">Categories</h3><!-- End .widget-title -->
-
-                        <ul>
-                            <li><a href="#">Lifestyle<span>3</span></a></li>
-                            <li><a href="#">Shopping<span>3</span></a></li>
-                            <li><a href="#">Fashion<span>1</span></a></li>
-                            <li><a href="#">Travel<span>3</span></a></li>
-                            <li><a href="#">Hobbies<span>2</span></a></li>
-                        </ul>
-                    </div><!-- End .widget -->
-
                     <div class="widget">
-                    @if($r_blog)
+                        @if($r_blog)
                         <h3 class="widget-title">Popular Posts</h3><!-- End .widget-title -->
 
                         <ul class="posts-list">
-                            
+
                             <li>
                                 <figure>
                                     <a href="{{route('home.blog_detail',['blog_slug'=>$blog->slug])}}">
@@ -203,18 +213,18 @@
                         @endif
                     </div><!-- End .widget -->
 
-                    <div class="widget widget-banner-sidebar">
-                        <div class="banner-sidebar-title">ad box 280 x 280</div><!-- End .ad-title -->
+                    <!-- <div class="widget widget-banner-sidebar">
+                        <div class="banner-sidebar-title">ad box 280 x 280</div>
 
                         <div class="banner-sidebar">
                             <a href="#">
                                 <img src="{{asset('assets/images/blog/sidebar/banner.jpg')}}" alt="banner">
                             </a>
-                        </div><!-- End .banner-ad -->
-                    </div><!-- End .widget -->
+                        </div>
+                    </div> -->
 
-                    <div class="widget">
-                        <h3 class="widget-title">Browse Tags</h3><!-- End .widget-title -->
+                    <!-- <div class="widget">
+                        <h3 class="widget-title">Browse Tags</h3>
 
                         <div class="tagcloud">
                             <a href="#">fashion</a>
@@ -224,16 +234,16 @@
                             <a href="#">travel</a>
                             <a href="#">shopping</a>
                             <a href="#">hobbies</a>
-                        </div><!-- End .tagcloud -->
-                    </div><!-- End .widget -->
+                        </div>
+                    </div> -->
 
-                    <div class="widget widget-text">
-                        <h3 class="widget-title">About Blog</h3><!-- End .widget-title -->
+                    <!-- <div class="widget widget-text">
+                        <h3 class="widget-title">About Blog</h3>
 
                         <div class="widget-text-content">
                             <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, pulvinar nunc sapien ornare nisl.</p>
-                        </div><!-- End .widget-text-content -->
-                    </div><!-- End .widget -->
+                        </div>
+                    </div> -->
                 </div><!-- End .sidebar sidebar-shop -->
             </aside><!-- End .col-lg-3 -->
         </div><!-- End .row -->

@@ -1,3 +1,5 @@
+@section('title', 'Service Categories')
+
 <div>
     <style>
         nav svg {

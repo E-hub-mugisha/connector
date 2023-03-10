@@ -1,3 +1,5 @@
+@section('title', 'Services')
+
 <div>
     <style>
         nav svg {
@@ -25,7 +27,7 @@
     <div class="page-content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div class="toolbox">
                         <div class="toolbox-left">
                             <div class="toolbox-info">
@@ -48,32 +50,42 @@
                     </div><!-- End .toolbox -->
 
                     <div class="products mb-3">
-                        <div class="row justify-content-center">
+                        <div class="row ">
                             @foreach($services as $service)
                             <div class="col-6 col-md-4 col-lg-4 col-xl-3">
-                                <div class="product product-7 text-center">
+                                <div class="product product-2">
                                     <figure class="product-media">
-                                        <span class="product-label label-new">New</span>
                                         <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
-                                            <img src="{{asset('assets/images/products/thumbnails')}}/{{$service->thumbnail}}" alt="Product image" class="product-image">
+                                            <img src="{{ asset('assets/images/products/thumbnails') }}/{{$service->thumbnail}}" alt="{{$service->name}}" class="product-image" style="width:230px; height:150px;">
                                         </a>
 
                                         <div class="product-action">
-                                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart"><span>Book Now</span></a>
+                                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="btn-product btn-cart" title="Add to cart">Book Now</a>
                                         </div><!-- End .product-action -->
                                     </figure><!-- End .product-media -->
 
                                     <div class="product-body">
-                                        <div class="product-cat">
-                                            <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">{{$service->category->name}}</a>
-                                        </div><!-- End .product-cat -->
+
                                         <h3 class="product-title"><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">{{$service->name}}</a></h3><!-- End .product-title -->
+                                        <div class="product-cat">
+                                            <a href="#">{{$service->category->name}}</a>&nbsp;<span>|</span>&nbsp;<a href="#">{{$service->tagline}}</a>
+                                        </div><!-- End .product-cat -->
                                         <div class="product-price">
-                                            ${{$service->price}}
+                                            {{$service->price}}<span>RWF</span>
                                         </div><!-- End .product-price -->
+                                        <!-- <div class="product-desc">
+                                            {{ Str::limit($service->description,50)}}
+                                        </div> -->
                                         <div class="ratings-container">
-                                            <span class="ratings-text">{{$service->tagline}}</span>
+
+                                            <div class="ratings">
+                                                <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+                                            </div><!-- End .ratings -->
+                                            <span class="ratings-text">( 4 Reviews )</span>
                                         </div><!-- End .rating-container -->
+                                        <div class="product-detail" style="padding:10px;">
+                                            <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="btn btn-primary btn-round"><span>Read more </span><i class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .product-action -->
                                     </div><!-- End .product-body -->
                                 </div><!-- End .product -->
                             </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
@@ -90,27 +102,25 @@
                         </ul>
                     </nav>
                 </div><!-- End .col-lg-9 -->
-                <aside class="col-lg-3 order-lg-first">
+                <aside class="col-lg-2 order-lg-first">
                     <div class="sidebar sidebar-shop">
                         <div class="widget widget-clean">
                             <label>Filters:</label>
-                            <a href="#" class="sidebar-filter-clear">Clean All</a>
+                            <!-- <a href="#" class="sidebar-filter-clear">Clean All</a> -->
                         </div><!-- End .widget widget-clean -->
-
+                        @foreach($scategories as $scategory)
                         <div class="widget widget-collapsible">
                             <h3 class="widget-title">
-                                <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true" aria-controls="widget-1">
-                                    Category
-                                </a>
+                                <a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}" class="custom-control-label" for="cat-1">{{$scategory->name}}</a>
                             </h3><!-- End .widget-title -->
 
-                            <div class="collapse show" id="widget-1">
+                            <div class="collapse show">
                                 <div class="widget-body">
                                     <div class="filter-items filter-items-count">
-                                    @foreach($scategories as $scategory)
+                                        @foreach($scategory->subcategories as $scat)
                                         <div class="filter-item">
                                             <div class="custom-control custom-checkbox">
-                                                <a href="{{route('home.service_by_category',['category_slug'=>$scategory->slug])}}" class="custom-control-label" for="cat-1">{{$scategory->name}}</a>
+                                                <a href="#" class="custom-control-label" for="cat-1">{{$scat->name}}</a>
                                             </div><!-- End .custom-checkbox -->
                                             <!-- <span class="item-count">3</span> -->
                                         </div><!-- End .filter-item -->
@@ -119,6 +129,7 @@
                                 </div><!-- End .widget-body -->
                             </div><!-- End .collapse -->
                         </div><!-- End .widget -->
+                        @endforeach
                     </div><!-- End .sidebar sidebar-shop -->
                 </aside><!-- End .col-lg-3 -->
             </div><!-- End .row -->

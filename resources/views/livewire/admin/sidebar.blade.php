@@ -141,6 +141,12 @@
             <span>Users</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.users_email')}}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Get Users Email</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

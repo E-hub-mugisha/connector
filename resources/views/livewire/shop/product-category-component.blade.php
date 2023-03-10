@@ -20,10 +20,19 @@
                                 <div class="accordion" id="widget-cat-acc">
                                     @foreach($categories as $category)
                                     <div class="acc-item">
-                                        <h5>
+                                        <h5 class="category-item {{count($category->subcategories) > 0 ? 'has-child-cate':''}}">
                                             <a role="button" href="{{route('product.category',['category_slug'=>$category->slug])}}">
                                                 {{$category->name}}
                                             </a>
+                                            @if(count($category->subcategories)>0)
+                                            <ul>
+                                                @foreach($category->subcategories as $scategory)
+                                                <li>
+                                                    <a href="{{route('product.category',['category_slug'=>$category->slug,'scategory_slug'=>$scategory->slug])}}">{{$scategory->name}}</a>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
                                         </h5>
                                     </div><!-- End .acc-item -->
                                     @endforeach
@@ -77,21 +86,24 @@
 
                                     <div class="product-body">
                                         <div class="product-cat">
-                                            <a href="#">{{$product->SKU}}</a>
+                                            <a href="{{route('product.brand',['brand'=>$product->brand])}}">{{$product->brand}}</a>
                                         </div><!-- End .product-cat -->
                                         <h3 class="product-title"><a href="{{route('product-detail',['product_slug'=>$product->slug])}}">{{ $product->name }}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                            ${{$product->regular_price}}
+                                            {{$product->regular_price}}<span class="text-color-success">RWF</span>
                                         </div><!-- End .product-price -->
                                         <div class="ratings-container">
+                                            <div class="product-desc">
+                                                {{ Str::limit($product->short_description,50)}}
+                                            </div>
                                             <div class="ratings">
                                                 <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
                                             </div><!-- End .ratings -->
                                             <span class="ratings-text">( 12 Reviews )</span>
                                         </div><!-- End .rating-container -->
-                                        
-                                            <a href="#" class="btn-product btn-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add To Cart</a>
-                                        
+
+                                        <a href="#" class="btn-product btn-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Add To Cart</a>
+
                                     </div><!-- End .product-body -->
                                 </div><!-- End .product -->
                             </div><!-- End .col-sm-6 col-md-4 col-xl-3 -->

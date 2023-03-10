@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -27,7 +27,7 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -46,7 +46,7 @@
 
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -68,7 +68,7 @@
 
         <!-- Content Row -->
         <div class="row justify-content-center">
-            <div class="col-lg-10 mb-4">
+            <div class="col-lg-6 mb-4">
 
                 <!-- Illustrations -->
                 <div class="card shadow mb-4">
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-10 mb-4">
+            <div class="col-lg-6 mb-4">
 
                 <!-- Illustrations -->
                 <div class="card shadow mb-4">
@@ -137,7 +137,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Recent Services</h6>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-responsive table-wishlist table-mobile" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>#</th>

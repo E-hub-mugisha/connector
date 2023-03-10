@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- Hiletasker/cart.html  22 Nov 2019 09:55:06 GMT -->
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Shop -Hiletask</title>
+    <title>@yield('title') - {{ config('app.name', 'HileTask') }}</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Shop -Hiletasker">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/images/icons/apple-touch-icon.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="manifest" href="{{ asset('assets/images/icons/site.html') }}">
-    <link rel="mask-icon" href="{{ asset('assets/images/icons/safari-pinned-tab.svg') }}" color="#666666">
     <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
-    <meta name="apple-mobile-web-app-title" content="Hiletasker">
-    <meta name="application-name" content="Hiletasker">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="{{asset('assets/images/icons/browserconfig.xml')}}">
+    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <!-- Plugins CSS File -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/owl-carousel/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/plugins/magnific-popup/magnific-popup.css')}}">
@@ -39,11 +33,11 @@
 
 <body>
     <div class="page-wrapper">
-        <header class="header">
+        <header class="header header-10 header-intro-clearance">
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
-                        <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                        <a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
@@ -52,29 +46,7 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul>
-                                    <!-- <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">USD</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="#">Eur</a></li>
-                                                    <li><a href="#">Usd</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">English</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="#">English</a></li>
-                                                    <li><a href="#">French</a></li>
-                                                    <li><a href="#">Spanish</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li> -->
+
                                     @if(Route::has('login'))
                                     @auth
                                     @if(Auth::user()->utype==="ADM")
@@ -126,11 +98,10 @@
                             </li>
                         </ul><!-- End .top-menu -->
                     </div><!-- End .header-right -->
-
                 </div><!-- End .container -->
             </div><!-- End .header-top -->
 
-            <div class="header-middle sticky-header">
+            <div class="header-middle">
                 <div class="container">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
@@ -141,92 +112,160 @@
                         <a href="/" class="logo">
                             <img src="{{asset('assets/images/logo.png')}}" alt=" Logo" width="105" height="25">
                         </a>
-
-                        <nav class="main-nav">
-                            <ul class="menu sf-arrows">
-                                <li class="megamenu-container active">
-                                    <a href="/" class="sf-with-ul">Home</a>
-
-
-                                </li>
-                                <li>
-                                    <a href="{{route('shop.shop')}}" class="sf-with-ul">Shop</a>
-
-
-                                </li>
-                                <li>
-                                    <a href="#" class="sf-with-ul">Product</a>
-
-
-                                </li>
-                            </ul><!-- End .menu -->
-                        </nav><!-- End .main-nav -->
                     </div><!-- End .header-left -->
 
-                    <div class="header-right">
-                        <div class="header-search">
-                            <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
-                            <form id="pform" action="{{route('searchProduct')}}" method="post">
+                    <div class="header-center">
+                        <div class="header-search header-search-extended header-search-visible header-search-no-radius d-none d-lg-block">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                            <form action="{{route('searchProduct')}}" method="post">
                                 @csrf
-                                <div class="header-search-wrapper">
-                                    <label for="q" class="sr-only">Search</label>
+                                <div class="header-search-wrapper search-wrapper-wide">
 
-                                    <input type="search" class="form-control typeahead" name="q" id="q" placeholder="Search in..." required>
-                                    <button class="btn btn-primary-outline-2" type="submit"><i class="icon-search"></i></button>
+                                    <label for="q" class="sr-only">Search</label>
+                                    <input type="search" class="form-control typeahead" name="q" id="q" placeholder="Search product ..." required>
+                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
                         </div><!-- End .header-search -->
+                    </div>
 
-                        <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <i class="icon-shopping-cart"></i>
-                                @if(Cart::count() > 0 )
-                                <span class="cart-count">{{Cart::count()}}</span>
-                                @endif
-                            </a>
+                    <div class="header-right">
+                        <div class="header-dropdown-link">
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
+                            <div class="dropdown cart-dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                    <i class="icon-shopping-cart"></i>
                                     @if(Cart::count() > 0 )
-                                    @foreach(Cart::content() as $item)
-                                    <div class="product">
-                                        <div class="product-cart-details">
-                                            <h4 class="product-title">
-                                                <a href="#">{{ $item->model->name }}</a>
-                                            </h4>
-
-                                            <span class="cart-product-info">
-                                                <span class="cart-product-qty">1</span>
-                                                x ${{$item->Subtotal()}}
-                                            </span>
-                                        </div><!-- End .product-cart-details -->
-
-                                        <figure class="product-image-container">
-                                            <a href="#" class="product-image">
-                                                <img src="{{asset('assets/images/products/cart/product-1.jpg')}}" alt="product">
-                                            </a>
-                                        </figure>
-                                        <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="icon-close"></i></a>
-                                    </div><!-- End .product -->
-                                    @endforeach
+                                    <span class="cart-count">{{Cart::count()}}</span>
                                     @endif
-                                </div><!-- End .cart-product -->
+                                </a>
 
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-cart-products">
+                                        @if(Cart::count() > 0 )
+                                        @foreach(Cart::content() as $item)
+                                        <div class="product">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                    <a href="#">{{ $item->model->name }}</a>
+                                                </h4>
 
-                                    <span class="cart-total-price">${{ Cart::total()}}</span>
-                                </div><!-- End .dropdown-cart-total -->
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">1</span>
+                                                    x ${{$item->Subtotal()}}
+                                                </span>
+                                            </div><!-- End .product-cart-details -->
 
-                                <div class="dropdown-cart-action">
-                                    <a href="{{route('product.cart')}}" class="btn btn-primary">View Cart</a>
-                                    <a href="{{route('checkout')}}" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .cart-dropdown -->
+                                            <figure class="product-image-container">
+                                                <a href="#" class="product-image">
+                                                    <img src="{{asset('assets/images/products')}}/{{$item->model->image}}" alt="product">
+                                                </a>
+                                            </figure>
+                                            <a href="#" class="btn-remove" title="Remove Product" wire:click.prevent="destroy('{{$item->rowId}}')"><i class="icon-close"></i></a>
+                                        </div><!-- End .product -->
+                                        @endforeach
+                                        @endif
+                                    </div><!-- End .cart-product -->
+
+                                    <div class="dropdown-cart-total">
+                                        <span>Total</span>
+
+                                        <span class="cart-total-price">${{ Cart::total()}}</span>
+                                    </div><!-- End .dropdown-cart-total -->
+
+                                    <div class="dropdown-cart-action">
+                                        <a href="{{route('product.cart')}}" class="btn btn-primary">View Cart</a>
+                                        <a href="{{route('checkout')}}" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                    </div><!-- End .dropdown-cart-total -->
+                                </div><!-- End .dropdown-menu -->
+                            </div><!-- End .cart-dropdown -->
+                        </div>
                     </div><!-- End .header-right -->
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
+
+            <div class="header-bottom sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <div class="dropdown category-dropdown show is-on" data-visible="true">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
+                                Browse Categories
+                            </a>
+
+                            <div class="dropdown-menu show">
+                                <nav class="side-nav">
+                                    <ul class="menu-vertical sf-arrows">
+                                        @foreach(\App\Models\Category::all() as $category)
+                                        <li class="megamenu-container {{count($category->subcategories) > 0 ? 'has-child-cate':''}}">
+                                            <a class="sf-with-ul" href="{{route('product.category',['category_slug'=>$category->slug])}}">{{$category->name}}</a>
+                                            @if(count($category->subcategories)>0)
+                                            <div class="megamenu">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-8">
+                                                        <div class="menu-col">
+                                                            <div class="row">
+                                                                @foreach($category->subcategories as $scategory)
+                                                                <div class="col-md-6">
+                                                                    <div class="menu-title">{{$category->name}}</div><!-- End .menu-title -->
+                                                                    <ul>
+                                                                        <li><a href="{{route('product.category',['category_slug'=>$category->slug,'scategory_slug'=>$scategory->slug])}}">{{$scategory->name}}</a></li>
+                                                                    </ul>
+                                                                </div><!-- End .col-md-6 -->
+                                                                @endforeach
+                                                            </div><!-- End .row -->
+                                                        </div><!-- End .menu-col -->
+                                                    </div><!-- End .col-md-8 -->
+
+                                                    <div class="col-md-4">
+                                                        <div class="banner banner-overlay">
+                                                            <a href="{{route('product.category',['category_slug'=>$category->slug])}}" class="banner banner-menu">
+                                                                <img src="{{asset('assets/images/category/products')}}/{{$category->image}}" alt="{{$category->name}}">
+                                                            </a>
+                                                        </div><!-- End .banner banner-overlay -->
+                                                    </div><!-- End .col-md-4 -->
+                                                </div><!-- End .row -->
+                                            </div><!-- End .megamenu -->
+                                            @endif
+                                        </li>
+                                        @endforeach
+                                    </ul><!-- End .menu-vertical -->
+                                </nav><!-- End .side-nav -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .category-dropdown -->
+                    </div><!-- End .col-lg-3 -->
+                    <div class="header-center">
+                        <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li class="megamenu-container active">
+                                    <a href="/" class="sf">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('shop.shop')}}" class="sf">Shop</a>
+                                </li>
+                                <li>
+                                    <div class="header-dropdown">
+                                        <a href="#" class="sf text-white">Brands</a>
+                                        <div class="header-menu">
+                                            <ul>
+                                                @foreach(\App\Models\Product::query('brand')->distinct('brand')->get() as $product)
+                                                <li><a href="{{route('product.brand',['brand'=>$product->brand])}}">{{$product->brand}}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{route('home.contact')}}" class="sf">Contact</a>
+                                </li>
+                            </ul><!-- End .menu -->
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .col-lg-9 -->
+                    <div class="header-right">
+                        <i class="icon-map-marker"></i>
+                        <p>Kigali<span class="highlight">&nbsp;Rwanda</span></p>
+                    </div>
+                </div><!-- End .container -->
+            </div><!-- End .header-bottom -->
         </header><!-- End .header -->
 
         <main class="main">
@@ -257,8 +296,7 @@
                                 <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="#">About Hiletasker</a></li>
-                                    <li><a href="#">How to shop on Hiletasker</a></li>
+                                    <li><a href="#">About Hiletask</a></li>
                                     <li><a href="#">FAQ</a></li>
                                     <li><a href="{{route('home.contact')}}">Contact us</a></li>
                                     <li><a href="{{route('login')}}">Log in</a></li>
@@ -272,10 +310,7 @@
 
                                 <ul class="widget-list">
                                     <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="#">Money-back guarantee!</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Shipping</a></li>
-                                    <li><a href="#">Terms and conditions</a></li>
+                                    <li><a href="{{ route('terms') }}">Terms and conditions</a></li>
                                     <li><a href="#">Privacy Policy</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
@@ -286,10 +321,8 @@
                                 <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="#">Sign In</a></li>
+                                    <li><a href="{{route('login')}}">Sign In</a></li>
                                     <li><a href="{{route('product.cart')}}">View Cart</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Track My Order</a></li>
                                     <li><a href="#">Help</a></li>
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
@@ -300,7 +333,7 @@
 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="footer-copyright">Copyright © 2022 HileTasker. All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <p class="footer-copyright">Copyright © 2022 HileTask. All Rights Reserved.</p><!-- End .footer-copyright -->
                     <figure class="footer-payments">
                         <img src="{{asset('assets/images/payments.png')}}" alt="Payment methods" width="272" height="20">
                     </figure><!-- End .footer-payments -->
@@ -327,16 +360,24 @@
                 <ul class="mobile-menu">
                     <li class="active">
                         <a href="/">Home</a>
-
-
                     </li>
                     <li>
-                        <a href="#">Shop</a>
-
+                        <a href="{{route('shop.shop')}}">Shop</a>
                     </li>
                     <li>
-                        <a href="#" class="sf-with-ul">Product</a>
-
+                        <div class="header-dropdown">
+                            <a href="#" class="sf text-white">Brands</a>
+                            <div class="header-menu">
+                                <ul>
+                                    @foreach(\App\Models\Product::query('brand')->distinct('brand')->get() as $product)
+                                    <li><a href="{{route('product.brand',['brand'=>$product->brand])}}">{{$product->brand}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{route('home.contact')}}" class="sf">Contact</a>
                     </li>
                 </ul>
             </nav><!-- End .mobile-nav -->

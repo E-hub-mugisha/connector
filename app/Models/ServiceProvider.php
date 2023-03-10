@@ -23,6 +23,10 @@ class ServiceProvider extends Model
 
     public function services()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'service_provider_id','id');
+    }
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\ServiceProviderRating');
     }
 }
