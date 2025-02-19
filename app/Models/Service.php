@@ -27,11 +27,23 @@ class Service extends Model
     }
     public static function getService()
     {
-        $services = DB::table('services')->select('id','name','service_category_id','service_provider_id','price','discount','discount_type','location','created_at')->get();
+        $services = DB::table('services')->select('id', 'name', 'service_category_id', 'service_provider_id', 'price', 'discount', 'discount_type', 'location', 'created_at')->get();
         return $services;
     }
     public function subCategories()
     {
-        return $this->belongsTo(ServiceSubCategory::class,'subcategory_id');
+        return $this->belongsTo(ServiceSubCategory::class, 'sub_category_id');
+    }
+    public function serviceBookings()
+    {
+        return $this->hasMany(ServiceBooking::class);
+    }
+    public function subcategory()
+    {
+        return $this->belongsTo(ServiceSubCategory::class, 'sub_category_id');
+    }
+    public function media()
+    {
+        return $this->hasMany(ServiceMedia::class);
     }
 }

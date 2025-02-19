@@ -1,119 +1,136 @@
 @section('title', 'Contact')
 
-<div>
-    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
-        <div class="container">
-            <h1 class="page-title">Let's<span>Talk</span></h1>
-        </div><!-- End .container -->
-    </div><!-- End .page-header -->
-    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
-
-    <div class="page-content">
-        <div class="container">
+<!-- 
+		=============================================
+			Inner Banner
+		============================================== 
+		-->
+<div class="inner-banner-one position-relative">
+    <div class="container">
+        <div class="position-relative">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="contact-box text-center">
-                        <h3>Office</h3>
+                <div class="col-xl-6 m-auto text-center">
+                    <div class="title-two">
+                        <h2 class="text-white">@yield('title')</h2>
+                    </div>
+                    <p class="text-lg text-white mt-30 lg-mt-20">Our dedicated support team is ready to assist you with any inquiries or issues you may have. We're committed to ensuring your satisfaction.</p>
+                </div>
+            </div>
 
-                        <address>Kicukiro, Kigali, <br>RWANDA</address>
-                    </div><!-- End .contact-box -->
-                </div><!-- End .col-md-4 -->
+        </div>
+    </div>
+    <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_02.svg')}}" alt="" class="lazy-img shapes shape_01">
+    <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_03.svg')}}" alt="" class="lazy-img shapes shape_02">
+</div> <!-- /.inner-banner-one -->
 
-                <div class="col-md-4">
-                    <div class="contact-box text-center">
-                        <h3>Start a Conversation</h3>
 
-                        <div><a href="mailto:#">info@hiletask.com</a></div>
-                        <div><a href="tel:+250 791 957 955">+250 791 957 955</a></div>
-                    </div><!-- End .contact-box -->
-                </div><!-- End .col-md-4 -->
 
-                <div class="col-md-4">
-                    <div class="contact-box text-center">
-                        <h3>Social</h3>
+<!-- 
+		=============================================
+			Contact Us
+		============================================== 
+		-->
+<section class="contact-us-section pt-100 lg-pt-80">
+    <div class="container">
+        <div class="border-bottom pb-150 lg-pb-80">
+            <div class="title-one text-center mb-70 lg-mb-40">
+                <h2>Get in touch</h2>
+            </div>
+            <div class="row">
+                <div class="col-xl-10 m-auto">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="address-block-one text-center mb-40 wow fadeInUp">
+                                <div class="icon rounded-circle d-flex align-items-center justify-content-center m-auto"><img src="{{ asset('asset/images/icon/icon_57.svg')}}" alt=""></div>
+                                <h5 class="title">Our Address</h5>
+                                <p>Kigali <br>Rwanda</p>
+                            </div> <!-- /.address-block-one -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="address-block-one text-center mb-40 wow fadeInUp">
+                                <div class="icon rounded-circle d-flex align-items-center justify-content-center m-auto"><img src="{{ asset('asset/images/icon/icon_58.svg')}}" alt=""></div>
+                                <h5 class="title">Contact Info</h5>
+                                <p>Give us call at <br><a href="tel:+250789919005" class="call">+250 789 919 005</a></p>
+                            </div> <!-- /.address-block-one -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="address-block-one text-center mb-40 wow fadeInUp">
+                                <div class="icon rounded-circle d-flex align-items-center justify-content-center m-auto"><img src="{{ asset('asset/images/icon/icon_59.svg')}}" alt=""></div>
+                                <h5 class="title">Inquiry Support</h5>
+                                <p>chat service <br><a href="#" class="webaddress">info.connector.rw</a></p>
+                            </div> <!-- /.address-block-one -->
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="social-icons social-icons-color justify-content-center">
-                            <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                            <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                            <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                            <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
-                            <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
-                        </div><!-- End .soial-icons -->
-                    </div><!-- End .contact-box -->
-                </div><!-- End .col-md-4 -->
-            </div><!-- End .row -->
-
-            <hr class="mt-3 mb-5 mt-md-1">
-            <div class="touch-container row justify-content-center">
-                <div class="col-md-9 col-lg-7">
-                    <div class="text-center">
-                        <h2 class="title mb-1">Get In Touch</h2><!-- End .title mb-2 -->
-                        <p class="lead text-primary">
-                            We collaborate with ambitious brands and people; we’d love to build something great together.
-                        </p><!-- End .lead text-primary -->
-                        <p class="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
-                    </div><!-- End .text-center -->
-
+            <div class="row">
+                <div class="col-xl-9 m-auto">
                     @if (Session::has('message'))
                     <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                     @endif
-                    <form class="contact-form mb-2" wire:submit.prevent="sendMessage">
-                        @csrf
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <label for="cname" class="sr-only">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name *" wire:model="name" required>
-                                @error('name')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div><!-- End .col-sm-4 -->
-
-                            <div class="col-sm-4">
-                                <label for="cemail" class="sr-only">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Email *" wire:model="email" required>
-                                @error('email')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div><!-- End .col-sm-4 -->
-
-                            <div class="col-sm-4">
-                                <label for="cphone" class="sr-only">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" wire:model="phone" placeholder="Phone">
-                                @error('phone')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div><!-- End .col-sm-4 -->
-                        </div><!-- End .row -->
-
-                        <label for="csubject" class="sr-only">Subject</label>
-                        <input type="text" class="form-control" id="subject" name="subject" wire:model="subject" placeholder="subject">
-                        @error('subject')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
-
-
-                        <label for="cmessage" class="sr-only">Message</label>
-                        <textarea class="form-control" cols="30" rows="4" id="message" name="message" wire:model="message" required placeholder="Message *"></textarea>
-                        @error('message')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
-
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
-                                <span>SUBMIT</span>
-                                <i class="icon-long-arrow-right"></i>
-                            </button>
-                        </div><!-- End .text-center -->
-                    </form><!-- End .contact-form -->
-                </div><!-- End .col-md-9 col-lg-7 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .page-content -->
+                    <div class="form-style-one mt-85 lg-mt-50 wow fadeInUp">
+                        <form action="/sendMessage" method="POST" id="contact-form">
+                            @csrf
+                            <div class="row controls">
+                                <div class="col-sm-6">
+                                    <div class="input-group-meta form-group mb-30">
+                                        <label for="">Name*</label>
+                                        <input type="text" placeholder="Your Name*" id="name" name="name" required="required">
+                                        @error('name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group-meta form-group mb-30">
+                                        <label for="">Email*</label>
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Email *" required>
+                                        @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group-meta form-group mb-35">
+                                        <label for="">Phone</label>
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                        @error('phone')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group-meta form-group mb-35">
+                                        <label for="">Subject</label>
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="subject">
+                                        @error('subject')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-group-meta form-group mb-35">
+                                        <textarea class="form-control" cols="30" rows="4" id="message" name="message" required placeholder="Message *"></textarea>
+                                        @error('message')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn-eleven fw-500 tran3s ">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- /.form-style-one -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ./contact-us-section -->
+<div class="map-banner">
+    <div class="gmap_canvas h-100 w-100">
+        <iframe class="gmap_iframe h-100 w-100" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=kigali&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+    </div>
 </div>

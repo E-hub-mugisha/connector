@@ -1,6 +1,5 @@
 <div>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-    <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
@@ -62,7 +61,7 @@
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary btn-icon-split">
                                 <span class="icon text-white-50">
-                                    <i class="fas fa-flag"></i>
+                                    <i class="fas fa-plus"></i>
                                 </span>
                                 <span class="text">Add Blog</span>
                             </button>
@@ -74,18 +73,7 @@
     </div>
 </div>
 <script>
-      $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
-    </script>
+    $(document).ready(function() {
+        $('.summernote').summernote();
+    });
+</script>

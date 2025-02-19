@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tagline');
             $table->bigInteger('service_category_id')->unsigned()->nullable();
             $table->bigInteger('service_provider_id')->unsigned()->nullable();
+            $table->bigInteger('service_subcategory_id')->unsigned()->nullable();
             $table->decimal('price');
             $table->decimal('discount')->nullable();
             $table->enum('discount_type', ['fixed', 'percent'])->nullable();
@@ -31,7 +32,10 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->foreign('service_category_id')->references('id')->on('service_categories')->onDelete('cascade');
-            
+            $table->foreign('service_subcategory_id')
+                ->references('id')
+                ->on('service_subcategories')
+                ->onDelete('set null');
         });
     }
 

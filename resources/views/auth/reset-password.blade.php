@@ -1,51 +1,82 @@
-<x-base-layout>
-    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+@extends('layouts.base')
+@section('title', 'Reset Password')
+@section('content')
+    <!-- 
+		=============================================
+			Inner Banner
+		============================================== 
+		-->
+    <div class="inner-banner-one position-relative">
         <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Login</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+            <div class="position-relative">
+                <div class="row">
+                    <div class="col-xl-6 m-auto text-center">
+                        <div class="title-two">
+                            <h2 class="text-white">@yield('title')</h2>
+                        </div>
+                        <p class="text-lg text-white mt-30 lg-mt-20">Create an account & Start posting or hiring talents</p>
+                    </div>
+                </div>
 
-    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            </div>
+        </div>
+        <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_02.svg')}}" alt="" class="lazy-img shapes shape_01">
+        <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_03.svg')}}" alt="" class="lazy-img shapes shape_02">
+    </div> <!-- /.inner-banner-one -->
+
+
+
+    <!-- 
+		=============================================
+			Registration Section
+		============================================== 
+		-->
+    <section class="registration-section position-relative pt-100 lg-pt-80 pb-150 lg-pb-80">
         <div class="container">
-            <div class="form-box">
-                <div class="form-tab">
-                    <h2 class="text-center">Reset password</h2>
-                    <div>
-                        <div id="signin-2">
+            <div class="user-data-form">
+                <div class="text-center">
+                    <h2>Create Account</h2>
+                </div>
+                <div class="form-wrapper m-auto">
+                    <div class="tab-content mt-40">
+                        <div class="tab-pane fade show active" role="tabpanel" id="fc1">
                             <form method="POST" action="{{ route('password.update') }}">
                                 @csrf
 
                                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-                                <div class="form-group">
-                                    <label for="email" value="{{ __('Email') }}" >Email</label>
-                                    <input id="email" class="form-control mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password" value="{{ __('Password') }}" >Password</label>
-                                    <input id="password" class="form-control mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password_confirmation" value="{{ __('Confirm Password') }}">Confirm Password</label>
-                                    <input id="password_confirmation" class="form-control mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-                                </div>
-
-                                <div class="flex items-center justify-end mt-4">
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        {{ __('Reset Password') }}
-                                    </button>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label>Email*</label>
+                                            <input id="email" class=" mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label for="password" value="{{ __('Password') }}">Your Password</label>
+                                            <input type="password" id="password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label for="password_confirmation" value="{{ __('Confirm Password') }}">Confirm Password</label>
+                                            <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20">{{ __('Reset Password') }}</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
-                    </div><!-- End .tab-content -->
-                </div><!-- End .form-tab -->
-            </div><!-- End .form-box -->
-        </div><!-- End .container -->
-    </div><!-- End .login-page section-bg -->
-</x-base-layout>
+                        <!-- /.tab-pane -->
+                    </div>
+                </div>
+                <!-- /.form-wrapper -->
+            </div>
+            <!-- /.user-data-form -->
+        </div>
+    </section>
+
+@endsection

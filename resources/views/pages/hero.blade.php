@@ -1,33 +1,66 @@
-<div class="intro-slider-container mb-5">
-    <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{
-                        "dots": true,
-                        "nav": false,
-                        "loop": true, 
-                        "responsive": {
-                            "1200": {
-                                "nav": true,
-                                "dots": false
-                            }
-                        }
-                    }'>
-        @foreach($sliders as $slider)
-        <div class="intro-slide" style="background-image: url(assets/images/slider/{{$slider->image}});">
-            <div class="container intro-content">
-                <div class="row justify-content-end">
-                    <div class="col-auto col-sm-7 col-md-6 col-lg-5">
-                        <h3 class="intro-subtitle text-third">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
-                        <h2 class="intro-title">{{$slider->title}}</h2><!-- End .intro-title -->
+<!-- 
+		=============================================
+			Hero Banner
+		============================================== 
+		-->
+<div class="hero-banner-six position-relative pt-170 lg-pt-150 pb-60 lg-pb-40">
+    <div class="container">
+        <div id="banner-six-carousel" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                @foreach($sliders as $index => $slider)
+                <li data-bs-target="#banner-six-carousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                @endforeach
+            </ol>
+            <div class="carousel-inner w-100 h-100">
+                @foreach($sliders as $index => $slider)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <img src="{{ asset('image/slider')}}/{{$slider->image}}" class="d-block w-100" alt="Slide {{$index + 1}}" style="width: 100%;height: 100%;/* object-fit: cover; */ /* max-height: 600px; */">
+                    <div class="carousel-caption d-md-block">
+                        <div class="row">
+                            <div class="col-xxl-8 col-xl-9 col-lg-8 m-auto text-center">
+                                <h1>{{$slider->title}}</h1>
+                                 <p class="text-md text-white mt-25 mb-55 lg-mb-40">Discover Your Path to Prosperity – Connect with Trusted Experts Today!</p> 
+                            </div>
+                        </div>
+                        <div class="row">
+							<div class="col-xl-8 m-auto">
+								<div class="row">
+									<div class="col-sm-4">
+										<div class="counter-block-two mt-15 text-center wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+											<div class="main-count fw-500 text-white"><span class="counter">{{$totalSales}}</span>+</div>
+											<p class="text-white">Total Sales</p>
+										</div> <!-- /.counter-block-two -->
+									</div>
+									<div class="col-sm-4">
+										<div class="counter-block-two mt-15 text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+											<div class="main-count fw-500 text-white"><span class="counter">{{$totalSprovider}}</span>+</div>
+											<p class="text-white">Total Service Providers</p>
+										</div> <!-- /.counter-block-two -->
+									</div>
+									<div class="col-sm-4">
+										<div class="counter-block-two mt-15 text-center wow fadeInUp" data-wow-delay="0.35s" style="visibility: visible; animation-delay: 0.35s; animation-name: fadeInUp;">
+											<div class="main-count fw-500 text-white"><span class="counter">{{$totalDone}}</span>+</div>
+											<p class="text-white">Total service Done</p>
+										</div> <!-- /.counter-block-two -->
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#banner-six-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#banner-six-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
 
-                        <a href="{{route('shop.shop')}}" class="btn btn-primary btn-round">
-                            <span>Shop Products</span>
-                            <i class="icon-long-arrow-right"></i>
-                        </a>
-                    </div><!-- End .col-lg-11 offset-lg-1 -->
-                </div><!-- End .row -->
-            </div><!-- End .intro-content -->
-        </div><!-- End .intro-slide -->
-        @endforeach
-    </div><!-- End .intro-slider owl-carousel owl-simple -->
 
-    <span class="slider-loader"></span><!-- End .slider-loader -->
-</div><!-- End .intro-slider-container -->
+<!-- /.hero-banner-six -->

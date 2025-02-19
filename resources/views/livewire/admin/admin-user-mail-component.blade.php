@@ -1,6 +1,6 @@
 <div>
     <div class="container">
-        <h1>Laravel Send Email to Multiple Users - ItSolutionStuff.com</h1>
+        <h1>Send Email to Multiple Users</h1>
         @if(Session::has('message'))
         <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
         @endif
@@ -63,5 +63,5 @@
             }
             console.log(selectRowsCount);
         });
-    </script>}
+    </script>
 </div>

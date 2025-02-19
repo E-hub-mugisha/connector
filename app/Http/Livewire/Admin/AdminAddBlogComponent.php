@@ -69,6 +69,6 @@ class AdminAddBlogComponent extends Component
     public function render()
     {
         $categories = ServiceCategory::all();
-        return view('livewire.admin.admin-add-blog-component',['categories'=>$categories])->layout('layouts.app');
+        return view('admin.admin-add-blog-component',['categories'=>$categories])->layout('layouts.app');
     }
 }

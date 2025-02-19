@@ -1,119 +1,203 @@
-<x-base-layout>
-    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+@extends('layouts.base')
+@section('title', 'Register')
+@section('content')
+<!-- 
+		=============================================
+			Inner Banner
+		============================================== 
+		-->
+    <div class="inner-banner-one position-relative">
         <div class="container">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Login</li>
-            </ol>
-        </div><!-- End .container -->
-    </nav><!-- End .breadcrumb-nav -->
+            <div class="position-relative">
+                <div class="row">
+                    <div class="col-xl-6 m-auto text-center">
+                        <div class="title-two">
+                            <h2 class="text-white">Register</h2>
+                        </div>
+                        <p class="text-lg text-white mt-30 lg-mt-20">Create an account & Start posting or hiring talents</p>
+                    </div>
+                </div>
 
-    <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('assets/images/backgrounds/login-bg.jpg')">
+            </div>
+        </div>
+        <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_02.svg')}}" alt="" class="lazy-img shapes shape_01">
+        <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{ asset('asset/images/shape/shape_03.svg')}}" alt="" class="lazy-img shapes shape_02">
+    </div> <!-- /.inner-banner-one -->
+
+
+
+    <!-- 
+		=============================================
+			Registration Section
+		============================================== 
+		-->
+    <section class="registration-section position-relative pt-100 lg-pt-80 pb-150 lg-pb-80">
         <div class="container">
-            <div class="form-box">
-                <div class="form-tab">
-                    <ul class="nav nav-pills nav-fill">
-                        <li class="nav-item">
-                            <a class="nav-link">Sign In</a>
+            <div class="user-data-form">
+                <div class="text-center">
+                    <h2>Create Account</h2>
+                </div>
+                <div class="form-wrapper m-auto">
+                    <!-- <ul class="nav nav-tabs border-0 w-100 mt-30" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#fc1" role="tab">Candidates</button>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{route('register')}}">Register</a>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#fc2" role="tab">Employer</button>
                         </li>
-                    </ul>
-                    <div>
-                        <div id="signin-2">
-
+                    </ul> -->
+                    <div class="tab-content mt-40">
+                        <div class="tab-pane fade show active" role="tabpanel" id="fc1">
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label>Name*</label>
+                                            <input id="name" class="@error('name') is-invalid @enderror" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                            @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label>Email*</label>
+                                            <input id="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                <div>
-                                    <label for="name" value="{{ __('Name') }}">Your Names</label>
-                                    <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label for="phone" value="{{ __('phone') }}">Your phone</label>
+                                            <input id="phone" class="@error('phone') is-invalid @enderror" name="phone" required>
 
-                                <div class="mt-4">
-                                    <label for="email" value="{{ __('Email') }}">Your Email</label>
-                                    <input id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                            @error('phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label for="utype" value="{{ __('Register as') }}">Register as</label>
+                                            <select id="registeras" class="form-control @error('registeras') is-valid @enderror" name="registeras" required>
+                                                <option value="CST">Customer</option>
+                                                <option value="SVP">Service Provider</option>
+                                                @error('registeras')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label for="password" value="{{ __('Password') }}">Your Password</label>
+                                            <input type="password" id="password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label for="password_confirmation" value="{{ __('Confirm Password') }}">Confirm Password</label>
+                                            <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <input type="checkbox" id="remember_me" name="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                <div class="mt-4">
-                                    <label for="phone" value="{{ __('phone') }}">Your phone</label>
-                                    <input id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" required>
-
-                                    @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="utype" value="{{ __('Register as') }}">Register as</label>
-                                    <select id="registeras" class="form-control @error('registeras') is-valid @enderror" name="registeras" required>
-                                        <option value="CST">Customer</option>
-                                        <option value="SVP">Service Provider</option>
-                                        @error('registeras')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </select>
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="password" value="{{ __('Password') }}">Your Password</label>
-                                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-4">
-                                    <label for="password_confirmation" value="{{ __('Confirm Password') }}">Confirm Password</label>
-                                    <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required autocomplete="new-password" />
-                                </div>
-
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" name="terms" value="1" required />
-                                    <label class="form-check-label">
-                                        Agree with the <a href="{{ route('terms') }}">
-                                            {{ __('Terms and conditions') }}
-                                        </a>
-                                    </label>
-
-                                </div>
-
-                                <div class="flex items-center justify-end mt-4">
-                                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                                        {{ __('Already registered?') }}
-                                    </a>
-
-                                    <button type="submit" class="btn btn-outline-primary-2">
-                                        <span>Sign Up</span>
-                                        <i class="icon-long-arrow-right"></i>
-                                    </button>
+                                                <label for="remember">By hitting the "Register" button, you agree to the <a href="{{ route('terms') }}">Terms conditions</a> & <a href="{{route('policy')}}">Privacy Policy</a></label>
+                                            </div>
+                                        </div> <!-- /.agreement-checkbox -->
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn-eleven fw-500 tran3s d-block mt-20">Register</button>
+                                    </div>
                                 </div>
                             </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane fade" role="tabpanel" id="fc2">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label>Name*</label>
+                                            <input type="text" placeholder="Zubayer Hasan">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-25">
+                                            <label>Email*</label>
+                                            <input type="email" placeholder="zubayerhasan@gmail.com">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group-meta position-relative mb-20">
+                                            <label>Password*</label>
+                                            <input type="password" placeholder="Enter Password" class="pass_log_id">
+                                            <span class="placeholder_icon"><span class="passVicon"><img src="images/icon/icon_60.svg" alt=""></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="agreement-checkbox d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <input type="checkbox" id="remember">
+                                                <label for="remember">By hitting the "Register" button, you agree to the <a href="#">Terms conditions</a> & <a href="#">Privacy Policy</a></label>
+                                            </div>
+                                        </div> <!-- /.agreement-checkbox -->
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn-eleven fw-500 tran3s d-block mt-20">Register</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
 
-                        </div><!-- .End .tab-pane -->
-                    </div><!-- End .tab-content -->
-                </div><!-- End .form-tab -->
-            </div><!-- End .form-box -->
-        </div><!-- End .container -->
-    </div><!-- End .login-page section-bg -->
-</x-base-layout>
+                    <div class="d-flex align-items-center mt-30 mb-10">
+                        <div class="line"></div>
+                        <span class="pe-3 ps-3">OR</span>
+                        <div class="line"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <a href="#" class="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10">
+                                <img src="images/icon/google.png" alt="">
+                                <span class="ps-2">Signup with Google</span>
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="#" class="social-use-btn d-flex align-items-center justify-content-center tran3s w-100 mt-10">
+                                <img src="images/icon/facebook.png" alt="">
+                                <span class="ps-2">Signup with Facebook</span>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-center mt-10">Have an account? <a href="#" class="fw-500" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</a></p>
+                </div>
+                <!-- /.form-wrapper -->
+            </div>
+            <!-- /.user-data-form -->
+        </div>
+    </section>
+    
+@endsection

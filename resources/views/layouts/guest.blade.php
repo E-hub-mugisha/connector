@@ -2,73 +2,118 @@
 <html lang="en">
 
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90680653-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-90680653-2');
-    </script>
-
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Meta -->
-    <meta name="description" content="Service provider Dashboard">
-    <meta name="author" content="BootstrapDash">
-
-    <title>Sprovider Dashboard</title>
-
-    <!-- vendor css -->
-    <link href="{{asset('sprovider/lib/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-    <link href="{{asset('sprovider/lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
-    <link href="{{asset('sprovider/lib/typicons.font/typicons.css')}}" rel="stylesheet">
-    <link href="{{asset('sprovider/lib/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet">
-
-    <!-- azia CSS -->
-    <link rel="stylesheet" href="{{asset('sprovider/css/azia.css')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
-    @livewireStyles
-
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta name='og:image' content='images/assets/ogg.png'>
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- For Window Tab Color -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#244034">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#244034">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#244034">
+    <title>@yield('title') - {{ config('app.name', 'connector') }}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="56x56" href="{{ asset('asset/images/fav-icon/fav-connector.png') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/bootstrap.min.css') }}" media="all">
+    <!-- Main style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/style.min.css') }}" media="all">
+    <!-- responsive style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}" media="all">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    
 </head>
-
 <body>
+    <div class="main-page-wrapper">
 
-    @include('livewire.sprovider.navbar')
-    <main>
-        {{ $slot }}
-    </main>
-    @include('sweetalert::alert')
-    <div class="az-footer ht-40">
-        <div class="container ht-100p pd-t-0-f">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © HileTask <?php echo date("Y"); ?></span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Designed by <a href="https://homiez.rw" target="_blank">HOMIEZ</a></span>
-        </div><!-- container -->
-    </div><!-- az-footer -->
+        <!-- 
+		=============================================
+				Dashboard Aside Menu
+		============================================== 
+		-->
+        @include('customers.sidebar')
+        <!-- /.dash-aside-navbar -->
+        <!-- page content -->
+        <main>
+            <div class="dashboard-body">
+    <div class="position-relative">
+        @include('customers.includes.navbar')
+            @yield('content')
+            </div>
+            </div>
+        </main>
+        @include('sweetalert::alert')
+        <button class="scroll-top">
+            <i class="bi bi-arrow-up-short"></i>
+        </button>
 
+        <!-- Optional JavaScript _____________________________  -->
 
-    <script src="{{asset('sprovider/lib/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('sprovider/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('sprovider/lib/ionicons/ionicons.js')}}"></script>
-    <script src="{{asset('sprovider/lib/jquery.flot/jquery.flot.js')}}"></script>
-    <script src="{{asset('sprovider/lib/jquery.flot/jquery.flot.resize.js')}}"></script>
-    <script src="{{asset('sprovider/lib/chart.js/Chart.bundle.min.js')}}"></script>
-    <script src="{{asset('sprovider/lib/peity/jquery.peity.min.js')}}"></script>
+        <!-- jQuery first, then Bootstrap JS -->
+        <!-- jQuery -->
+        <script src="{{ asset('asset/vendor/jquery.min.js') }}"></script>
+        <!-- Bootstrap JS -->
+        <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- WOW js -->
+        <script src="{{ asset('asset/vendor/wow/wow.min.js') }}"></script>
+        <!-- Slick Slider -->
+        <script src="{{ asset('asset/vendor/slick/slick.min.js') }}"></script>
+        <!-- Fancybox -->
+        <script src="{{ asset('asset/vendor/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+        <!-- Lazy -->
+        <script src="{{ asset('asset/vendor/jquery.lazy.min.js') }}"></script>
+        <!-- js Counter -->
+        <script src="{{ asset('asset/vendor/jquery.counterup.min.js') }}"></script>
+        <script src="{{ asset('asset/vendor/jquery.waypoints.min.js') }}"></script>
+        <!-- Nice Select -->
+        <script src="{{ asset('asset/vendor/nice-select/jquery.nice-select.min.js') }}"></script>
+        <!-- validator js -->
+        <script src="{{ asset('asset/vendor/validator.js') }}"></script>
 
-    <script src="{{asset('sprovider/js/azia.js')}}"></script>
-    <script src="{{asset('sprovider/js/chart.flot.sampledata.js')}}"></script>
-    <script src="{{asset('sprovider/js/dashboard.sampledata.js')}}"></script>
-    <script src="{{asset('sprovider/js/jquery.cookie.js')}}" type="text/javascript"></script>
+        <!-- Theme js -->
+        <script src="{{ asset('asset/js/theme.js') }}"></script>
+        
+         <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HWQ435LMGE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    @livewireScripts
+  gtag('config', 'G-HWQ435LMGE');
+</script>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true
+        });
+    });
+</script>
+
+    </div> <!-- /.main-page-wrapper -->
+    
 </body>
+
 
 </html>

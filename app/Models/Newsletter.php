@@ -10,7 +10,7 @@ use App\Mail\NewsMail;
 class Newsletter extends Model
 {
     use HasFactory;
-    public $fillable = ['names', 'email'];
+    public $fillable = ['email'];
     public static function boot()
     {
         parent::boot();

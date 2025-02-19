@@ -11,7 +11,7 @@ use App\Models\ServiceTransaction;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\bookMail;
-
+use App\Models\Service;
 
 class BookingController extends Controller
 {
@@ -21,6 +21,7 @@ class BookingController extends Controller
         $booking = new ServiceBooking();
         $booking->user_id = Auth::user()->id;
         $booking->service_provider_id = $request->input('service_provider_id');
+        $booking->service_id = $request->input('service_id');
         $booking->status = 'pending';
         $booking->total = $request->input('total');
         $booking->payment_mode = $request->input('payment_mode');
@@ -31,24 +32,8 @@ class BookingController extends Controller
         $booking->notes = $request->input('notes');
         $booking->date = $request->input('date');
         $booking->time = $request->input('time');
-        $service_provider = $request->input('service_provider');
-        
 
         $booking->save();
-
-        $booked = new ServiceBooked();
-        $booked->service_id = $request->input('service_id');
-        $booked->book_id = $booking->id;
-        $booked->service_provider_id = $request->input('service_provider_id');
-        $booked->total = $request->input('total');
-        $booked->save();
-
-        $transaction = new ServiceTransaction();
-        $transaction->user_id = Auth::user()->id;
-        $transaction->book_id = $booking->id;
-        $transaction->mode = $request->input('payment_mode');
-        $transaction->status = 'pending';
-        $transaction->save();
 
         $mailData = [
             'payment_mode' => $request->get('payment_mode'),
@@ -70,5 +55,10 @@ class BookingController extends Controller
         alert()->success('Thank You', 'Your booking have been sent successfully.');
 
         return redirect()->route('home');
+    }
+    public function BookingService($service_slug)
+    {
+        $service = Service::where('slug', $service_slug)->first();
+        return view('services.booking', compact('service'));
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Notifications\WelcomeEmailNotification;
+use Illuminate\Auth\Events\Registered;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CreateNewUser implements CreatesNewUsers
@@ -32,6 +33,8 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         $registeras = $input['registeras'] === 'SVP' ? 'SVP':'CST';
+        $userName = $input['name'];
+        $userEmail = $input['email'];
 
         $user = User::create([
             'name' => $input['name'],
@@ -45,11 +48,14 @@ class CreateNewUser implements CreatesNewUsers
         {
             ServiceProvider::create([
                 'user_id' => $user->id,
-                'proEmail' => $user->email,
+                'sprovider_name' => $userName,
+                'proEmail' => $userEmail,
             ]);
         }
-        alert()->success('SuccessAlert', 'Lorem ipsum dolor sit amet.');
+        alert()->success('Thank you', 'Your account created check the email');
         $user->notify(new WelcomeEmailNotification($user));
+
+        event(new Registered($user));
         return $user;
     }
 }

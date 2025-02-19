@@ -28,9 +28,18 @@ class ServiceBooking extends Model
     public static function boot()
     {
         parent::boot();
-        static::created(function ($item){
+        static::created(function ($item) {
             $adminEmail = "kabosierik@gmail.com";
             Mail::to($adminEmail)->send(new BookingMail($item));
         });
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function serviceProvider()
+    {
+        return $this->belongsTo(ServiceProvider::class);
     }
 }

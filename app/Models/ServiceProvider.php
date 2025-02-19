@@ -9,7 +9,7 @@ class ServiceProvider extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id', 'image'];
 
     public function category()
     {
@@ -23,10 +23,23 @@ class ServiceProvider extends Model
 
     public function services()
     {
-        return $this->hasMany(Service::class, 'service_provider_id','id');
+        return $this->hasMany(Service::class, 'service_provider_id', 'id');
+    }
+
+    public function feedback()
+    {
+        return $this->hasMany(Feedback::class);
     }
     public function ratings()
     {
-        return $this->hasMany('App\Models\ServiceProviderRating');
+        return $this->hasMany(Rating::class);
+    }
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class);
+    }
+    public function serviceBookings()
+    {
+        return $this->hasMany(ServiceBooking::class);
     }
 }

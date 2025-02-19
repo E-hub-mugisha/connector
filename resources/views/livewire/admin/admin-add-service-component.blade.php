@@ -3,16 +3,16 @@
         <div class="col-md-10">
             <div class="card shadow mb-1" style="padding: 20px;">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Add Service Category</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Add Service</h6>
                 </div>
-                    <div class="container">
-                        <div id="signin-2">
-                            @if(Session::has('message'))
-                            <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-                            @endif
-                            <form wire:submit.prevent="createService">
-                                @csrf
-<div class="row">
+                <div class="container">
+                    <div id="signin-2">
+                        @if(Session::has('message'))
+                        <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+                        @endif
+                        <form wire:submit.prevent="createService">
+                            @csrf
+                            <div class="row">
                                 <div class="col-md-4 form-group">
                                     <label for="name" value="{{ __('name') }}">name *</label>
                                     <input type="text" class="form-control" id="name" name="name" wire:model="name" wire:keyup="generateSlug" required>
@@ -29,7 +29,7 @@
                                     <input type="text" class="form-control" id="tagline" name="tagline" wire:model="tagline" required>
                                     @error('tagline') <p class="text-danger">{{$message}}</p>@enderror
                                 </div><!-- End .form-group -->
-                                
+
                                 <div class="col-md-6 form-group">
                                     <label for="service_provider" value="{{ __('service_provider') }}">Service provider</label>
                                     <select class="form-control" wire:model="service_provider_id">
@@ -75,14 +75,14 @@
                                     @error('duration') <p class="text-danger">{{$message}}</p>@enderror
 
                                 </div>
-                                
-                                
+
+
                                 <div class="col-md-6 form-group">
                                     <label for="location" value="{{ __('location') }}">location</label>
                                     <input type="text" class="form-control" id="location" name="location" wire:model="location">
                                     @error('location') <p class="text-danger">{{$message}}</p>@enderror
                                 </div><!-- End .form-group -->
-                                
+
 
                                 <div class="col-md-4 form-group">
                                     <label for="description" value="{{ __('description') }}">description</label>
@@ -125,11 +125,11 @@
                                         <i class="icon-long-arrow-right"></i>
                                     </button>
                                 </div><!-- End .form-footer -->
-                            </form>
-                        </div><!-- .End .tab-pane -->
-                    </div><!-- End .tab-content --> 
-                </div><!-- End .form-tab -->
-            </div><!-- End .form-box -->
-        </div><!-- End .container -->
-    </div><!-- End .login-page section-bg -->
+                        </form>
+                    </div><!-- .End .tab-pane -->
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div><!-- End .login-page section-bg -->
 </div>

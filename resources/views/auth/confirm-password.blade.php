@@ -1,3 +1,4 @@
+@section('title', 'Confirm Password')
 <x-base-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">

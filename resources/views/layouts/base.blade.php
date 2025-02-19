@@ -2,476 +2,89 @@
 <html lang="en">
 
 <head>
-
-    <title>@yield('title') - {{ config('app.name', 'HileTask') }}</title>
-    <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="HileTasker">
-    <meta name="author" content="p-themes">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta name='og:image' content='images/assets/ogg.png'>
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- For Window Tab Color -->
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#244034">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#244034">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#244034">
+    <title>@yield('title') - {{ config('app.name', 'connector') }}</title>
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/icons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/fav.png') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/fav.png') }}">
-    <meta name="apple-mobile-web-app-title" content="HileTasker">
-    <meta name="application-name" content="HileTasker">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
-    <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/owl-carousel/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/magnific-popup/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/plugins/jquery.countdown.css') }}">
-    <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-demo-4.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/demos/demo-4.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/assisfery/SocialShareJS@1.4/social-share.min.css">
-    <script src="https://cdn.jsdelivr.net/gh/assisfery/SocialShareJS@1.4/social-share.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    @livewireStyles
+    <link rel="icon" type="image/png" sizes="56x56" href="{{ asset('asset/images/fav-icon/fav-connector.png') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/bootstrap.min.css') }}" media="all">
+    <!-- Main style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/style.min.css') }}" media="all">
+    <!-- responsive style sheet -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}" media="all">
+
+    
 </head>
 
 <body>
-    <div class="page-wrapper">
-        <header class="header header-intro-clearance header-4">
-            <div class="header-top">
-                <div class="container">
-                    <div class="header-left">
-                        <a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a>
-                    </div><!-- End .header-left -->
-
-                    <div class="header-right">
-
-                        <ul class="top-menu">
-                            <li>
-                                <a href="#">Links</a>
-                                <ul>
-                                    @if(Route::has('login'))
-                                    @auth
-                                    @if(Auth::user()->utype==="ADM")
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">{{ auth()->user()->name }} (Admin)</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                                    <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @elseif(Auth::user()->utype==="SVP")
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">{{ auth()->user()->name }} (Sprovider)</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="{{route('sprovider.dashboard')}}">Dashboard</a></li>
-                                                    <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @else
-                                    <li>
-                                        <div class="header-dropdown">
-                                            <a href="#">{{ auth()->user()->name }} (Customer)</a>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li><a href="{{route('customer.dashboard')}}">Dashboard</a></li>
-                                                    <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    @endif
-                                    <form id="logout-form" method="POST" action="{{route('logout')}}" style="display:none;">
-                                        @csrf
-                                    </form>
-                                    @else
-                                    <li><a href="{{route('login')}}">Sign in</a></li>
-                                    <li><a href="{{route('register')}}">Sign up</a></li>
-                                    @endif
-                                    @endif
-                                </ul>
-                            </li>
-                        </ul><!-- End .top-menu -->
-                    </div><!-- End .header-right -->
-
-                </div><!-- End .container -->
-            </div><!-- End .header-top -->
-
-            <div class="header-middle">
-                <div class="container">
-                    <div class="header-left">
-                        <button class="mobile-menu-toggler">
-                            <span class="sr-only">Toggle mobile menu</span>
-                            <i class="icon-bars"></i>
-                        </button>
-
-                        <a href="/" class="logo">
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="HileTask Logo" width="140" height="50">
-                        </a>
-                    </div><!-- End .header-left -->
-
-                    <div class="header-center">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form id="sform" action="{{route('searchService')}}" method="post">
-                                @csrf
-                                <div class="header-search-wrapper search-wrapper-wide">
-                                    <label for="q" class="sr-only">Search</label>
-                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" class="form-control typeahead" name="q" id="q" placeholder="Search product ..." required>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
-                    </div>
-
-                    <div class="header-right">
-                        <a href="{{route('shop.shop')}}" class="btn btn-primary btn-round"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a>
-
-                    </div><!-- End .header-right -->
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
-
-            <div class="header-bottom sticky-header">
-                <div class="container">
-                    <div class="header-left">
-                        <div class="dropdown category-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
-                                Browse Service Providers <i class="icon-angle-down"></i>
-                            </a>
-
-                            <div class="dropdown-menu">
-                                <nav class="side-nav">
-                                    <ul class="menu-vertical sf-arrows">
-                                        <li class="item-lead"><a href="{{route('home.service_provider')}}">All Service Providers</a></li>
-                                        @foreach(\App\Models\ServiceProvider::distinct()->get() as $sprovider)
-                                        @if(!empty($sprovider->sprovider_name))
-                                        <li><a href="{{route('home.service_provider_by_category',['service_category_name'=>$sprovider->category->slug])}}">@if($sprovider->service_category_id)
-                                                {{$sprovider->category->name}}
-                                                @endif </a></li>
-                                        @endif
-                                        @endforeach
-                                    </ul><!-- End .menu-vertical -->
-                                </nav><!-- End .side-nav -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .category-dropdown -->
-                    </div><!-- End .header-left -->
-
-                    <div class="header-center">
-                        <nav class="main-nav">
-                            <ul class="menu sf-arrows">
-                                <li class="megamenu-container active">
-                                    <a href="/" class="sf">Home</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('home.service_categories')}}" class="sf">Service Categories</a>
-
-                                </li>
-                                <li>
-                                    <a href="{{route('home.services')}}" class="sf">Services</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('home.blogs')}}" class="sf">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="{{route('home.contact')}}" class="sf">Contact us</a>
-                                </li>
-                            </ul><!-- End .menu -->
-                        </nav><!-- End .main-nav -->
-                    </div><!-- End .header-center -->
-
-                    <div class="header-right">
-                        <i class="icon-map-marker"></i>
-                        <p>Kigali<span class="highlight">&nbsp;Rwanda</span></p>
-                    </div>
-                </div><!-- End .container -->
-            </div><!-- End .header-bottom -->
-        </header><!-- End .header -->
-        <main class="main">
-            {{ $slot }}
+    <div class="main-page-wrapper">
+        @include('includes.header')
+        <main>
+            @yield('content')
         </main><!-- End .main -->
         @include('sweetalert::alert')
+        @include('includes.footer')
 
-        <footer class="footer">
-            <div>
-                @include('livewire.admin.newsletter-component')
-            </div>
-            <div class="footer-middle">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget widget-about">
-                                <img src="{{ asset('assets/images/logo.png') }}" class="footer-logo" alt="Footer Logo" width="150" height="50">
-                                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+        @include('includes.loginPage')
 
-                            </div><!-- End .widget about-widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
+        <button class="scroll-top">
+            <i class="bi bi-arrow-up-short"></i>
+        </button>
 
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+        <!-- Optional JavaScript _____________________________  -->
 
-                                <ul class="widget-list">
-                                    <li><a href="/about">About HileTask</a></li>
-                                    <li><a href="#">Our Services</a></li>
-                                    <li><a href="/faq">FAQ</a></li>
-                                    <li><a href="{{route('home.contact')}}">Contact us</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
+        <!-- jQuery first, then Bootstrap JS -->
+        <!-- jQuery -->
+        <script src="{{ asset('asset/vendor/jquery.min.js') }}"></script>
+        <!-- Bootstrap JS -->
+        <script src="{{ asset('asset/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- WOW js -->
+        <script src="{{ asset('asset/vendor/wow/wow.min.js') }}"></script>
+        <!-- Slick Slider -->
+        <script src="{{ asset('asset/vendor/slick/slick.min.js') }}"></script>
+        <!-- Fancybox -->
+        <script src="{{ asset('asset/vendor/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+        <!-- Lazy -->
+        <script src="{{ asset('asset/vendor/jquery.lazy.min.js') }}"></script>
+        <!-- js Counter -->
+        <script src="{{ asset('asset/vendor/jquery.counterup.min.js') }}"></script>
+        <script src="{{ asset('asset/vendor/jquery.waypoints.min.js') }}"></script>
+        <!-- Nice Select -->
+        <script src="{{ asset('asset/vendor/nice-select/jquery.nice-select.min.js') }}"></script>
+        <!-- validator js -->
+        <script src="{{ asset('asset/vendor/validator.js') }}"></script>
 
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+        <!-- Theme js -->
+        <script src="{{ asset('asset/js/theme.js') }}"></script>
+    </div> <!-- /.main-page-wrapper -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HWQ435LMGE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-                                <ul class="widget-list">
-                                    <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="{{ route('terms') }}">Terms and conditions</a></li>
-                                    <li><a href="{{route('policy')}}">Privacy Policy</a></li>
-                                </ul><!-- End .widget-list -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="widget">
-                                <h4 class="widget-title">Contact info</h4><!-- End .widget-title -->
-
-                                <ul class="widget-list">
-                                    <li><a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a></li>
-                                    <li><a href="mail-to:#"><i class="icon-envelope"></i>support@hiletask.com</a></li>
-                                </ul><!-- End .widget-list -->
-                                <div class="social-icons">
-                                    <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-                                    <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-                                    <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-                                    <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
-                                </div><!-- End .social-icons -->
-                            </div><!-- End .widget -->
-                        </div><!-- End .col-sm-6 col-lg-3 -->
-                    </div><!-- End .row -->
-                </div><!-- End .container -->
-            </div><!-- End .footer-middle -->
-
-            <div class="footer-bottom">
-                <div class="container">
-                    <p class="footer-copyright">Copyright © <?php echo date("Y"); ?> HileTask. All Rights Reserved.</p><!-- End .footer-copyright -->
-                    <figure class="footer-payments">
-                        <img src="{{ asset('assets/images/payments.png') }}" alt="Payment methods" width="272" height="20">
-                    </figure><!-- End .footer-payments -->
-                </div><!-- End .container -->
-            </div><!-- End .footer-bottom -->
-        </footer><!-- End .footer -->
-    </div><!-- End .page-wrapper -->
-    <!-- <div class="elfsight-app-c5e59fd8-4714-43ac-b56e-29761cd65ba0"></div> -->
-    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
-    <!-- <script src="https://apps.elfsight.com/p/platform.js" defer></script> -->
-
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
-
-    <div class="mobile-menu-container mobile-menu-light">
-        <div class="mobile-menu-wrapper">
-            <span class="mobile-menu-close"><i class="icon-close"></i></span>
-
-            <form id="sform" action="{{route('searchService')}}" method="post" class="mobile-search">
-                @csrf
-                <label for="mobile-search" class="sr-only">Search</label>
-                <input type="search" class="form-control typeahead" name="q" id="q" placeholder="Search in..." required>
-                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-            </form>
-
-            <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab" role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab" aria-controls="mobile-cats-tab" aria-selected="false">Service Providers</a>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel" aria-labelledby="mobile-menu-link">
-                    <nav class="mobile-nav">
-                        <ul class="mobile-menu">
-                            <li class="active">
-                                <a href="/">Home</a>
-                            </li>
-                            <li>
-                                <a href="{{route('home.service_categories')}}">Service Categories</a>
-                            </li>
-                            <li>
-                                <a href="{{route('home.services')}}" class="sf">Services</a>
-                            </li>
-                            <li>
-                                <a href="{{route('home.blogs')}}">Blog</a>
-                            </li>
-                            <li>
-                                <a href="{{route('home.contact')}}">Contact us</a>
-                            </li>
-                        </ul>
-                    </nav><!-- End .mobile-nav -->
-                </div><!-- .End .tab-pane -->
-                <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
-                    <nav class="mobile-cats-nav">
-                        <ul class="mobile-cats-menu">
-                            <li><a class="mobile-cats-lead" href="{{route('home.service_provider')}}">All Service Providers</a></li>
-                            @foreach(\App\Models\ServiceProvider::all() as $sprovider)
-                            @if(!empty($sprovider->sprovider_name))
-                            <li><a href="{{route('home.service_provider_by_category',['service_category_name'=>$sprovider->category->slug])}}">@if($sprovider->service_category_id)
-                                    {{$sprovider->category->name}}
-                                    @endif </a></li>
-                            @endif
-                            @endforeach
-                        </ul><!-- End .mobile-cats-menu -->
-                    </nav><!-- End .mobile-cats-nav -->
-                </div><!-- .End .tab-pane -->
-            </div><!-- End .tab-content -->
-
-            <div class="social-icons">
-                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
-            </div><!-- End .social-icons -->
-        </div><!-- End .mobile-menu-wrapper -->
-    </div><!-- End .mobile-menu-container -->
-
-
-    <!-- <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="row no-gutters bg-white newsletter-popup-content">
-                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
-                        <div class="banner-content text-center">
-                            <img src="{{ asset('assets/images/logo.png') }}" class="logo" alt="logo" width="100" height="50">
-                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-                            <p>Subscribe to the HileTasker eCommerce newsletter to receive timely updates from your favorite products.</p>
-                            <form action="#">
-                                <div class="input-group input-group-round">
-                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
-                                    <div class="input-group-append">
-                                        <button class="btn" type="submit"><span>go</span></button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2-5col col-lg-5 ">
-                        <img src="{{ asset('assets/images/popup/newsletter/img-1.jpg') }}" class="newsletter-img" alt="newsletter">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- Plugins JS File -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.hoverIntent.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/js/superfish.min.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap-input-spinner.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.plugin.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
-    <script src="{{ asset('assets/js/share.js') }}"></script>
-    <!-- Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script src="{{ asset('assets/js/demos/demo-4.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-    <script type="text/javascript">
-        var path = "{{route('autocomplete')}}";
-        $('.typeahead').typeahead({
-            source: function(query, process) {
-                return $.get(path, {
-                    query: query
-                }, function(data) {
-                    return process(data);
-                });
-            }
-        });
-    </script>
-    <script src="https://getchat.app/assets/js/min/getchatapp.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var gcaMain = new GetChatApp({
-                'mobileNumber': '+250782390919',
-                'titleMessage': '👋 Chat with me on WhatsApp!',
-                'welcomeMessage': 'Hey there!🙌<br /> <br /> Get in touch with me by typing a message here. It will go straight to my phone! 🔥<br /> <br /> ~Your Name',
-                'position': 'right',
-                'platforms': {
-                    'whatsapp': true,
-                    'facebook': false,
-                    'email': false,
-                    'instagram': false,
-                    'telegram': false,
-                },
-                'facebookPageId': '',
-                'gcaEmailAddress': '',
-                'gcaEmailSubject': '',
-                'gcaInstagramUsername': '',
-                'gcaTelegramUsername': '',
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        window.onload = setShareLinks;
-
-        function setShareLinks() {
-            var pageUrl = encodeURIComponent(document.URL);
-            var pageTitle = encodeURIComponent(document.title);
-
-            document.addEventListener('click', function(event) {
-                let url = null;
-
-                if (event.target.classList.contains('share__link--facebook')) {
-                    url = "https://www.facebook.com/sharer.php?u=" + pageUrl;
-                    socialWindow(url, 570, 570);
-                }
-
-                if (event.target.classList.contains('share__link--twitter')) {
-                    url = "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + pageTitle;
-                    socialWindow(url, 570, 300);
-                }
-
-                if (event.target.classList.contains('share__link--linkedin')) {
-                    url = "https://www.linkedin.com/shareArticle?mini=true&url=" + pageUrl;
-                    socialWindow(url, 570, 570);
-                }
-
-                if (event.target.classList.contains('share__link--whatsapp')) {
-                    url = "whatsapp://send?text=" + pageTitle + "%20" + pageUrl;
-                    socialWindow(url, 570, 450);
-                }
-
-                if (event.target.classList.contains('share__link--mail')) {
-                    url = "mailto:?subject=%22" + pageTitle + "%22&body=Read%20the%20article%20%22" + pageTitle + "%22%20on%20" + pageUrl;
-                    socialWindow(url, 570, 450);
-                }
-
-            }, false);
-        }
-
-        function socialWindow(url, width, height) {
-            var left = (screen.width - width) / 2;
-            var top = (screen.height - height) / 2;
-            var params = "menubar=no,toolbar=no,status=no,width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
-            window.open(url, "", params);
-        }
-    </script>
-
-
-    @livewireScripts
+  gtag('config', 'G-HWQ435LMGE');
+</script>
 </body>
+
 
 </html>

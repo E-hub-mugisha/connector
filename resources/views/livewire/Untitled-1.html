@@ -1,0 +1,169 @@
+<header class="header header-intro-clearance header-4">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-left">
+                <a href="tel:+250 791 957 955"><i class="icon-phone"></i>Call: +250 791 957 955</a>
+            </div><!-- End .header-left -->
+
+            <div class="header-right">
+
+                <ul class="top-menu">
+                    <li>
+                        <a href="#">Links</a>
+                        <ul>
+                            @if(Route::has('login'))
+                            @auth
+                            @if(Auth::user()->utype==="ADM")
+                            <li>
+                                <div class="header-dropdown">
+                                    <a href="#">{{ auth()->user()->name }} (Admin)</a>
+                                    <div class="header-menu">
+                                        <ul>
+                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('logout')}}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            @elseif(Auth::user()->utype==="SVP")
+                            <li>
+                                <div class="header-dropdown">
+                                    <a href="#">{{ auth()->user()->name }} (Sprovider)</a>
+                                    <div class="header-menu">
+                                        <ul>
+                                            <li><a href="{{route('sprovider.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('logout')}}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            @else
+                            <li>
+                                <div class="header-dropdown">
+                                    <a href="#">{{ auth()->user()->name }} (Customer)</a>
+                                    <div class="header-menu">
+                                        <ul>
+                                            <li><a href="{{route('customer.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('logout')}}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
+                            <form id="logout-form" method="POST" action="{{route('logout')}}" style="display:none;">
+                                @csrf
+                            </form>
+                            @else
+                            <li><a href="{{route('login')}}">Sign in</a></li>
+                            <li><a href="{{route('register')}}">Sign up</a></li>
+                            @endif
+                            @endif
+                        </ul>
+                    </li>
+                </ul><!-- End .top-menu -->
+            </div><!-- End .header-right -->
+
+        </div><!-- End .container -->
+    </div><!-- End .header-top -->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a href="/" class="logo">
+                    <img src="{{ asset('assets/images/logo.png') }}" alt="HileTask Logo" width="140" height="50">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                    <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                    <form id="sform" action="{{route('searchService')}}" method="post">
+                        @csrf
+                        <div class="header-search-wrapper search-wrapper-wide">
+                            <label for="q" class="sr-only">Search</label>
+                            <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                            <input type="search" class="form-control typeahead" name="q" id="q"
+                                placeholder="Search product ..." required>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+            </div>
+
+            <!-- <div class="header-right">
+                        <a href="{{route('shop.shop')}}" class="btn btn-primary btn-round">
+                            <span>Shop Now</span><i class="icon-long-arrow-right"></i>
+                        </a>
+
+                    </div> -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <div class="header-left">
+                <div class="dropdown category-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false" data-display="static" title="Browse Categories">
+                        Browse Service Providers <i class="icon-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <nav class="side-nav">
+                            <ul class="menu-vertical sf-arrows">
+                                <li class="item-lead"><a href="{{route('home.service_provider')}}">All Service
+                                        Providers</a></li>
+                                @foreach(\App\Models\ServiceProvider::distinct()->get() as $sprovider)
+                                @if(!empty($sprovider->sprovider_name))
+                                <li><a
+                                        href="{{route('home.service_provider_by_category',['service_category_name'=>$sprovider->category->slug])}}">@if($sprovider->service_category_id)
+                                        {{$sprovider->category->name}}
+                                        @endif </a></li>
+                                @endif
+                                @endforeach
+                            </ul><!-- End .menu-vertical -->
+                        </nav><!-- End .side-nav -->
+                    </div><!-- End .dropdown-menu -->
+                </div><!-- End .category-dropdown -->
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="megamenu-container active">
+                            <a href="/" class="sf">Home</a>
+                        </li>
+                        <li>
+                            <a href="{{route('home.service_categories')}}" class="sf">Service Categories</a>
+
+                        </li>
+                        <li>
+                            <a href="{{route('home.services')}}" class="sf">Services</a>
+                        </li>
+                        <li>
+                            <a href="{{route('home.blogs')}}" class="sf">Blog</a>
+                        </li>
+                        <li>
+                            <a href="{{route('home.contact')}}" class="sf">Contact us</a>
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+
+            <div class="header-right">
+                <i class="icon-map-marker"></i>
+                <p>Kigali<span class="highlight">&nbsp;Rwanda</span></p>
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->
