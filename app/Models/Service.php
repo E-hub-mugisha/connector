@@ -46,4 +46,8 @@ class Service extends Model
     {
         return $this->hasMany(ServiceMedia::class);
     }
+    public function staffMembers()
+    {
+        return $this->belongsToMany(StaffMember::class, 'service_staff');
+    }
 }

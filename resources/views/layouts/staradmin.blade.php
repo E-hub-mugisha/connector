@@ -223,6 +223,11 @@
                             <span class="menu-title">Service Media</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('staff-members.index') }}" class="nav-link">
+                            <span class="menu-title">Staff Members</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- partial -->

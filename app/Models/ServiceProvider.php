@@ -42,4 +42,8 @@ class ServiceProvider extends Model
     {
         return $this->hasMany(ServiceBooking::class);
     }
+    public function staffMembers()
+    {
+        return $this->hasMany(StaffMember::class);
+    }
 }

@@ -42,4 +42,8 @@ class ServiceBooking extends Model
     {
         return $this->belongsTo(ServiceProvider::class);
     }
+    public function staffMembers()
+    {
+        return $this->belongsToMany(StaffMember::class, 'service_staff');
+    }
 }

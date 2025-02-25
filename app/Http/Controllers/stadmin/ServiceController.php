@@ -54,7 +54,7 @@ class ServiceController extends Controller
             $subcategory = new ServiceSubCategory();
             $subcategory->name = $request->input('sub_category');
             $subcategory->service_category_id = $request->input('service_category_id');
-            $subcategory->slug = Str::slug($request->input('sub_category')); // optional
+            $subcategory->slug = Str::slug($request->input('sub_category'));
             $subcategory->save();
         }
         $subcategoryId = $subcategory->id;
@@ -62,9 +62,15 @@ class ServiceController extends Controller
         $service = new Service();
         $image = $request->file('image');
         $sprovider = ServiceProvider::where('user_id', Auth::user()->id)->first();
-        $service->name = $request->input('name');
-        $slugName = Str::slug($request->input("name"));
-        $service->slug = $slugName;
+
+        $serviceName = $request->input('name');
+        $providerName = $sprovider->sprovider_name; // Assuming `name` is a field in ServiceProvider
+
+        // Generate slug combining service name and provider name
+        $serviceSlug = Str::slug($serviceName . '-' . $providerName);
+
+        $service->name = $serviceName;
+        $service->slug = $serviceSlug;
         $service->service_category_id = $request->input('service_category_id');
         $service->sub_category_id = $subcategoryId;
         $service->service_provider_id = $sprovider->id;
@@ -77,15 +83,16 @@ class ServiceController extends Controller
         $service->inclusion = str_replace("\n", '|', trim($request->input('inclusion')));
         $service->exclusion = str_replace("\n", '|', trim($request->input('exclusion')));
 
-        if ($image = $request->file('image')) {
+        if ($image) {
             $destinationPath = 'image/services/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $service['image'] = "$profileImage";
+            $service->image = $profileImage;
         }
+
         $service->save();
 
-        alert()->success('SuccessAlert', 'Thank you for reaching out t0; we will get back to you soon');
+        alert()->success('SuccessAlert', 'Thank you for reaching out; we will get back to you soon');
 
         session()->flash('message', 'Service created successfully!');
 
@@ -126,27 +133,34 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $service = Service::findOrFail($id);
         $image = $request->file('image');
         $sprovider = ServiceProvider::where('user_id', Auth::user()->id)->first();
-        $service->name = $request->input('name');
-        $slugName = Str::slug($request->input("name"));
-        $service->slug = $slugName;
+
+        $serviceName = $request->input('name');
+        $providerName = $sprovider->sprovider_name; // Assuming `name` is a field in ServiceProvider
+
+        // Generate slug combining service name and provider name
+        $serviceSlug = Str::slug($serviceName . '-' . $providerName);
+
+        $service->name = $serviceName;
+        $service->slug = $serviceSlug;
         $service->service_category_id = $request->input('service_category_id');
+
+        // Find or create the subcategory
         $subcategory = ServiceSubCategory::where('name', $request->input('sub_category'))
             ->where('service_category_id', $request->input('service_category_id'))
             ->first();
 
         if (!$subcategory) {
-            // Create a new subcategory if not found
             $subcategory = new ServiceSubCategory();
             $subcategory->name = $request->input('sub_category');
             $subcategory->service_category_id = $request->input('service_category_id');
-            $subcategory->slug = Str::slug($request->input('sub_category')); // optional
+            $subcategory->slug = Str::slug($request->input('sub_category'));
             $subcategory->save();
         }
         $subcategoryId = $subcategory->id;
+
         $service->sub_category_id = $subcategoryId;
         $service->service_provider_id = $sprovider->id;
         $service->price = $request->input('price');
@@ -158,18 +172,19 @@ class ServiceController extends Controller
         $service->inclusion = str_replace("\n", '|', trim($request->input('inclusion')));
         $service->exclusion = str_replace("\n", '|', trim($request->input('exclusion')));
 
-        if ($image = $request->file('image')) {
+        // Handle image update if a new image is provided
+        if ($image) {
             $destinationPath = 'image/services/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $service['image'] = "$profileImage";
+            $service->image = $profileImage;
         }
 
         $service->save();
 
-        alert()->success('SuccessAlert', 'Thank you for reaching out t0; we will get back to you soon');
+        alert()->success('SuccessAlert', 'Service updated successfully!');
 
-        session()->flash('message', 'Service created successfully!');
+        session()->flash('message', 'Service updated successfully!');
 
         return redirect()->route('serviceProvider.index');
     }

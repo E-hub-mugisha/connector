@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\stadmin\ServiceMediaController;
+use App\Http\Controllers\stadmin\StaffMemberController;
 use App\Http\Livewire\Admin\AdminAddBlogComponent;
 use App\Http\Livewire\Admin\AdminAddPartnerComponent;
 use App\Http\Livewire\Admin\AdminAddProductCategoryComponent;
@@ -127,7 +128,7 @@ Route::get('/productautocomplete', [ProductSearchController::class, 'productAuto
 Route::post('/productsearch', [ProductSearchController::class, 'searchProduct'])->name('searchProduct');
 
 
-Route::post('/bookNow', [App\Http\Controllers\BookingController::class, 'bookNow']);
+Route::post('/bookNow', [App\Http\Controllers\BookingController::class, 'bookNow'])->name('bookings.store');
 Route::post('/sendComment', [App\Http\Controllers\CommentController::class, 'sendComment']);
 // Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterSubscriptionController::class, 'SubscribeEmail'])->name('Subscriptions.store');
 Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterSubscriptionController::class, 'SubscribeEmail'])->name('Subscriptions.store');
@@ -141,7 +142,7 @@ Route::get('/checkout', CheckoutComponent::class)->name('checkout')->middleware(
 Route::get('/about', function () {
     $partners = PartnerLogo::all();
     $feedbacks = Feedback::inRandomOrder()->take(6)->get();
-    return view('pages.about', compact('partners','feedbacks'));
+    return view('pages.about', compact('partners', 'feedbacks'));
 })->name('about');
 
 Route::get('/terms', function () {
@@ -260,7 +261,7 @@ Route::middleware([
     Route::get('/sprovider/promotions', [App\Http\Controllers\stadmin\PromotionsController::class, 'index'])->name('promotions.index');
     Route::post('/promotionsAdd', [App\Http\Controllers\stadmin\PromotionsController::class, 'storePromotion'])->name('promotions.store');
     Route::put('/promotions/{id}', [App\Http\Controllers\stadmin\PromotionsController::class, 'update'])->name('promotions.update');
-    
+
     Route::get('/sprovider/clients', [App\Http\Controllers\stadmin\StadminController::class, 'SClients'])->name('sprovider.clients');
     Route::get('/sprovider/clients/{user_id}', [App\Http\Controllers\stadmin\StadminController::class, 'SClientDetail'])->name('sprovider.clientDetails');
 
@@ -269,9 +270,15 @@ Route::middleware([
         $service = \App\Models\Service::with('media')->findOrFail($serviceId);
         return view('service_media', compact('service'));
     })->name('service.media');
-    
+
     Route::post('/service-media', [ServiceMediaController::class, 'store'])->name('service-media.store');
     Route::delete('/service-media/{id}', [ServiceMediaController::class, 'destroy'])->name('service-media.destroy');
+
+    Route::get('/staff-members', [StaffMemberController::class, 'index'])->name('staff-members.index');
+    Route::post('/staff-members', [StaffMemberController::class, 'store'])->name('staff-members.store');
+    Route::post('/staff-members/{id}', [StaffMemberController::class, 'update'])->name('staff-members.update');
+    Route::post('/updateServices/{id}', [StaffMemberController::class, 'updateServices'])->name('staff-members.updateServices');
+    Route::delete('/staff-members/{id}', [StaffMemberController::class, 'destroy'])->name('staff-members.destroy');
 });
 
 Route::middleware([
@@ -332,7 +339,7 @@ Route::middleware([
     Route::post('/admin/AddServiceProvide', [App\Http\Controllers\admin\ServiceProviderController::class, 'storeServiceProvide'])->name('ServiceProviderAdd');
     Route::get('/admin/users',  [App\Http\Controllers\admin\UserController::class, 'index'])->name('admin.users');
     Route::delete('/admin/users/delete/{id}',  [App\Http\Controllers\admin\UserController::class, 'destroy'])->name('users.delete');
-    
+
     Route::get('/admin/activate/{user_id}', [App\Http\Controllers\admin\UserController::class, 'adminActivate'])->name('admin.activate');
     Route::get('/customer/activate/{user_id}', [App\Http\Controllers\admin\UserController::class, 'customerActivate'])->name('customer.activate');
     Route::get('/provider/activate/{user_id}', [App\Http\Controllers\admin\UserController::class, 'providerActivate'])->name('provider.activate');
@@ -364,7 +371,7 @@ Route::middleware([
     Route::put('/admin/newsletter/update/{id}', [App\Http\Controllers\NewsletterSubscriptionController::class, 'update'])->name('admin.newsletterSubscriptions.update');
     Route::get('/admin/newsletters/send', [App\Http\Controllers\NewsletterSubscriptionController::class, 'Newsletter'])->name('admin.newsletterSubscriptions.send');
     Route::post('newsletter_subscriptions/send-newsletter', [App\Http\Controllers\NewsletterSubscriptionController::class, 'sendNewsletter'])->name('admin.newsletterSubscriptions.sendNewsletter');
-    
+
     Route::get('/admin/providers/feedbacks', [App\Http\Controllers\admin\ServiceProviderController::class, 'ProviderFeedback'])->name('admin.ProviderFeedback');
     Route::get('/admin/providers/ratings', [App\Http\Controllers\admin\ServiceProviderController::class, 'ProviderRating'])->name('admin.ProviderRatings');
     Route::put('/admin/rating/{id}/approve', [App\Http\Controllers\admin\ServiceProviderController::class, 'approveRating'])->name('admin.RatingApprove');
