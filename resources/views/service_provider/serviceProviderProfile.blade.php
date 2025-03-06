@@ -242,27 +242,27 @@
                         <h3 class="title">About</h3>
                         <p>{!!$sproviders->about!!}</p>
                     </div>
-                    
+
                     @if(!empty($sproviders->skills))
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Skills</h3>
-        <p>{!! $sproviders->skills !!}</p>
-    </div>
-@endif
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Skills</h3>
+                        <p>{!! $sproviders->skills !!}</p>
+                    </div>
+                    @endif
 
-@if(!empty($sproviders->qualification))
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Qualification</h3>
-        <p>{!! $sproviders->qualification !!}</p>
-    </div>
-@endif
+                    @if(!empty($sproviders->qualification))
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Qualification</h3>
+                        <p>{!! $sproviders->qualification !!}</p>
+                    </div>
+                    @endif
 
-@if(!empty($sproviders->experience))
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Experience</h3>
-        <p>{!! $sproviders->experience !!}</p>
-    </div>
-@endif
+                    @if(!empty($sproviders->experience))
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Experience</h3>
+                        <p>{!! $sproviders->experience !!}</p>
+                    </div>
+                    @endif
 
 
                     <!-- Reviews and Ratings Section -->
@@ -415,9 +415,9 @@
         </div>
         <div class=" row">
             @foreach(\App\Models\Service::where('service_provider_id',$sproviders->id)->get() as $service)
-            <div class="col-sm-3 mb-30">
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-30">
                 <div class="job-list-two style-two position-relative">
-                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{ asset('assets/images/products/thumbnails') }}/{{$service->thumbnail}}" alt="" class="lazy-img m-auto"></a>
+                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{asset('image/services')}}/{{$service->image}}" alt="" class="lazy-img m-auto"></a>
                     <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
                     <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="job-duration fw-500">{{$service->category->name}}</a></div>
                     <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>
@@ -439,19 +439,19 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="ms-xxl-5 ms-xl-3">
-                
+
                     <div class="accordion-box grid-style show">
                         <div class="row">
                             <div class="total-job-found">
-                            <div class="heading heading-flex mb-3">
-                                <div class="heading-left">
-                                    <h2 class="title">Promotion Services For You</h2><!-- End .title -->
-                                </div><!-- End .heading-left -->
+                                <div class="heading heading-flex mb-3">
+                                    <div class="heading-left">
+                                        <h2 class="title">Promotion Services For You</h2><!-- End .title -->
+                                    </div><!-- End .heading-left -->
+                                </div>
                             </div>
-                        </div>
                             @foreach( $promotions as $promotion)
                             @if(\Carbon\Carbon::now()->lessThanOrEqualTo($promotion->end_date))
-                            
+
                             <div class="col-xxl-3 col-sm-6 d-flex">
                                 <div class="candidate-profile-card favourite text-center grid-layout mb-25">
                                     <a href="{{route('home.service_details',['service_slug'=>$promotion->service->slug])}}" class="save-btn badge-danger tran3s"><span class="bg-danger" style="padding: 5px; border-radius: 10px; color: white;">{{ $promotion->discount}} % </span></a>

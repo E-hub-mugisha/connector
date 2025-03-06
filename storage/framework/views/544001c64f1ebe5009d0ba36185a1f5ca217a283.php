@@ -114,30 +114,30 @@
                                         <div><a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="title fw-500 tran3s"><?php echo e($service->name); ?></a></div>
                                         <div class="job-salary">Original Price:<span class="fw-500 text-dark" style="margin: 6px; color:#ff1e00;"><?php echo e($service->price); ?></span> / RWF</div>
                                         <div>
-                                    <?php
-                                    $total = $service->price;
-                                    ?>
-                                    <?php if($service->discount): ?>
-                                    <?php if($service->discount_type == 'fixed'): ?>
-                                    <div class="discount-fix">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;"><?php echo e($service->discount); ?></span>
-                                    </div>
-                                    <div class="discount-fix-total">
-                                        <span><?php $total = $total-$service->discount; ?></span>
-                                    </div>
-                                    <?php elseif($service->discount_type == 'percent'): ?>
-                                    <div class="discount-per">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;"><?php echo e($service->discount); ?>%</span>
-                                    </div>
-                                    <div class="discount-per-total" style="margin:6px;">
-                                        <span><?php $total = $total-($total*$service->discount/100); ?></span>
-                                    </div>
-                                    <?php endif; ?>
-                                    <?php endif; ?>
-                                    <div class="total">
-                                        Total Price:<span style="margin: 6px;"><?php echo e($total); ?></span>
-                                    </div>
-                                </div>
+                                            <?php
+                                            $total = $service->price;
+                                            ?>
+                                            <?php if($service->discount): ?>
+                                            <?php if($service->discount_type == 'fixed'): ?>
+                                            <div class="discount-fix">
+                                                Discount:<span style="margin: 6px; color:#ff1e00;"><?php echo e($service->discount); ?></span>
+                                            </div>
+                                            <div class="discount-fix-total">
+                                                <span><?php $total = $total-$service->discount; ?></span>
+                                            </div>
+                                            <?php elseif($service->discount_type == 'percent'): ?>
+                                            <div class="discount-per">
+                                                Discount:<span style="margin: 6px; color:#ff1e00;"><?php echo e($service->discount); ?>%</span>
+                                            </div>
+                                            <div class="discount-per-total" style="margin:6px;">
+                                                <span><?php $total = $total-($total*$service->discount/100); ?></span>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php endif; ?>
+                                            <div class="total">
+                                                Total Price:<span style="margin: 6px;"><?php echo e($total); ?></span>
+                                            </div>
+                                        </div>
                                         <div class="job-location"><span>Location:</span><a href="<?php echo e(route('home.service_location',['service_location'=>$service->location])); ?>"><?php echo e($service->location); ?></a></div>
 
                                         <div class="d-flex align-items-center justify-content-between mt-auto">

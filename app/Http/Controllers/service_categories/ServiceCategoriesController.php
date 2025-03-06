@@ -32,7 +32,7 @@ class ServiceCategoriesController extends Controller
     public function AllServices()
     {
         $scategories = ServiceCategory::all();
-        $services = Service::inRandomOrder()->paginate(6);
+        $services = Service::inRandomOrder()->paginate(8);
         return view('services.services', compact('services', 'scategories'));
     }
     public function ServiceDetail($service_slug)

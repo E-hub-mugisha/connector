@@ -114,30 +114,30 @@
                                         <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>
                                         <div class="job-salary">Original Price:<span class="fw-500 text-dark" style="margin: 6px; color:#ff1e00;">{{$service->price}}</span> / RWF</div>
                                         <div>
-                                    @php
-                                    $total = $service->price;
-                                    @endphp
-                                    @if($service->discount)
-                                    @if($service->discount_type == 'fixed')
-                                    <div class="discount-fix">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
-                                    </div>
-                                    <div class="discount-fix-total">
-                                        <span>@php $total = $total-$service->discount; @endphp</span>
-                                    </div>
-                                    @elseif($service->discount_type == 'percent')
-                                    <div class="discount-per">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
-                                    </div>
-                                    <div class="discount-per-total" style="margin:6px;">
-                                        <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
-                                    </div>
-                                    @endif
-                                    @endif
-                                    <div class="total">
-                                        Total Price:<span style="margin: 6px;">{{$total}}</span>
-                                    </div>
-                                </div>
+                                            @php
+                                            $total = $service->price;
+                                            @endphp
+                                            @if($service->discount)
+                                            @if($service->discount_type == 'fixed')
+                                            <div class="discount-fix">
+                                                Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
+                                            </div>
+                                            <div class="discount-fix-total">
+                                                <span>@php $total = $total-$service->discount; @endphp</span>
+                                            </div>
+                                            @elseif($service->discount_type == 'percent')
+                                            <div class="discount-per">
+                                                Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
+                                            </div>
+                                            <div class="discount-per-total" style="margin:6px;">
+                                                <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
+                                            </div>
+                                            @endif
+                                            @endif
+                                            <div class="total">
+                                                Total Price:<span style="margin: 6px;">{{$total}}</span>
+                                            </div>
+                                        </div>
                                         <div class="job-location"><span>Location:</span><a href="{{route('home.service_location',['service_location'=>$service->location])}}">{{ $service->location}}</a></div>
 
                                         <div class="d-flex align-items-center justify-content-between mt-auto">

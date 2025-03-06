@@ -285,27 +285,27 @@ unset($__errorArgs, $__bag); ?>
                         <h3 class="title">About</h3>
                         <p><?php echo $sproviders->about; ?></p>
                     </div>
-                    
+
                     <?php if(!empty($sproviders->skills)): ?>
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Skills</h3>
-        <p><?php echo $sproviders->skills; ?></p>
-    </div>
-<?php endif; ?>
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Skills</h3>
+                        <p><?php echo $sproviders->skills; ?></p>
+                    </div>
+                    <?php endif; ?>
 
-<?php if(!empty($sproviders->qualification)): ?>
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Qualification</h3>
-        <p><?php echo $sproviders->qualification; ?></p>
-    </div>
-<?php endif; ?>
+                    <?php if(!empty($sproviders->qualification)): ?>
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Qualification</h3>
+                        <p><?php echo $sproviders->qualification; ?></p>
+                    </div>
+                    <?php endif; ?>
 
-<?php if(!empty($sproviders->experience)): ?>
-    <div class="inner-card border-style mb-65 lg-mb-40">
-        <h3 class="title">Experience</h3>
-        <p><?php echo $sproviders->experience; ?></p>
-    </div>
-<?php endif; ?>
+                    <?php if(!empty($sproviders->experience)): ?>
+                    <div class="inner-card border-style mb-65 lg-mb-40">
+                        <h3 class="title">Experience</h3>
+                        <p><?php echo $sproviders->experience; ?></p>
+                    </div>
+                    <?php endif; ?>
 
 
                     <!-- Reviews and Ratings Section -->
@@ -465,9 +465,9 @@ unset($__errorArgs, $__bag); ?>
         </div>
         <div class=" row">
             <?php $__currentLoopData = \App\Models\Service::where('service_provider_id',$sproviders->id)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-sm-3 mb-30">
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-30">
                 <div class="job-list-two style-two position-relative">
-                    <a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="logo"><img src="images/lazy.svg" data-src="<?php echo e(asset('assets/images/products/thumbnails')); ?>/<?php echo e($service->thumbnail); ?>" alt="" class="lazy-img m-auto"></a>
+                    <a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="logo"><img src="images/lazy.svg" data-src="<?php echo e(asset('image/services')); ?>/<?php echo e($service->image); ?>" alt="" class="lazy-img m-auto"></a>
                     <a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
                     <div><a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="job-duration fw-500"><?php echo e($service->category->name); ?></a></div>
                     <div><a href="<?php echo e(route('home.service_details',['service_slug'=>$service->slug])); ?>" class="title fw-500 tran3s"><?php echo e($service->name); ?></a></div>
@@ -489,19 +489,19 @@ unset($__errorArgs, $__bag); ?>
         <div class="row">
             <div class="col-xl-12 col-lg-12">
                 <div class="ms-xxl-5 ms-xl-3">
-                
+
                     <div class="accordion-box grid-style show">
                         <div class="row">
                             <div class="total-job-found">
-                            <div class="heading heading-flex mb-3">
-                                <div class="heading-left">
-                                    <h2 class="title">Promotion Services For You</h2><!-- End .title -->
-                                </div><!-- End .heading-left -->
+                                <div class="heading heading-flex mb-3">
+                                    <div class="heading-left">
+                                        <h2 class="title">Promotion Services For You</h2><!-- End .title -->
+                                    </div><!-- End .heading-left -->
+                                </div>
                             </div>
-                        </div>
                             <?php $__currentLoopData = $promotions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $promotion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if(\Carbon\Carbon::now()->lessThanOrEqualTo($promotion->end_date)): ?>
-                            
+
                             <div class="col-xxl-3 col-sm-6 d-flex">
                                 <div class="candidate-profile-card favourite text-center grid-layout mb-25">
                                     <a href="<?php echo e(route('home.service_details',['service_slug'=>$promotion->service->slug])); ?>" class="save-btn badge-danger tran3s"><span class="bg-danger" style="padding: 5px; border-radius: 10px; color: white;"><?php echo e($promotion->discount); ?> % </span></a>

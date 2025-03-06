@@ -1,52 +1,64 @@
 
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
-    <h2 class="mb-4">Staff Members</h2>
 
-    <!-- Button to trigger modal -->
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#staffModal" onclick="resetForm()">Add Staff</button>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-between align-items-start">
+                        <h2 class="card-title card-title-dash">Staff Members</h2>
 
-    <!-- Staff Members Table -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Services</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $__currentLoopData = $staffMembers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $staff): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <tr>
-                <td><?php echo e($loop->iteration); ?></td>
-                <td><?php echo e($staff->name); ?></td>
-                <td><?php echo e($staff->email); ?></td>
-                <td><?php echo e($staff->role); ?></td>
-                <td>
-                    <?php $__currentLoopData = $staff->services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <span class="badge bg-info"><?php echo e($service->name); ?></span>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick="editStaff(<?php echo e($staff); ?>)" data-bs-toggle="modal" data-bs-target="#staffModal">Edit</button>
-                    
-                    <!-- Manage Services Button -->
-                    <button class="btn btn-secondary btn-sm" onclick="manageServices(<?php echo e($staff); ?>)" data-bs-toggle="modal" data-bs-target="#servicesModal">Manage Services</button>
+                        <!-- Button to trigger modal -->
+                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#staffModal" onclick="resetForm()">Add Staff</button>
+                    </div>
+                    <!-- Staff Members Table -->
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Services</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $staffMembers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $staff): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td><?php echo e($loop->iteration); ?></td>
+                                    <td><?php echo e($staff->name); ?></td>
+                                    <td><?php echo e($staff->email); ?></td>
+                                    <td><?php echo e($staff->role); ?></td>
+                                    <td>
+                                        <?php $__currentLoopData = $staff->services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <span class="badge bg-info"><?php echo e($service->name); ?></span>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" onclick="editStaff(<?php echo e($staff); ?>)" data-bs-toggle="modal" data-bs-target="#staffModal">Edit</button>
 
-                    <form action="<?php echo e(route('staff-members.destroy', $staff->id)); ?>" method="POST" class="d-inline">
-                        <?php echo csrf_field(); ?>
-                        <?php echo method_field('DELETE'); ?>
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </tbody>
-    </table>
+                                        <!-- Manage Services Button -->
+                                        <button class="btn btn-secondary btn-sm" onclick="manageServices(<?php echo e($staff); ?>)" data-bs-toggle="modal" data-bs-target="#servicesModal">Manage Services</button>
+
+                                        <form action="<?php echo e(route('staff-members.destroy', $staff->id)); ?>" method="POST" class="d-inline">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Add/Edit Staff Modal -->
@@ -153,7 +165,7 @@ unset($__errorArgs, $__bag); ?>
                         <label for="serviceSelect" class="form-label">Select Services</label>
                         <select class="form-select" id="serviceSelect" name="services[]" multiple required>
                             <?php $__currentLoopData = $services; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $service): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($service->id); ?>"><?php echo e($service->name); ?></option>
+                            <option value="<?php echo e($service->id); ?>"><?php echo e($service->name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
@@ -219,5 +231,4 @@ unset($__errorArgs, $__bag); ?>
     }
 </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.staradmin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\connector\well-known\hiletask\resources\views/stadmin/staff/index.blade.php ENDPATH**/ ?>
