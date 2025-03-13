@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title') - {{ config('app.name', 'connector') }}</title>
+    <title>@yield('title') | {{ config('app.name', 'connector') }}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('stadmin/vendors/feather/feather.css')}}">
     <link rel="stylesheet" href="{{ asset('stadmin/vendors/mdi/css/materialdesignicons.min.css')}}">
@@ -39,10 +39,10 @@
                     </button>
                 </div>
                 <div>
-                    <a class="navbar-brand brand-logo" href="index.html">
+                    <a class="navbar-brand brand-logo" href="{{route('sprovider.dashboard')}}">
                         <img src="{{ asset('asset/images/logo/logo-connector-footer.png')}}" alt="logo" />
                     </a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html">
+                    <a class="navbar-brand brand-logo-mini" href="{{route('sprovider.dashboard')}}">
                         <img src="{{ asset('asset/images/fav-icon/fav-connector.png') }}" alt="logo" />
                     </a>
                 </div>
@@ -220,13 +220,28 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('sprovider.media') }}" class="nav-link">
+                            <i class="menu-icon mdi mdi-image"></i>
                             <span class="menu-title">Service Media</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('staff-members.index') }}" class="nav-link">
+                        <i class="menu-icon mdi mdi-account"></i>
                             <span class="menu-title">Staff Members</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#Reviews" aria-expanded="false" aria-controls="Reviews">
+                            <i class="menu-icon mdi mdi-floor-plan"></i>
+                            <span class="menu-title">Reviews & Feedback</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="Reviews">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{{route('serviceProvider.reviews')}}">User Reviews</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{route('serviceProvider.feedback')}}">User Feedback</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </nav>

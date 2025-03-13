@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class BookingMail extends Mailable
+class UserBookingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -15,8 +15,6 @@ class BookingMail extends Mailable
 
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
     public function __construct($mailData)
     {
@@ -25,11 +23,11 @@ class BookingMail extends Mailable
 
     /**
      * Build the message.
-     *
-     * @return $this
      */
     public function build()
     {
-        return $this->subject('New Booking - '. $this->mailData->service_name)->markdown('emails.bookingMail');
+        return $this->subject('Booking Confirmation - ' . config('app.name'))
+                    ->markdown('emails.user_booking')
+                    ->with('mailData', $this->mailData);
     }
 }

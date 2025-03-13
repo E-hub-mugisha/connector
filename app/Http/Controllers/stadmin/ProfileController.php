@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\stadmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Feedback;
+use App\Models\Rating;
 use App\Models\ServiceCategory;
 use App\Models\ServiceProvider;
 use Illuminate\Http\Request;
@@ -114,5 +116,19 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function UserFeedback()
+    {
+        $sprovider = ServiceProvider::where('user_id', Auth::user()->id)->first();
+        $feedbacks = Feedback::where('Service_Provider_ID', $sprovider->id)->where('approved', true)->get();
+        return view('stadmin.feedback.user-feedbacks',compact('feedbacks'));
+    }
+
+    public function UserReviews()
+    {
+        $sprovider = ServiceProvider::where('user_id', Auth::user()->id)->first();
+        $ratings = Rating::where('Service_Provider_ID', $sprovider->id)->where('approved', true)->get();
+        return view('stadmin.feedback.user-reviews',compact('ratings'));
     }
 }

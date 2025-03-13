@@ -75,25 +75,16 @@
                             <td>
                                 <a href="#">{{$partner->name}}</a>
                             </td>
-                            <td>{{$partner->created_at}}</td>
                             <td class="action-col">
-                                <div class="dropdown">
-                                    <button class="btn btn-block btn-outline-primary-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="icon-list-alt"></i>Select Options
+                                <a class="btn btn-success btn-sm" href="#">Edit</a>
+                                <form id="delete-form" action="{{route('admin.delete_partner', $partner->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this partner?')">
+
+                                        <i class="fas fa-trash"></i>
                                     </button>
-
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <form id="delete-form" action="{{route('admin.delete_partner', $partner->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-circle" onclick="return confirm('Are you sure you want to delete this partner?')">
-
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

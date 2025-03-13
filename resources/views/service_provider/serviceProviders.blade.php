@@ -113,7 +113,7 @@
                                     </div><!-- End .heading-left -->
                                 </div>
                             </div>
-                            
+
                         </div>
                         <!-- /.upper-filter -->
                         <div class="accordion-box grid-style show">
@@ -123,10 +123,12 @@
                                 <div class="col-xxl-4 col-lg-4 col-sm-6 d-flex">
                                     <div class="candidate-profile-card favourite text-center grid-layout border-0 mb-25">
                                         <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="save-btn tran3s"><i class="bi bi-heart"></i></a>
-                                        <div class="cadidate-avatar online position-relative d-block m-auto">
-                                            <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="rounded-circle">
-                                                <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{asset('image/profile')}}/{{$sprovider->image}}" alt="" class="lazy-img rounded-circle"></a>
-                                        </div>
+                                        <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}">
+                                            <img src="{{asset('image/profile')}}/{{$sprovider->image}}"
+                                                alt="image"
+                                                class="lazy-img m-auto"
+                                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                                        </a>
                                         <h4 class="candidate-name mt-15 mb-0"><a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="tran3s">{{$sprovider->sprovider_name}}</a></h4>
                                         <div class="candidate-post">
                                             @if($sprovider->service_category_id)

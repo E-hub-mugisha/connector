@@ -175,6 +175,10 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store')->middleware('auth');
 Route::post('/rating', [App\Http\Controllers\FeedbackController::class, 'RatingStore'])->name('rating.store')->middleware('auth');
 
+Route::get('/payment', [App\Http\Controllers\BookingController::class, 'paymentProcess'])->name('home.payment');
+Route::get('/payment/{booking_id}', [App\Http\Controllers\BookingController::class, 'showPaymentForm'])->name('payment.now');
+Route::post('/payment/process', [App\Http\Controllers\BookingController::class, 'processPayment'])->name('payment.process');
+
 Route::middleware([
     'auth:sanctum',
     'verified'
@@ -279,6 +283,9 @@ Route::middleware([
     Route::post('/staff-members/{id}', [StaffMemberController::class, 'update'])->name('staff-members.update');
     Route::post('/updateServices/{id}', [StaffMemberController::class, 'updateServices'])->name('staff-members.updateServices');
     Route::delete('/staff-members/{id}', [StaffMemberController::class, 'destroy'])->name('staff-members.destroy');
+
+    Route::get('/ServiceProvider/user-reviews', [App\Http\Controllers\stadmin\ProfileController::class, 'UserReviews'])->name('serviceProvider.reviews');
+    Route::get('/ServiceProvider/feedbacks', [App\Http\Controllers\stadmin\ProfileController::class, 'UserFeedback'])->name('serviceProvider.feedback');
 });
 
 Route::middleware([

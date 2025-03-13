@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Service Details')
+@section('title', $service->name)
 @section('content')
 <!-- =============================================
 			Inner Banner
@@ -85,13 +85,15 @@
             <div class="col-xxl-3 col-lg-4">
                 <div class="cadidate-profile-sidebar ms-xl-5 ms-xxl-0 md-mt-60">
                     <div class="cadidate-bio bg-wrapper bg-color mb-6 md-mb-40">
-                        <div class="pt-25">
-                            <div class="cadidate-avatar m-auto">
-                                <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{asset('image/services')}}/{{$service->image}}" alt="" class="lazy-img rounded-circle w-100">
-                            </div>
-                        </div>
-                        <h3 class="cadidate-name text-center">{{$service->name}}</h3>
-                        <div class="text-center pb-25">
+                        <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
+                            <img src="{{asset('image/services')}}/{{$service->image}}"
+                                alt="image"
+                                class="lazy-img m-auto"
+                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                        </a>
+
+                        <h3 class="cadidate-name ">{{$service->name}}</h3>
+                        <div class=" pb-25">
                             {{$service->category->name}}
                         </div>
                         <ul class="style-none">
@@ -201,10 +203,15 @@
                     @if($r_service)
                     <div class="inner-card">
                         <h3 class="title">Related</h3>
-                        <div class="col-sm-4 mb-3">
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
 
                             <div class="job-list-two style-two position-relative">
-                                <a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{asset('image/services')}}/{{$r_service->image}}" alt="" class="lazy-img m-auto"></a>
+                            <a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}">
+                                            <img src="{{asset('image/services')}}/{{$r_service->image}}"
+                                                alt="image"
+                                                class="lazy-img m-auto"
+                                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                                        </a>
                                 <span class="save-btn text-center tran3s" title="Save Job">{{ $service->duration}}</span>
                                 <div><a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}" class="job-duration fw-500">{{$r_service->category->name}}</a></div>
                                 <div><a href="{{route('home.service_details',['service_slug'=>$r_service->slug])}}" class="title fw-500 tran3s">{{$r_service->name}}</a></div>
@@ -226,15 +233,8 @@
         </div>
     </div>
 </section>
-<!-- /.candidates-profile -->
 
 
-
-<!--
-		=====================================================
-			Job Portal Intro
-		=====================================================
-		-->
 <section class="job-portal-intro">
     <div class="container">
         <div class="wrapper bottom-border pt-65 md-pt-50 pb-65 md-pb-50">

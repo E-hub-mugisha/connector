@@ -32,7 +32,7 @@ class HomeController extends Controller
         $aservices = Service::whereIn('service_category_id',$sid)->inRandomOrder()->take(8)->get();
         $cid = ServiceCategory::whereIn('slug',['home-cleaning','laundry','cleaning'])->get()->pluck('id');
         $cleanservices = Service::whereIn('service_category_id',$cid)->inRandomOrder()->take(8)->get();
-        $services = Service::inRandomOrder()->take(8)->get();
+        $services = Service::inRandomOrder()->take(9)->get();
         $sliders = Slider::where('status',1)->inRandomOrder()->get();
         $blogs = Blogs::where('status','approved')->inRandomOrder()->take(3)->get();
         $totalSales = Order::where('status', 'delivered')->count();

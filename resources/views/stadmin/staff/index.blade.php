@@ -1,5 +1,5 @@
 @extends('layouts.staradmin')
-
+@section('title','Staff Members')
 @section('content')
 
 <div class="content-wrapper">

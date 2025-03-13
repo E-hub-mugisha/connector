@@ -415,20 +415,51 @@
         </div>
         <div class=" row">
             @foreach(\App\Models\Service::where('service_provider_id',$sproviders->id)->get() as $service)
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-30">
+            <div class="col-sm-12 col-md-6 col-lg-4  mb-30">
+
                 <div class="job-list-two style-two position-relative">
-                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{asset('image/services')}}/{{$service->image}}" alt="" class="lazy-img m-auto"></a>
-                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="save-btn text-center rounded-circle tran3s" title="Save Job"><i class="bi bi-bookmark-dash"></i></a>
+                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
+                        <img src="{{asset('image/services')}}/{{$service->image}}"
+                            alt="image"
+                            class="lazy-img m-auto"
+                            style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                    </a>
+                    <span class="save-btn text-center tran3s" title="Save Job">{{ $service->duration}}</span>
                     <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="job-duration fw-500">{{$service->category->name}}</a></div>
                     <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>
-                    <div class="job-salary"><span class="fw-500 text-dark">{{$service->price}}</span> / RWF</div>
-                    <div class="d-flex align-items-center justify-content-between mt-auto">
-                        <div class="job-location"><a href="{{route('home.service_location',['service_location'=>$service->location])}}">{{ $service->location}}</a></div>
-                        <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="apply-btn text-center tran3s">Book Service</a>
+                    <div class="job-salary">Original Price:<span class="fw-500 text-dark" style="margin: 6px; color:#ff1e00;">{{$service->price}}</span> / RWF</div>
+                    <div>
+                        @php
+                        $total = $service->price;
+                        @endphp
+                        @if($service->discount)
+                        @if($service->discount_type == 'fixed')
+                        <div class="discount-fix">
+                            Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
+                        </div>
+                        <div class="discount-fix-total">
+                            <span>@php $total = $total-$service->discount; @endphp</span>
+                        </div>
+                        @elseif($service->discount_type == 'percent')
+                        <div class="discount-per">
+                            Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
+                        </div>
+                        <div class="discount-per-total" style="margin:6px;">
+                            <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
+                        </div>
+                        @endif
+                        @endif
+                        <div class="total">
+                            Total Price:<span style="margin: 6px;">{{$total}}</span>
+                        </div>
                     </div>
-                </div> <!-- /.job-list-two -->
+                    <div class="job-location"><span>Location:</span><a href="{{route('home.service_location',['service_location'=>$service->location])}}">{{ $service->location}}</a></div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                        <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="apply-btn text-center tran3s">Book Now</a>
+                    </div>
+                </div>
             </div>
-            <!-- /.job-list-one -->
             @endforeach
         </div>
     </div>

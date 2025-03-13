@@ -105,10 +105,15 @@
                         <div class="accordion-box grid-style show">
                             <div class="row">
                                 @foreach($services as $service)
-                                <div class="col-sm-3  mb-30">
+                                <div class="col-sm-12 col-md-6 col-lg-4  mb-30">
 
                                     <div class="job-list-two style-two position-relative">
-                                        <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{asset('image/services')}}/{{$service->image}}" alt="image" class="lazy-img m-auto"></a>
+                                        <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
+                                            <img src="{{asset('image/services')}}/{{$service->image}}"
+                                                alt="image"
+                                                class="lazy-img m-auto"
+                                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                                        </a>
                                         <span class="save-btn text-center tran3s" title="Save Job">{{ $service->duration}}</span>
                                         <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="job-duration fw-500">{{$service->category->name}}</a></div>
                                         <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>

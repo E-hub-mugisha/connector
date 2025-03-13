@@ -21,7 +21,7 @@
     <meta name="msapplication-navbutton-color" content="#244034">
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#244034">
-    <title>@yield('title') - {{ config('app.name', 'connector') }}</title>
+    <title>@yield('title') | {{ config('app.name', 'connector') }}</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="56x56" href="{{ asset('asset/images/fav-icon/fav-connector.png') }}">
     <!-- Bootstrap CSS -->
@@ -31,7 +31,7 @@
     <!-- responsive style sheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/responsive.css') }}" media="all">
 
-    
+
 </head>
 
 <body>
@@ -76,14 +76,17 @@
         <script src="{{ asset('asset/js/theme.js') }}"></script>
     </div> <!-- /.main-page-wrapper -->
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HWQ435LMGE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HWQ435LMGE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-HWQ435LMGE');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-HWQ435LMGE');
+    </script>
 </body>
 
 

@@ -39,46 +39,51 @@
                     <div class="accordion-box grid-style show">
                         <div class="row">
                             @foreach($services as $service)
-                           <div class="col-sm-3  mb-30">
+                            <div class="col-sm-12 col-md-6 col-lg-4  mb-30">
 
-                                    <div class="job-list-two style-two position-relative">
-                                        <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="logo"><img src="images/lazy.svg" data-src="{{asset('image/services')}}/{{$service->image}}" alt="image" class="lazy-img m-auto"></a>
-                                        <span class="save-btn text-center tran3s" title="Save Job">{{ $service->duration}}</span>
-                                        <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="job-duration fw-500">{{$service->category->name}}</a></div>
-                                        <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>
-                                        <div class="job-salary">Original Price:<span class="fw-500 text-dark" style="margin: 6px; color:#ff1e00;">{{$service->price}}</span> / RWF</div>
-                                        <div>
-                                    @php
-                                    $total = $service->price;
-                                    @endphp
-                                    @if($service->discount)
-                                    @if($service->discount_type == 'fixed')
-                                    <div class="discount-fix">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
-                                    </div>
-                                    <div class="discount-fix-total">
-                                        <span>@php $total = $total-$service->discount; @endphp</span>
-                                    </div>
-                                    @elseif($service->discount_type == 'percent')
-                                    <div class="discount-per">
-                                        Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
-                                    </div>
-                                    <div class="discount-per-total" style="margin:6px;">
-                                        <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
-                                    </div>
-                                    @endif
-                                    @endif
-                                    <div class="total">
-                                        Total Price:<span style="margin: 6px;">{{$total}}</span>
-                                    </div>
-                                </div>
-                                        <div class="job-location"><span>Location:</span><a href="{{route('home.service_location',['service_location'=>$service->location])}}">{{ $service->location}}</a></div>
-
-                                        <div class="d-flex align-items-center justify-content-between mt-auto">
-                                            <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="apply-btn text-center tran3s">Book Now</a>
+                                <div class="job-list-two style-two position-relative">
+                                    <a href="{{route('home.service_details',['service_slug'=>$service->slug])}}">
+                                        <img src="{{asset('image/services')}}/{{$service->image}}"
+                                            alt="image"
+                                            class="lazy-img m-auto"
+                                            style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                                    </a>
+                                    <span class="save-btn text-center tran3s" title="Save Job">{{ $service->duration}}</span>
+                                    <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="job-duration fw-500">{{$service->category->name}}</a></div>
+                                    <div><a href="{{route('home.service_details',['service_slug'=>$service->slug])}}" class="title fw-500 tran3s">{{$service->name}}</a></div>
+                                    <div class="job-salary">Original Price:<span class="fw-500 text-dark" style="margin: 6px; color:#ff1e00;">{{$service->price}}</span> / RWF</div>
+                                    <div>
+                                        @php
+                                        $total = $service->price;
+                                        @endphp
+                                        @if($service->discount)
+                                        @if($service->discount_type == 'fixed')
+                                        <div class="discount-fix">
+                                            Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}</span>
+                                        </div>
+                                        <div class="discount-fix-total">
+                                            <span>@php $total = $total-$service->discount; @endphp</span>
+                                        </div>
+                                        @elseif($service->discount_type == 'percent')
+                                        <div class="discount-per">
+                                            Discount:<span style="margin: 6px; color:#ff1e00;">{{$service->discount}}%</span>
+                                        </div>
+                                        <div class="discount-per-total" style="margin:6px;">
+                                            <span>@php $total = $total-($total*$service->discount/100); @endphp</span>
+                                        </div>
+                                        @endif
+                                        @endif
+                                        <div class="total">
+                                            Total Price:<span style="margin: 6px;">{{$total}}</span>
                                         </div>
                                     </div>
+                                    <div class="job-location"><span>Location:</span><a href="{{route('home.service_location',['service_location'=>$service->location])}}">{{ $service->location}}</a></div>
+
+                                    <div class="d-flex align-items-center justify-content-between mt-auto">
+                                        <a href="{{route('home.booking',['service_slug'=>$service->slug])}}" class="apply-btn text-center tran3s">Book Now</a>
+                                    </div>
                                 </div>
+                            </div>
 
                             @endforeach
                         </div>
@@ -114,32 +119,24 @@
                                 </div><!-- End .heading-left -->
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="short-filter d-flex align-items-center">
-                                <div class="text-dark fw-500 me-2">Short:</div>
-                                <select class="nice-select">
-                                    <option value="0">Latest</option>
-                                    <option value="1">Category</option>
-                                    <option value="2">Job Type</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.upper-filter -->
                     <div class="accordion-box grid-style show">
                         <div class="row">
                             @foreach($sproviders as $sprovider)
                             @if(!empty($sprovider->sprovider_name))
-                            <div class="col-xxl-3 col-lg-3 col-sm-6 d-flex">
+                            <div class="col-xxl-4 col-lg-4 col-sm-6 d-flex">
                                 <div class="candidate-profile-card favourite text-center grid-layout border-0 mb-25">
                                     <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="save-btn tran3s"><i class="bi bi-heart"></i></a>
-                                    <div class="cadidate-avatar online position-relative d-block m-auto">
-                                        <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="rounded-circle">
-                                            <img src="{{ asset('asset/images/lazy.svg')}}" data-src="{{asset('image/profile')}}/{{$sprovider->image}}" alt="" class="lazy-img rounded-circle" width="100%" height="90px">
-                                        </a>
-                                    </div>
+                                    <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}">
+                                        <img src="{{asset('image/profile')}}/{{$sprovider->image}}"
+                                            alt="image"
+                                            class="lazy-img m-auto"
+                                            style="width: 100%; height: 200px; object-fit: cover; border-radius: 5px;">
+                                    </a>
                                     <h4 class="candidate-name mt-15 mb-0"><a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="tran3s">{{$sprovider->sprovider_name}}</a></h4>
-                                    <div class="candidate-post">@if($sprovider->service_category_id)
+                                    <div class="candidate-post">
+                                        @if($sprovider->service_category_id)
                                         {{$sprovider->category->name}}
                                         @endif
                                     </div>
@@ -171,7 +168,7 @@
                                     </div>
                                     <div class="row gx-2 pt-25 sm-pt-10">
                                         <div class="col-md-6">
-                                            <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="profile-btn tran3s w-100 mt-5">Profile</a>
+                                            <a href="{{route('home.service-provider_profile',['sprovider_id'=>$sprovider->id])}}" class="profile-btn tran3s w-100 mt-5">View Profile</a>
                                         </div>
                                         <div class="col-md-6">
                                             <a href="mailto:{{$sprovider->proEmail}}" class="msg-btn tran3s w-100 mt-5">Message</a>
@@ -310,7 +307,6 @@
 
 <!-- /.feedback-section-one -->
 
-@include('includes.brands')
 
 
 @endsection

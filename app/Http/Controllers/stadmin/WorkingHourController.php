@@ -40,6 +40,7 @@ class WorkingHourController extends Controller
             'is_closed' => $request->is_closed,
         ]);
 
+        alert()->success('Thank You', 'Working hours added successfully');
         return redirect()->route('working_hours.index', $request->sprovider_id)
             ->with('success', 'Working hours added successfully.');
     }
@@ -67,6 +68,7 @@ class WorkingHourController extends Controller
             'is_closed' => $request->is_closed,
         ]);
 
+        alert()->success('Thank You', 'Working hours updated successfully.');
         return redirect()->route('working_hours.index', $workingHour->sprovider_id)
             ->with('success', 'Working hours updated successfully.');
     }
@@ -76,6 +78,7 @@ class WorkingHourController extends Controller
         $workingHour = WorkingHour::findOrFail($id);
         $workingHour->delete();
 
+        alert()->success('Thank You', 'Your Working hours deleted successfully');
         return redirect()->route('working_hours.index', $workingHour->sprovider_id)
             ->with('success', 'Working hours deleted successfully.');
     }

@@ -1,23 +1,40 @@
 @component('mail::message')
-<h2>Hey, It's me {{ $mailData['names'] }}</h2> 
-<br>
-    
-<strong>User details: </strong><br>
-<strong>Name: </strong>{{ $mailData['names'] }} <br>
-<strong>Email: </strong>{{ $mailData['email'] }} <br>
-<strong>Phone: </strong>{{ $mailData['phone'] }} <br>
-<strong>Location: </strong>{{ $mailData['location'] }} <br>
+# Hello {{ $mailData['names'] }},  
 
-<h2>I am requesting for {{ $mailData['service_name'] }}</h2>
-<strong>When: </strong>{{ $mailData['date'] }} at {{ $mailData['time'] }} <br><br>
-<strong>Payment Mode: </strong>{{ $mailData['payment_mode'] }} <br>
-<br>
+You've received a new **service request** from a customer. Below are the details:
+
+---
+
+## 🔹 **User Details**  
+📛 **Name:** {{ $mailData['names'] }}  
+📧 **Email:** [{{ $mailData['email'] }}](mailto:{{ $mailData['email'] }})  
+📞 **Phone:** [{{ $mailData['phone'] }}](tel:{{ $mailData['phone'] }})  
+📍 **Location:** {{ $mailData['location'] }}  
+
+---
+
+## 🛠 **Service Request**  
+💼 **Requested Service:** {{ $mailData['service_name'] }}  
+📅 **Date & Time:** {{ $mailData['date'] }} at {{ $mailData['time'] }}  
+💳 **Payment Mode:** {{ $mailData['payment_mode'] }}  
+
+@if(!empty($mailData['notes']))
+📝 **Additional Notes:**  
+_{{ $mailData['notes'] }}_
+@endif
+
+---
+
+## ✅ **Next Steps**  
+Click the button below to review and confirm the booking.
+
 @component('mail::button', ['url' => route('sprovider.dashboard')])
-Verify
+🔍 View Booking Details
 @endcomponent
 
+If you have any questions, feel free to reach out.  
 
-Thank you,
+Thanks & Best Regards,  
+**{{ config('app.name') }}**  
 
-{{ config('app.name') }}
 @endcomponent

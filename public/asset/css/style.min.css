@@ -5361,7 +5361,7 @@ iframe {
 .pricing-card-one {
     position: relative;
     overflow: hidden;
-    text-align: center;
+    /* text-align: center; */
     background: #fff;
     border: 1px solid #6B9080;
     border-radius: 30px;

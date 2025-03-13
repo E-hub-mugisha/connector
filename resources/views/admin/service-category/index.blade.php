@@ -109,11 +109,30 @@
                 @endif
               </td>
               <td>
-                <ul class="sclist">
-                  @foreach($scategory->subcategories as $scat)
-                  <li>{{$scat->name}}</li>
-                  @endforeach
-                </ul>
+                <button type="button" class="btn btn-success btn-sm m-2" data-toggle="modal" data-target="#subCategoryModal">
+                  view Sub-Category
+                </button>
+                <div class="modal fade" id="subCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+
+                        @foreach($scategory->subcategories as $scat)
+                        <p>{{$scat->name}}</p>
+                        @endforeach
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </td>
               <td class="action-col">
                 <a href="{{route('admin.service_by_category',['category_slug'=>$scategory->slug])}}" class="btn btn-success btn-circle">
