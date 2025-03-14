@@ -175,9 +175,15 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::post('/feedback', [App\Http\Controllers\FeedbackController::class, 'store'])->name('feedback.store')->middleware('auth');
 Route::post('/rating', [App\Http\Controllers\FeedbackController::class, 'RatingStore'])->name('rating.store')->middleware('auth');
 
-Route::get('/payment', [App\Http\Controllers\BookingController::class, 'paymentProcess'])->name('home.payment');
-Route::get('/payment/{booking_id}', [App\Http\Controllers\BookingController::class, 'showPaymentForm'])->name('payment.now');
-Route::post('/payment/process', [App\Http\Controllers\BookingController::class, 'processPayment'])->name('payment.process');
+// Route::get('/payment', [App\Http\Controllers\BookingController::class, 'paymentProcess'])->name('home.payment');
+// Route::get('/payment/{booking_id}', [App\Http\Controllers\BookingController::class, 'showPaymentForm'])->name('payment.now');
+// Route::post('/paymentProcess', [App\Http\Controllers\PaymentController::class, 'processPayment']);
+
+Route::get('/booking/confirmation/{booking_id}', [App\Http\Controllers\BookingController::class, 'showConfirmation'])->name('booking.confirmation');
+Route::get('/payment/{booking_id}', [App\Http\Controllers\PaymentController::class, 'showPaymentPage'])->name('payment');
+Route::post('/payment/process', [App\Http\Controllers\PaymentController::class, 'processPayment'])->name('payment.process');
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'paymentCallback'])->name('payment.callback');
+
 
 Route::middleware([
     'auth:sanctum',
